@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>9月 IS事業部 コール履歴の分析</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&display=swap">
+<style>
+:root{--bg:#eaf6ee;--card:#fff;--ink:#1f3a33;--sub:#5d7a70;--line:#cfe5d8;--cat:#f4a259;--leo:#f2c14e;--bear:#b0794a;--sky:#d9f0ff;--bar:#f4a259;
+box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13211c;--card:#1b2f28;--ink:#e8f5ee;--sub:#9bb8ac;--line:#2f4a3f;--sky:#1d3b4a}}
+:root[data-theme="dark"]{--bg:#13211c;--card:#1b2f28;--ink:#e8f5ee;--sub:#9bb8ac;--line:#2f4a3f;--sky:#1d3b4a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.7}
+main{max-width:960px;margin:0 auto;padding:20px 16px 48px}
+h1,h2,h3,p,ul{margin:0}
+.hero{background:var(--sky);border-radius:28px;padding:28px 24px 0;overflow:hidden}
+.hero small{color:var(--sub)}
+.hero h1{font-size:clamp(26px,5vw,38px);font-weight:800;line-height:1.3;margin-top:4px}
+.hero p{color:var(--sub);font-size:14px;margin-top:6px}
+.meadow{height:84px;margin:14px -24px 0;background:linear-gradient(#bfe6c9,#a5d8b3);position:relative;overflow:hidden}
+.meadow b{position:absolute;bottom:14px;font-size:36px;animation:run 9s linear infinite;left:-60px}
+.meadow b:nth-child(2){animation-delay:-3s;animation-duration:11s}
+.meadow b:nth-child(3){animation-delay:-6s;animation-duration:8s}
+@keyframes run{to{transform:translateX(calc(100vw + 120px))}}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes grow{from{width:0}}
+.meadow b span,.hop{display:inline-block;animation:hop .55s ease-in-out infinite}
+h2{font-size:21px;font-weight:800;margin:40px 0 4px}
+.lead{color:var(--sub);font-size:14px;margin-bottom:12px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:16px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:16px}
+.st{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:12px 6px;text-align:center}
+.st .e{font-size:28px}
+.st b{display:block;font-size:24px;line-height:1.2}
+.st span{font-size:12px;color:var(--sub)}
+.st i{display:block;font-style:normal;font-size:12px;font-weight:800;margin-top:2px;color:#12805c}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.m{background:var(--card);border:2px solid var(--line);border-top:8px solid var(--c);border-radius:22px;padding:14px 16px}
+.m h3{font-size:17px}
+.m .face{font-size:32px;display:inline-block;animation:hop 1.4s ease-in-out infinite}
+.kv{display:flex;justify-content:space-between;font-size:14px;border-bottom:1px dashed var(--line);padding:5px 0}
+.kv b{font-weight:800}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:600px}
+th,td{padding:8px 9px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+th{font-size:12px;color:var(--sub);font-weight:500}
+td.ab{text-align:left;min-width:150px}
+td.ab span{display:inline-block;width:46px;font-weight:800;text-align:right}
+td.ab i{display:inline-block;vertical-align:middle;height:10px;margin-left:6px;border-radius:6px;background:var(--bar);width:var(--w);animation:grow 1.3s both}
+tr.t td{font-weight:800;background:var(--bg)}
+.zero{color:var(--sub)}
+.read{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.read .card h3{font-size:16px;margin-bottom:4px}
+.read li{font-size:14px;margin:3px 0}
+.read ul{padding-left:18px}
+.note{font-size:12.5px;color:var(--sub);margin-top:10px}
+.foot{text-align:center;margin-top:40px;color:var(--sub);font-size:12.5px}
+@media(max-width:700px){.cards,.read{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.hero{padding:22px 18px 0}.meadow{margin:14px -18px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.meadow b{left:20px}.meadow b:nth-child(2){left:120px}.meadow b:nth-child(3){left:220px}}
+.pair{margin:12px 0}.pair .l{font-weight:800;font-size:14px;margin-bottom:4px}
+.pb{display:grid;grid-template-columns:34px 1fr 96px;gap:8px;align-items:center;font-size:12.5px;color:var(--sub);margin:3px 0}
+.pb i{display:block;height:14px;border-radius:8px;background:var(--c);width:var(--w);animation:grow 1.4s .3s both}
+.pb i.o{opacity:.4}.pb b{color:var(--ink);text-align:right}
+.bi{margin:14px 0}.bi .top{display:flex;justify-content:space-between;font-weight:800;font-size:14px}
+.bi .top small{font-weight:500;color:var(--sub)}
+.bt{height:18px;background:var(--bg);border-radius:10px;margin:4px 0}
+.bt i{display:block;height:100%;border-radius:10px;background:var(--c);width:var(--w);animation:grow 1.4s both}
+.bi .sub{font-size:12.5px;color:var(--sub)}
+</style></head>
+<body><main>
+
+<section class="hero">
+<small>株式会社ランバード ｜ IS事業部 ｜ コール履歴CSV 2026.09.01–09.30</small>
+<h1>9月 コール履歴の分析</h1>
+<p>3人分のコール履歴（3,721件）を、アポ・入室・受注までたどって集計しました。</p>
+<div class="meadow" aria-hidden="true"><b><span>🐱</span></b><b><span>🐆</span></b><b><span>🐻</span></b></div>
+</section>
+
+<h2>電話から受注までの道のり</h2>
+<p class="lead">3人のコール履歴から出たアポ54件の行き先です。</p>
+<div class="steps">
+<div class="st"><span class="e hop">📞</span><b>3,721</b><span>コール</span></div>
+<div class="st"><span class="e hop">🐾</span><b>932</b><span>通電</span><i>25.0%</i></div>
+<div class="st"><span class="e hop">🎯</span><b>54</b><span>アポ</span><i>1.45%</i></div>
+<div class="st"><span class="e hop">💻</span><b>30</b><span>入室</span><i>55.6%</i></div>
+<div class="st"><span class="e hop">🏆</span><b>5</b><span>受注</span><i>9.3%</i></div>
+</div>
+<p class="note">率の分母：通電率とアポ率はコール数、入室率と受注率はアポ数。</p>
+
+<h2>メンバー別</h2>
+<div class="cards" style="margin-top:12px">
+<div class="m" style="--c:var(--leo)"><span class="face">🐆</span><h3>仲村さん</h3>
+<div class="kv"><span>コール</span><b>1,823</b></div><div class="kv"><span>通電</span><b>449（24.6%）</b></div><div class="kv"><span>アポ</span><b>26（1.43%）</b></div><div class="kv"><span>入室</span><b>16（61.5%）</b></div><div class="kv"><span>受注</span><b>2（7.7%）</b></div></div>
+<div class="m" style="--c:var(--cat)"><span class="face">🐱</span><h3>アヤさん</h3>
+<div class="kv"><span>コール</span><b>1,234</b></div><div class="kv"><span>通電</span><b>299（24.2%）</b></div><div class="kv"><span>アポ</span><b>12（0.97%）</b></div><div class="kv"><span>入室</span><b>7（58.3%）</b></div><div class="kv"><span>受注</span><b>3（25.0%）</b></div></div>
+<div class="m" style="--c:var(--bear)"><span class="face">🐻</span><h3>佐久間さん</h3>
+<div class="kv"><span>コール</span><b>664</b></div><div class="kv"><span>通電</span><b>184（27.7%）</b></div><div class="kv"><span>アポ</span><b>16（2.41%）</b></div><div class="kv"><span>入室</span><b>7（43.8%）</b></div><div class="kv"><span>受注</span><b>0（0.0%）</b></div></div>
+</div>
+
+<h2>業種別</h2>
+<p class="lead">飲食は通電・アポ・入室・受注のすべてで上位でした。</p>
+<div class="card tw" id="t-gyo"></div>
+
+<h2>リスト別</h2>
+<p class="lead">ランク（リスト名の頭文字）と、種別（かっこ内の名前）で分けています。</p>
+<div class="card tw" id="t-rank"></div>
+<div style="height:12px"></div>
+<div class="card tw" id="t-kind"></div>
+
+<h2>飲食に多くかけた</h2>
+<p class="lead">9/11のMTGで決めた「飲食のコール比率を上げる」方針の結果です。</p>
+<div class="card">
+<div class="pair" style="--c:var(--cat)"><div class="l">飲食のコール数と全体に占める割合</div>
+<div class="pb"><span>7月</span><i class="o" style="--w:48%"></i><b>331（6.9%）</b></div>
+<div class="pb"><span>8月</span><i class="o" style="--w:56%"></i><b>294（8.5%）</b></div>
+<div class="pb"><span>9月</span><i style="--w:100%"></i><b>521（14.0%）</b></div></div>
+<div class="kv"><span>飲食のアポ率（全業種は1.45%）</span><b>2.50%</b></div>
+<div class="kv"><span>🐆 仲村：飲食コール295・アポ9件</span><b>3.1%</b></div>
+<div class="kv"><span>🐱 アヤ：飲食コール139・アポ3件</span><b>2.2%</b></div>
+<div class="kv"><span>🐻 佐久間：飲食コール87・アポ1件</span><b>1.1%</b></div>
+</div>
+
+<div class="foot">🐾 🐾 🐾<br>© 2026 RUNBIRD INC. IS事業部</div>
+</main>
+<script>
+var G={
+gyo:[["飲食",521,172,13,8,3],["その他",635,185,12,8,1],["美容",1086,221,11,6,1],["健康",739,169,7,3,0],["建築",156,38,3,1,0],["サービス",211,56,2,2,0],["ペット",142,38,2,0,0],["スクール",76,16,1,1,0],["物販",11,6,2,1,0]],
+rank:[["B",222,73,6,5,0],["M",347,103,7,5,1],["A",1106,266,16,10,1],["N",1168,251,15,7,2],["旧",713,192,8,1,0],["C",99,34,1,1,0]],
+kind:[["GM特上即かけ",2324,568,38,19,2],["GM",698,196,8,5,1],["AIリスト",464,123,5,4,1],["特上即かけ",153,26,2,1,0]]
+};
+function pct(a,b){return b?(a/b*100).toFixed(1)+"%":"―"}
+function bars(id,title,rows,c){
+ var mx=0;rows.forEach(function(r){mx=Math.max(mx,r[3]/r[1])});
+ var h='<div class="lead" style="margin:0">'+title+'（棒の長さ＝アポ率）</div>';
+ rows.forEach(function(r){
+  var rate=r[3]/r[1];
+  h+='<div class="bi" style="--c:'+c+'"><div class="top"><span>'+r[0]+'</span><small>コール '+r[1].toLocaleString()+'</small></div>'+
+  '<div class="bt"><i style="--w:'+Math.max(rate/mx*100,1.5).toFixed(1)+'%"></i></div>'+
+  '<div class="sub">アポ <b style="color:var(--ink)">'+r[3]+'件（'+(rate*100).toFixed(2)+'%）</b> ・ 通電 '+pct(r[2],r[1])+' ・ 入室 '+pct(r[4],r[3])+'（'+r[4]+'/'+r[3]+'） ・ 受注 '+pct(r[5],r[3])+'（'+r[5]+'/'+r[3]+'）</div></div>';
+ });
+ document.getElementById(id).innerHTML=h;
+}
+bars('t-gyo','業種別',G.gyo,'var(--cat)');
+bars('t-rank','リストのランク別',G.rank,'var(--leo)');
+bars('t-kind','リストの種別別',G.kind,'var(--bear)');
+</script>
+</body></html>

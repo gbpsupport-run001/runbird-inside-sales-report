@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9月 IS事業部 コール数・リスト目標</title>
+<style>
+  :root {
+    --navy: #3b2412;
+    --accent: #e8871e;
+    --accent-light: #fff2df;
+    --spot: #4a2e0f;
+    --border: #e8d3b0;
+    --text: #3b2412;
+    --text-sub: #8a6d4a;
+    --pink: #ff8fab;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: #f9e4c0;
+    background-image:
+      radial-gradient(ellipse 22px 16px at 20px 20px, var(--spot) 40%, transparent 42%),
+      radial-gradient(ellipse 18px 14px at 70px 55px, var(--spot) 40%, transparent 42%),
+      radial-gradient(ellipse 20px 15px at 120px 15px, var(--spot) 40%, transparent 42%),
+      radial-gradient(ellipse 16px 12px at 45px 90px, var(--spot) 40%, transparent 42%),
+      radial-gradient(ellipse 22px 17px at 100px 100px, var(--spot) 40%, transparent 42%);
+    background-size: 150px 130px;
+    background-repeat: repeat;
+    color: var(--text);
+    padding: 40px 16px;
+    line-height: 1.7;
+  }
+  .sheet {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fffaf0;
+    border-radius: 24px;
+    box-shadow: 0 6px 24px rgba(90,50,10,0.25);
+    overflow: hidden;
+    border: 6px solid #fff;
+    position: relative;
+  }
+  .header {
+    background: linear-gradient(135deg, #f4a340, var(--accent));
+    color: #4a2e0f;
+    padding: 32px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header .critters { position: absolute; top: 10px; right: 20px; display: flex; gap: 6px; }
+  .header .critters svg { width: 40px; height: 40px; }
+  .header .eyebrow {
+    font-size: 13px; letter-spacing: 0.08em; opacity: 0.8; margin-bottom: 6px; font-weight: 700;
+  }
+  .header h1 { margin: 0; font-size: 27px; font-weight: 800; text-shadow: 1px 1px 0 #fff8; }
+  .header .sub { margin-top: 8px; font-size: 14px; font-weight: 600; }
+  .content { padding: 30px 40px 44px; }
+  h2 {
+    font-size: 17px; color: var(--navy); background: var(--accent-light);
+    border-left: 6px solid var(--pink); padding: 8px 14px; border-radius: 8px; margin: 34px 0 16px;
+  }
+  h2:first-of-type { margin-top: 0; }
+  h2 .paw::before { content: "🐾 "; }
+  p.lead { color: var(--text-sub); font-size: 14px; margin: 4px 0 20px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; background: #fff; border-radius: 10px; overflow: hidden; }
+  th, td { padding: 12px 12px; text-align: center; border: 1px solid var(--border); }
+  th { background: var(--navy); color: #ffe6b3; font-weight: 700; font-size: 13px; }
+  td.name { text-align: left; font-weight: 700; background: var(--accent-light); color: var(--navy); }
+  .name-cell { display: flex; align-items: center; gap: 10px; }
+  .name-cell svg { width: 34px; height: 34px; flex-shrink: 0; }
+  td.num { font-size: 17px; font-weight: 800; color: #c9601a; }
+  td.dash { color: #cbb28a; }
+  .list-goal {
+    display: flex; align-items: center; gap: 20px;
+    background: linear-gradient(135deg, #ffe1ee, #fff2df);
+    border: 2px dashed var(--pink); border-radius: 16px; padding: 20px 26px; margin-top: 8px;
+  }
+  .list-goal .figure { font-size: 42px; font-weight: 900; color: var(--pink); line-height: 1; white-space: nowrap; }
+  .list-goal .desc { font-size: 14px; color: var(--text); }
+  .list-goal .desc strong { color: var(--navy); }
+  .stat-cards { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+  .stat-card { flex: 1; min-width: 140px; background: #fff; border: 2px solid var(--accent-light); border-radius: 14px; padding: 14px 16px; text-align: center; }
+  .stat-card .emoji { font-size: 22px; }
+  .stat-card .val { font-size: 22px; font-weight: 800; color: var(--accent); margin: 4px 0; }
+  .stat-card .lbl { font-size: 12px; color: var(--text-sub); }
+  .insight { background: #fff; border-radius: 12px; border: 1px solid var(--border); padding: 16px 20px; font-size: 13.5px; margin-top: 14px; }
+  .insight ul { margin: 6px 0 0; padding-left: 20px; }
+  .insight li { margin-bottom: 6px; }
+  .footnote { margin-top: 32px; padding-top: 18px; border-top: 2px dotted var(--border); font-size: 12.5px; color: var(--text-sub); }
+  .footnote ul { margin: 8px 0 0; padding-left: 20px; }
+  .footnote li { margin-bottom: 4px; }
+  .band { text-align: center; font-size: 20px; letter-spacing: 10px; padding: 6px 0; background: var(--accent-light); }
+
+  .run-track {
+    position: relative;
+    height: 90px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #fff6e6, #ffe9c7);
+    border-bottom: 3px dashed var(--accent);
+  }
+  .run-track .ground {
+    position: absolute; bottom: 8px; left: 0; right: 0; height: 2px;
+    background: repeating-linear-gradient(90deg, var(--spot) 0 14px, transparent 14px 28px);
+    opacity: 0.5;
+  }
+  .runner {
+    position: absolute;
+    bottom: 10px;
+    width: 60px; height: 60px;
+    animation-name: run-across, bob;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+  }
+  .runner svg { width: 100%; height: 100%; }
+  .runner.cat   { animation-duration: 7s, 0.3s; animation-delay: 0s, 0s; }
+  .runner.panther { animation-duration: 6s, 0.25s; animation-delay: 1.2s, 0s; }
+  .runner.bear  { animation-duration: 8.5s, 0.4s; animation-delay: 2.4s, 0s; }
+  @keyframes run-across {
+    from { left: -70px; }
+    to   { left: 100%; }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+  }
+  .mascot-row { display: flex; justify-content: center; gap: 28px; margin: 6px 0 26px; flex-wrap: wrap; }
+  .mascot-card { text-align: center; }
+  .mascot-card svg { width: 84px; height: 84px; }
+  .mascot-card .mlabel { font-size: 12px; font-weight: 700; color: var(--navy); margin-top: 4px; }
+  @media (max-width: 600px) {
+    .header, .content { padding-left: 20px; padding-right: 20px; }
+    th, td { padding: 8px 6px; font-size: 12px; }
+    .list-goal { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .header .critters svg { width: 28px; height: 28px; }
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="band">🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾</div>
+    <div class="header">
+      <div class="critters">
+        <!-- mini cat -->
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="55" r="34" fill="#fff"/><polygon points="20,35 32,12 40,40" fill="#fff"/><polygon points="80,35 68,12 60,40" fill="#fff"/><circle cx="38" cy="52" r="4" fill="#3b2412"/><circle cx="62" cy="52" r="4" fill="#3b2412"/><ellipse cx="50" cy="64" rx="4" ry="3" fill="#e8871e"/></svg>
+      </div>
+      <div class="eyebrow">株式会社ランバード｜IS事業部</div>
+      <h1>9月 コール数・リスト準備目標</h1>
+      <div class="sub">8月実績（8/1〜8/31・確定）をもとに設定 🐾</div>
+    </div>
+
+        <div class="run-track">
+      <div class="ground"></div>
+      <div class="runner cat">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="58" r="36" fill="#fdeadb"/><polygon points="18,38 32,10 44,42" fill="#fdeadb"/><polygon points="82,38 68,10 56,42" fill="#fdeadb"/><circle cx="36" cy="56" r="5" fill="#3b2412"/><circle cx="64" cy="56" r="5" fill="#3b2412"/><ellipse cx="50" cy="66" rx="4" ry="3" fill="#e8871e"/><path d="M46,70 Q50,74 54,70" stroke="#3b2412" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <div class="runner panther">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="58" r="36" fill="#2b2b2f"/><polygon points="18,38 32,10 44,42" fill="#2b2b2f"/><polygon points="82,38 68,10 56,42" fill="#2b2b2f"/><circle cx="38" cy="56" r="5.5" fill="#ffd85e"/><circle cx="62" cy="56" r="5.5" fill="#ffd85e"/><ellipse cx="50" cy="66" rx="4" ry="3" fill="#ff8fab"/></svg>
+      </div>
+      <div class="runner bear">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="58" r="36" fill="#8a5a3b"/><circle cx="18" cy="28" r="13" fill="#8a5a3b"/><circle cx="82" cy="28" r="13" fill="#8a5a3b"/><ellipse cx="50" cy="64" rx="16" ry="12" fill="#c99a72"/><circle cx="37" cy="55" r="4.5" fill="#3b2412"/><circle cx="63" cy="55" r="4.5" fill="#3b2412"/></svg>
+      </div>
+    </div>
+<div class="content">
+
+      <div class="mascot-row">
+        <div class="mascot-card">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="58" r="36" fill="#fdeadb"/>
+            <polygon points="18,38 32,10 44,42" fill="#fdeadb"/>
+            <polygon points="82,38 68,10 56,42" fill="#fdeadb"/>
+            <polygon points="24,34 32,18 38,36" fill="#ffc9a8"/>
+            <polygon points="76,34 68,18 62,36" fill="#ffc9a8"/>
+            <circle cx="36" cy="56" r="5" fill="#3b2412"/>
+            <circle cx="64" cy="56" r="5" fill="#3b2412"/>
+            <circle cx="37.5" cy="54.5" r="1.3" fill="#fff"/>
+            <circle cx="65.5" cy="54.5" r="1.3" fill="#fff"/>
+            <circle cx="24" cy="66" r="6" fill="#ffb3c6" opacity="0.7"/>
+            <circle cx="76" cy="66" r="6" fill="#ffb3c6" opacity="0.7"/>
+            <ellipse cx="50" cy="66" rx="4" ry="3" fill="#e8871e"/>
+            <path d="M46,70 Q50,74 54,70" stroke="#3b2412" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <line x1="14" y1="60" x2="30" y2="62" stroke="#3b2412" stroke-width="1.2"/>
+            <line x1="14" y1="68" x2="30" y2="68" stroke="#3b2412" stroke-width="1.2"/>
+            <line x1="86" y1="60" x2="70" y2="62" stroke="#3b2412" stroke-width="1.2"/>
+            <line x1="86" y1="68" x2="70" y2="68" stroke="#3b2412" stroke-width="1.2"/>
+          </svg>
+          <div class="mlabel">🐱 アヤさん</div>
+        </div>
+        <div class="mascot-card">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="58" r="36" fill="#2b2b2f"/>
+            <polygon points="18,38 32,10 44,42" fill="#2b2b2f"/>
+            <polygon points="82,38 68,10 56,42" fill="#2b2b2f"/>
+            <polygon points="24,34 32,20 37,36" fill="#4a4a52"/>
+            <polygon points="76,34 68,20 63,36" fill="#4a4a52"/>
+            <ellipse cx="50" cy="60" rx="20" ry="16" fill="#3a3a40"/>
+            <circle cx="38" cy="56" r="5.5" fill="#ffd85e"/>
+            <circle cx="62" cy="56" r="5.5" fill="#ffd85e"/>
+            <circle cx="38" cy="56" r="2" fill="#1a1a1a"/>
+            <circle cx="62" cy="56" r="2" fill="#1a1a1a"/>
+            <ellipse cx="50" cy="66" rx="4" ry="3" fill="#ff8fab"/>
+            <path d="M46,70 Q50,73 54,70" stroke="#e8d3b0" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+          <div class="mlabel">🐆 仲村さん</div>
+        </div>
+        <div class="mascot-card">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="58" r="36" fill="#8a5a3b"/>
+            <circle cx="18" cy="28" r="13" fill="#8a5a3b"/>
+            <circle cx="82" cy="28" r="13" fill="#8a5a3b"/>
+            <circle cx="18" cy="28" r="6" fill="#c99a72"/>
+            <circle cx="82" cy="28" r="6" fill="#c99a72"/>
+            <ellipse cx="50" cy="64" rx="16" ry="12" fill="#c99a72"/>
+            <circle cx="37" cy="55" r="4.5" fill="#3b2412"/>
+            <circle cx="63" cy="55" r="4.5" fill="#3b2412"/>
+            <circle cx="38.2" cy="53.8" r="1.1" fill="#fff"/>
+            <circle cx="64.2" cy="53.8" r="1.1" fill="#fff"/>
+            <ellipse cx="50" cy="66" rx="5" ry="4" fill="#5c3a24"/>
+            <path d="M45,71 Q50,75 55,71" stroke="#3b2412" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+          <div class="mlabel">🐻 佐久間さん</div>
+        </div>
+      </div>
+
+      <h2><span class="paw"></span>8月の実績サマリー</h2>
+      <p class="lead">まずは8月がんばった記録から！みんなよく走った月でした🐾💨</p>
+
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="emoji">📞</div>
+          <div class="val">3,457件</div>
+          <div class="lbl">チーム総コール数</div>
+        </div>
+        <div class="stat-card">
+          <div class="emoji">🎯</div>
+          <div class="val">34件</div>
+          <div class="lbl">アポ獲得数</div>
+        </div>
+        <div class="stat-card">
+          <div class="emoji">📈</div>
+          <div class="val">約102件</div>
+          <div class="lbl">コール数/アポ</div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>メンバー</th><th>稼働日数</th><th>総コール数</th><th>1日平均</th><th>アポ獲得数</th><th>コール数/アポ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">🐱 アヤさん</td><td>15日</td><td>1,569件</td><td class="num">104.6件</td><td>8件</td><td>196件</td></tr>
+          <tr><td class="name">🐆 仲村さん</td><td>15日</td><td>1,208件</td><td class="num">80.5件</td><td>16件</td><td>75.5件</td></tr>
+          <tr><td class="name">🐻 佐久間さん</td><td>16日</td><td>680件</td><td class="num">42.5件</td><td>10件</td><td>68件</td></tr>
+        </tbody>
+      </table>
+
+      <div class="insight">
+        <strong>🐾 見えてきたこと</strong>
+        <ul>
+          <li>仲村さんが15件と最多のアポ獲得。コール数あたりの効率（75件に1件）もチーム最高！</li>
+          <li>アヤさんはコール数最多（1日平均104.6件）だけど、アポ獲得は8件とやや効率は低め（196件に1件）</li>
+          <li>佐久間さんはコール数は最少（1日平均41.4件）ながら、効率は69件に1件とアヤさんより良い</li>
+          <li>日によるムラが大きく、これは商談対応の有無が影響していそう → だから案件数別に目標を分けた</li>
+        </ul>
+      </div>
+
+      <h2><span class="paw"></span>行動率・商談決定率（8月・アポ結果判明分ベース）</h2>
+      <p class="lead">獲得したアポが実際に商談まで進んだか（入室成功率）、商談まで進んだうちどれだけ受注できたか（成約率）を集計しました。</p>
+      <table>
+        <thead>
+          <tr><th>メンバー</th><th>アポ数</th><th>商談実施</th><th>未接続</th><th>不明</th><th>月またぎ</th><th>入室成功率</th><th>成約率(実施分中)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">🐻 佐久間さん</td><td>12件</td><td>7件</td><td>3件</td><td>2件</td><td>0件</td><td class="num">70.0%</td><td class="num">28.6%<br><span style="font-size:11px;color:var(--text-sub);">(2/7・7COLOR/air plants N13)</span></td></tr>
+          <tr><td class="name">🐆 仲村さん</td><td>16件</td><td>7件</td><td>7件</td><td>2件</td><td>0件</td><td class="num">50.0%</td><td class="num">14.3%<br><span style="font-size:11px;color:var(--text-sub);">(1/7・旬菜 笑)</span></td></tr>
+          <tr><td class="name">🐱 アヤさん</td><td>8件</td><td>6件</td><td>2件</td><td>0件</td><td>0件</td><td class="num">75.0%</td><td class="num">0.0%<br><span style="font-size:11px;color:var(--text-sub);">(0/6・Bodymake Labが9月持ち越し)</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="insight">
+        <strong>🐾 見えてきたこと</strong>
+        <ul>
+          <li>入室成功率（アポ→実際に商談できた率）はアヤさんが75.0%とチーム最高。佐久間さん70.0%、仲村さん50.0%と続く。仲村さんは未接続（Zoom/電話つながらず）が7件と多め。</li>
+          <li>成約率（商談実施できた中でのGET率）は佐久間さんが28.6%とチーム最高。仲村さん14.3%、アヤさんは8月確定時点で0.0%（Bodymake Labが9月に継続中、アンホールドはNG確定）。</li>
+          <li>仲村さんは「アポを商談の場に持ち込む力」に伸びしろ、佐久間さんは「商談を受注に変える力」が強みという傾向が出ている。</li>
+        </ul>
+      </div>
+
+      <div class="footnote" style="margin-top:14px;">
+        <strong>集計上の注意点</strong>
+        <ul>
+          <li>「不明」＝Zoom/対応の結果報告がログに無かった案件（佐久間：HOWA、8/31 18:30即アポ／仲村：髪処 結、リンパケアサロン美巡）。結果報告の徹底で今後この件数を減らしたい。</li>
+          <li>sup&yoga 洞爺湖 nagii（佐久間）は8/31に商談実施・NGで結果が確定したため、「月またぎ」から「商談実施→NG」に更新しました。</li>
+          <li>アヤさんは8/31分のコール履歴データが未取得のため、8月確定値は8/28時点のままです（後日データが揃い次第、反映します）。</li>
+          <li>ドライヘッドスパ 微睡（GET・アヤ）は<strong>7/31取得のアポ</strong>で、受注報告が8月に上がったもの。8月アポ数(獲得ベース)には含めていません。</li>
+          <li>入室成功率・成約率とも「不明」「月またぎ」を分母から除いた判明分ベースの数値。</li>
+        </ul>
+      </div>
+
+      <h2><span class="paw"></span>案件別詳細（8月）</h2>
+      <p class="lead">各メンバーのアポ案件を1件ずつ記録しています。</p>
+
+      <p style="font-weight:700;color:var(--navy);margin:18px 0 6px;">🦁 佐久間さん（12件・確定）</p>
+      <table>
+        <thead><tr><th style="text-align:left;">店舗名</th><th style="text-align:left;">状況</th></tr></thead>
+        <tbody>
+          <tr><td style="text-align:left;">お食事処 九十九</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">酒と肴 宵待</td><td style="text-align:left;">商談実施→NG（※翌日GETしたのは仲村の別カウントの再営）</td></tr>
+          <tr><td style="text-align:left;">ネイルサロン BTnail</td><td style="text-align:left;">未接続</td></tr>
+          <tr><td style="text-align:left;">7COLOR</td><td style="text-align:left;">商談実施→<strong>GET</strong></td></tr>
+          <tr><td style="text-align:left;">ぐっさん カイロプラクティック院</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">HOWA</td><td style="text-align:left;">ログに結果報告なし（不明）</td></tr>
+          <tr><td style="text-align:left;">Dog Salon Luana</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">あおい商店</td><td style="text-align:left;">未接続（キャンセル）</td></tr>
+          <tr><td style="text-align:left;">air plants N13</td><td style="text-align:left;">商談実施→<strong>GET</strong></td></tr>
+          <tr><td style="text-align:left;">sup&yoga 洞爺湖 nagii</td><td style="text-align:left;">商談実施→NG（8/31確定）</td></tr>
+          <tr><td style="text-align:left;">バードアイビリーブ</td><td style="text-align:left;">未接続（当日キャンセル・8/31）</td></tr>
+          <tr><td style="text-align:left;">8/31 18:30即アポ案件</td><td style="text-align:left;">結果報告なし（不明）</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-weight:700;color:var(--navy);margin:22px 0 6px;">🐆 仲村さん（16件・確定）</p>
+      <table>
+        <thead><tr><th style="text-align:left;">店舗名</th><th style="text-align:left;">状況</th></tr></thead>
+        <tbody>
+          <tr><td style="text-align:left;">髪処 結</td><td style="text-align:left;">ログに結果報告なし（不明）</td></tr>
+          <tr><td style="text-align:left;">Capitan施術所</td><td style="text-align:left;">未接続（日変後、追跡途絶）</td></tr>
+          <tr><td style="text-align:left;">MIRABILE ミラビレ</td><td style="text-align:left;">未接続</td></tr>
+          <tr><td style="text-align:left;">創作和食 叶-かなえ-</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">旬菜 笑</td><td style="text-align:left;">商談実施→<strong>GET</strong></td></tr>
+          <tr><td style="text-align:left;">saffran</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">函館 エアコンクリーニング</td><td style="text-align:left;">未接続</td></tr>
+          <tr><td style="text-align:left;">Dinerさんどぼっくす</td><td style="text-align:left;">未接続</td></tr>
+          <tr><td style="text-align:left;">mimi&latte</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">Imperial Select</td><td style="text-align:left;">未接続（2回試行→追わず終了）</td></tr>
+          <tr><td style="text-align:left;">カラオケバーR</td><td style="text-align:left;">未接続</td></tr>
+          <tr><td style="text-align:left;">The Gift</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">リンパケアサロン美巡</td><td style="text-align:left;">ログに結果報告なし（不明）</td></tr>
+          <tr><td style="text-align:left;">宮城仙南クリーンサービス</td><td style="text-align:left;">未接続</td></tr>
+          <tr><td style="text-align:left;">越後板金工業</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">だいたいここ</td><td style="text-align:left;">商談実施→NG（8/31）</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-weight:700;color:var(--navy);margin:22px 0 6px;">🐱 アヤさん（8件・8/28時点）</p>
+      <table>
+        <thead><tr><th style="text-align:left;">店舗名</th><th style="text-align:left;">状況</th></tr></thead>
+        <tbody>
+          <tr><td style="text-align:left;">キタイチBASE</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">美容室 Kapilina</td><td style="text-align:left;">未接続</td></tr>
+          <tr><td style="text-align:left;">habitgym</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">アンホールド(UNHOLD)</td><td style="text-align:left;">商談実施→再営→NG確定（予算の都合）</td></tr>
+          <tr><td style="text-align:left;">Re:Bodyサロン心月</td><td style="text-align:left;">未接続</td></tr>
+          <tr><td style="text-align:left;">ほぐし処ちゃっこい手ぇ</td><td style="text-align:left;">商談実施→NG</td></tr>
+          <tr><td style="text-align:left;">Bodymake Lab Realize</td><td style="text-align:left;">商談実施（再営予定）→9月持ち越し</td></tr>
+          <tr><td style="text-align:left;">リーゾスストレッチ</td><td style="text-align:left;">商談実施→NG</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-sub);margin-top:8px;">※ドライヘッドスパ 微睡（GET）は7/31取得アポのため、上記8月アポ8件には含まれません。</p>
+
+      <h2><span class="paw"></span>1日あたりコール数目標（案件数別）</h2>
+      <p class="lead">案件（商談）対応数に応じて、その日のコール数目標を変えます。</p>
+      <table>
+        <thead>
+          <tr><th>メンバー</th><th>案件0件</th><th>案件1件</th><th>案件2件</th><th>案件3件</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"><div class="name-cell"><svg viewBox="0 0 100 100"><circle cx="50" cy="58" r="36" fill="#fdeadb"/><polygon points="18,38 32,10 44,42" fill="#fdeadb"/><polygon points="82,38 68,10 56,42" fill="#fdeadb"/><circle cx="36" cy="56" r="5" fill="#3b2412"/><circle cx="64" cy="56" r="5" fill="#3b2412"/><ellipse cx="50" cy="66" rx="4" ry="3" fill="#e8871e"/></svg>アヤさん</div></td>
+            <td class="num">130件</td><td class="num">80件</td><td class="num">60件</td><td class="dash">—</td>
+          </tr>
+          <tr>
+            <td class="name"><div class="name-cell"><svg viewBox="0 0 100 100"><circle cx="50" cy="58" r="36" fill="#2b2b2f"/><polygon points="18,38 32,10 44,42" fill="#2b2b2f"/><polygon points="82,38 68,10 56,42" fill="#2b2b2f"/><circle cx="38" cy="56" r="5" fill="#ffd85e"/><circle cx="62" cy="56" r="5" fill="#ffd85e"/></svg>仲村さん</div></td>
+            <td class="num">100件</td><td class="dash" colspan="3">案件は基本なし（平均90件は死守）</td>
+          </tr>
+          <tr>
+            <td class="name"><div class="name-cell"><svg viewBox="0 0 100 100"><circle cx="50" cy="58" r="36" fill="#8a5a3b"/><circle cx="18" cy="28" r="13" fill="#8a5a3b"/><circle cx="82" cy="28" r="13" fill="#8a5a3b"/><circle cx="37" cy="55" r="4.5" fill="#3b2412"/><circle cx="63" cy="55" r="4.5" fill="#3b2412"/></svg>佐久間さん</div></td>
+            <td class="num">110件</td><td class="num">70件</td><td class="num">50件</td><td class="num">30件</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2><span class="paw"></span>リスト準備目標（共通）</h2>
+      <div class="list-goal">
+        <div class="figure">15件</div>
+        <div class="desc">🐇 <strong>翌日分の新店（未架電）リスト</strong>を、全員共通で1日あたり15件準備する。</div>
+      </div>
+
+      <div class="footnote">
+        <strong>算出にあたっての前提</strong>
+        <ul>
+          <li>「案件0件」は商談対応がなく架電に専念できる日、件数が増えるほど商談対応時間が発生するためコール数目標は下がる設計。</li>
+          <li>数値は8月の実働日別コール数・アポ獲得実績（各自の平均・最大値・案件対応日の実績）をもとに、メンバーごとの働き方（稼働時間・事務対応の有無等）を踏まえて設定。</li>
+          <li>仲村さんは17時までの稼働かつ営業事務業務があるため、案件対応は基本なしとし、平均90件を下回らないことを目安とする。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="band">🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾</div>
+  </div>
+</body>
+</html>
