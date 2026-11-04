@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>10月 IS事業部 メンバー向け振り返りと11月の動き</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&display=swap">
+<style>
+:root{--bg:#eaf6ee;--card:#fff;--ink:#1f3a33;--sub:#5d7a70;--line:#cfe5d8;--cat:#f4a259;--leo:#f2c14e;--bear:#b0794a;--sky:#d9f0ff;--bar:#f4a259;
+box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13211c;--card:#1b2f28;--ink:#e8f5ee;--sub:#9bb8ac;--line:#2f4a3f;--sky:#1d3b4a}}
+:root[data-theme="dark"]{--bg:#13211c;--card:#1b2f28;--ink:#e8f5ee;--sub:#9bb8ac;--line:#2f4a3f;--sky:#1d3b4a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.7}
+main{max-width:960px;margin:0 auto;padding:20px 16px 48px}
+h1,h2,h3,p,ul{margin:0}
+.hero{background:var(--sky);border-radius:28px;padding:28px 24px 0;overflow:hidden}
+.hero small{color:var(--sub)}
+.hero h1{font-size:clamp(26px,5vw,38px);font-weight:800;line-height:1.3;margin-top:4px}
+.hero p{color:var(--sub);font-size:14px;margin-top:6px}
+.meadow{height:84px;margin:14px -24px 0;background:linear-gradient(#bfe6c9,#a5d8b3);position:relative;overflow:hidden}
+.meadow b{position:absolute;bottom:14px;font-size:36px;animation:run 9s linear infinite;left:-60px}
+.meadow b:nth-child(2){animation-delay:-3s;animation-duration:11s}
+.meadow b:nth-child(3){animation-delay:-6s;animation-duration:8s}
+@keyframes run{to{transform:translateX(calc(100vw + 120px))}}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes grow{from{width:0}}
+.meadow b span,.hop{display:inline-block;animation:hop .55s ease-in-out infinite}
+h2{font-size:21px;font-weight:800;margin:40px 0 4px}
+.lead{color:var(--sub);font-size:14px;margin-bottom:12px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:16px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:16px}
+.st{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:12px 6px;text-align:center}
+.st .e{font-size:28px}
+.st b{display:block;font-size:24px;line-height:1.2}
+.st span{font-size:12px;color:var(--sub)}
+.st i{display:block;font-style:normal;font-size:12px;font-weight:800;margin-top:2px;color:#12805c}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.m{background:var(--card);border:2px solid var(--line);border-top:8px solid var(--c);border-radius:22px;padding:14px 16px}
+.m h3{font-size:17px}
+.m .face{font-size:32px;display:inline-block;animation:hop 1.4s ease-in-out infinite}
+.kv{display:flex;justify-content:space-between;font-size:14px;border-bottom:1px dashed var(--line);padding:5px 0}
+.kv b{font-weight:800}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:600px}
+th,td{padding:8px 9px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+th{font-size:12px;color:var(--sub);font-weight:500}
+td.ab{text-align:left;min-width:150px}
+td.ab span{display:inline-block;width:46px;font-weight:800;text-align:right}
+td.ab i{display:inline-block;vertical-align:middle;height:10px;margin-left:6px;border-radius:6px;background:var(--bar);width:var(--w);animation:grow 1.3s both}
+tr.t td{font-weight:800;background:var(--bg)}
+.zero{color:var(--sub)}
+.read{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.read .card h3{font-size:16px;margin-bottom:4px}
+.read li{font-size:14px;margin:3px 0}
+.read ul{padding-left:18px}
+.note{font-size:12.5px;color:var(--sub);margin-top:10px}
+.foot{text-align:center;margin-top:40px;color:var(--sub);font-size:12.5px}
+@media(max-width:700px){.cards,.read{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.hero{padding:22px 18px 0}.meadow{margin:14px -18px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.meadow b{left:20px}.meadow b:nth-child(2){left:120px}.meadow b:nth-child(3){left:220px}}
+.pair{margin:12px 0}.pair .l{font-weight:800;font-size:14px;margin-bottom:4px}
+.pb{display:grid;grid-template-columns:34px 1fr 96px;gap:8px;align-items:center;font-size:12.5px;color:var(--sub);margin:3px 0}
+.pb i{display:block;height:14px;border-radius:8px;background:var(--c);width:var(--w);animation:grow 1.4s .3s both}
+.pb i.o{opacity:.4}.pb b{color:var(--ink);text-align:right}
+.bi{margin:14px 0}.bi .top{display:flex;justify-content:space-between;font-weight:800;font-size:14px}
+.bi .top small{font-weight:500;color:var(--sub)}
+.bt{height:18px;background:var(--bg);border-radius:10px;margin:4px 0}
+.bt i{display:block;height:100%;border-radius:10px;background:var(--c);width:var(--w);animation:grow 1.4s both}
+.bi .sub{font-size:12.5px;color:var(--sub)}
+
+.steps.s4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:700px){.steps.s4{grid-template-columns:repeat(2,1fr)}}
+.plan{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+.plan .card{border-top:8px solid var(--c)}
+.plan h3{font-size:17px;margin-bottom:4px}
+.plan ul{padding-left:18px}.plan li{font-size:14px;margin:5px 0}
+.must{display:inline-block;background:var(--cat);color:#fff;font-size:11.5px;font-weight:800;border-radius:10px;padding:0 8px;margin-right:4px}
+@media(max-width:700px){.plan{grid-template-columns:1fr}}
+.tw table{min-width:520px}
+
+</style></head>
+<body><main>
+
+<section class="hero">
+<small>株式会社ランバード ｜ IS事業部 ｜ AXTコール履歴 2026.10.01–10.30（暫定）</small>
+<h1>10月の振り返りと<br>11月以降の動き</h1>
+<p>10月の数字をメンバー別に振り返り、11月からの動き方をまとめました。</p>
+<div class="meadow" aria-hidden="true"><b><span>🐱</span></b><b><span>🐆</span></b><b><span>🐻</span></b></div>
+</section>
+
+<h2>電話から受注までの道のり</h2>
+<p class="lead">3人のコール履歴をもとにした、10月30日時点の数字です（10/31分は含みません）。</p>
+<div class="steps s4">
+<div class="st"><span class="e hop">📞</span><b>3,991</b><span>コール</span></div>
+<div class="st"><span class="e hop">🎯</span><b>47</b><span>アポ</span><i>1.18%</i></div>
+<div class="st"><span class="e hop">💻</span><b>30</b><span>商談した店舗</span></div>
+<div class="st"><span class="e hop">🏆</span><b>6</b><span>受注</span><i>20.0%</i></div>
+</div>
+<p class="note">率の分母：アポ率はコール数、受注率は商談した店舗数（行動数）。商談した店舗数にはIT振り・代理店振りの分を含みます。</p>
+
+<h2>メンバー別</h2>
+<div class="cards" style="margin-top:12px">
+<div class="m" style="--c:var(--leo)"><span class="face">🐆</span><h3>仲村さん</h3>
+<div class="kv"><span>コール（17日稼働）</span><b>1,641</b></div><div class="kv"><span>アポ</span><b>27（1.65%）</b></div><div class="kv"><span>詰め通過</span><b>11</b></div><div class="kv"><span>商談した店舗</span><b>15</b></div><div class="kv"><span>受注</span><b>1</b></div></div>
+<div class="m" style="--c:var(--cat)"><span class="face">🐱</span><h3>アヤさん</h3>
+<div class="kv"><span>コール（17日稼働）</span><b>1,638</b></div><div class="kv"><span>アポ</span><b>6（0.37%）</b></div><div class="kv"><span>詰め通過</span><b>2</b></div><div class="kv"><span>商談した店舗</span><b>3</b></div><div class="kv"><span>受注</span><b>1</b></div></div>
+<div class="m" style="--c:var(--bear)"><span class="face">🐻</span><h3>佐久間さん</h3>
+<div class="kv"><span>コール（21日稼働）</span><b>712</b></div><div class="kv"><span>アポ</span><b>14（1.97%）</b></div><div class="kv"><span>詰め通過</span><b>5</b></div><div class="kv"><span>商談した店舗</span><b>6</b></div><div class="kv"><span>受注</span><b>1</b></div></div>
+</div>
+<p class="note">詰め通過・商談した店舗・受注は「そのメンバーが取ったアポ」の行き先です。佐久間さんは商談対応と兼務のため、コール数が少なめです。</p>
+
+<h2>9月との比較</h2>
+<div class="card tw"><table>
+<tr><th></th><th>9月</th><th>10月（30日まで）</th></tr>
+<tr><td>コール数</td><td>3,721</td><td>3,991</td></tr>
+<tr><td>アポ数</td><td>54</td><td>47</td></tr>
+<tr><td>アポ率</td><td>1.45%</td><td>1.18%</td></tr>
+<tr><td>入室率（商談できた件数÷アポ数）</td><td>54.7%</td><td>50.0%</td></tr>
+</table></div>
+<p class="note">入室率は、ISの3人が取ったアポを商談予定日で数えた値です。10月はアポ48件のうち24件で商談できました。目標は65%以上です。</p>
+
+<h2>11月以降の動き</h2>
+<p class="lead">それぞれの動き方と、全員が守るルールです。</p>
+<div class="plan">
+<div class="card" style="--c:var(--bear)"><h3>🐻 佐久間さん</h3><ul>
+<li><b>求人アポ</b>を獲得していく</li>
+<li>狙う業種：酪農、食品製造、建設業、飲食</li>
+<li>バイトでも正社員でも狙う</li>
+<li>ある程度規模が大きいので、再営前提で<b>2〜3回で決める</b>ことも視野に入れる</li>
+</ul></div>
+<div class="card" style="--c:var(--cat)"><h3>🐱 アヤさん</h3><ul>
+<li>ITNGのお客さんに架電する</li>
+<li>IT商談者に確認してから<b>GO！！</b></li>
+<li>IT営業が×でも、かけたらあかんところは、手動で「営業中」に変える</li>
+</ul></div>
+<div class="card" style="--c:var(--leo)"><h3>🐆 仲村さん</h3><ul>
+<li><b>リストステータスの更新責任者</b>になる</li>
+</ul></div>
+<div class="card" style="--c:var(--line)"><h3>🐾 全員のルール</h3><ul>
+<li><span class="must">詰め</span>詰めの段階で、アプリが入っているかを聞く。入っていなければ、メールに記載のインストールリンクからダウンロードしてもらう</li>
+<li><span class="must">MUST</span>初期費用の11万円を回収しきったタイミングで、制作スタートにする</li>
+</ul></div>
+</div>
+
+<h2>アポ103件・受注率27%の場合</h2>
+<p class="lead">アポ103件を3人で分けたときの目安です。</p>
+<div class="card tw"><table>
+<tr><th>アポインター</th><th>比率</th><th>アポ</th><th>入室</th><th>受注に絡む件数</th></tr>
+<tr><td>🐻 佐久間</td><td>4割</td><td>41件</td><td>22件</td><td>6件</td></tr>
+<tr><td>🐆 仲村</td><td>4割</td><td>41件</td><td>22件</td><td>6件</td></tr>
+<tr><td>🐱 アヤ</td><td>2割</td><td>21件</td><td>11件</td><td>3件</td></tr>
+<tr class="t"><td>合計</td><td></td><td>103件</td><td>56件</td><td>15件</td></tr>
+</table></div>
+
+<div class="foot">🐾 🐾 🐾<br>© 2026 RUNBIRD INC. IS事業部</div>
+</main>
+</body></html>
