@@ -40,6 +40,10 @@ tr.t td{font-weight:800}
 .ck{margin:12px 0;font-size:14px}
 input{width:76px;font:inherit;padding:3px 8px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);text-align:right}
 .foot{text-align:center;margin-top:40px;color:var(--mut);font-size:12.5px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button{font:inherit;font-weight:800;padding:8px 16px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+#b-copy{background:var(--cat);border-color:var(--cat);color:#fff}
+textarea{width:100%;font:13px/1.6 "Noto Sans JP","Hiragino Sans",monospace;border:2px solid var(--line);border-radius:14px;background:var(--card);color:var(--fg);padding:10px;resize:vertical}
 </style></head>
 <body><!--rbnav--><style>.rbnav{position:relative;z-index:9999;font:13px/1.6 "Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;background:#fff;color:#1d2433;border-bottom:1px solid #d8d8d8;padding:8px 14px;box-sizing:border-box;text-align:left}.rbnav div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:2px 0}.rbnav b{font-weight:600;color:#667085;min-width:5.5em}.rbnav a,.rbnav span{padding:2px 12px;border-radius:999px;border:1px solid #d0d0d0;text-decoration:none;color:#1d2433;background:#fff}.rbnav span{background:#1d2433;border-color:#1d2433;color:#fff}@media(prefers-color-scheme:dark){.rbnav{background:#1d222d;color:#e8eaf0;border-color:#2b3140}.rbnav a{background:#1d222d;color:#e8eaf0;border-color:#3a4254}.rbnav span{background:#e8eaf0;color:#1d222d;border-color:#e8eaf0}}</style><nav class="rbnav" aria-label="資料一覧"><div><b>メンバー向け</b><a href="../../for-menber/2026-08/">8月</a><a href="../../for-menber/2026-09/">9月</a><span aria-current="page">10月</span></div></nav><!--/rbnav--><main>
 
@@ -50,6 +54,31 @@ input{width:76px;font:inherit;padding:3px 8px;border:2px solid var(--line);borde
 <div class="faces" aria-hidden="true"><span class="hop">🐻</span><span class="hop">🐆</span><span class="hop">🐱</span></div>
 </section>
 
+<h2>🏆 受注15件に対するアポ数の目標</h2>
+<p class="n">受注率27%の場合、アポ103件が必要です。3人の分担は次のとおりです。</p>
+<div class="w"><table>
+<tr><th>アポインター</th><th>比率</th><th>アポ</th><th>入室</th><th>受注に絡む件数</th></tr>
+<tr><td>🐻 佐久間</td><td>4割</td><td>41件</td><td>22件</td><td>6件</td></tr>
+<tr><td>🐆 仲村</td><td>4割</td><td>41件</td><td>22件</td><td>6件</td></tr>
+<tr><td>🐱 アヤ</td><td>2割</td><td>21件</td><td>11件</td><td>3件</td></tr>
+<tr class="t"><td>合計</td><td></td><td>103件</td><td>56件</td><td>15件</td></tr>
+</table></div>
+
+<h2>📐 必要なコール数</h2>
+<p class="n">必要コール数 ＝ アポ目標 ÷ アポ率。通電見込み ＝ コール数 × 接触率。自分の行の「アポ率・接触率・稼働日数」を入れてください。入れ終わったら「提出用にコピー」を押して、管理者に送ります。</p>
+<div class="w"><table id="calc">
+<tr><th>メンバー</th><th>アポ目標</th><th>アポ率（%）</th><th>接触率（%）</th><th>稼働日数</th><th>必要コール数</th><th>通電見込み</th><th>1日あたり</th></tr>
+<tr data-n="佐久間" data-t="41"><td>🐻 佐久間さん</td><td>41</td><td><input class="ar" type="number" step="0.01" value="2.18"></td><td><input class="cr" type="number" step="0.1" value="27.7"></td><td><input class="dy" type="number" step="1" min="1" max="31" value="20"></td><td class="c"></td><td class="e"></td><td class="d"></td></tr>
+<tr data-n="仲村" data-t="41"><td>🐆 仲村さん</td><td>41</td><td><input class="ar" type="number" step="0.01" value="1.53"></td><td><input class="cr" type="number" step="0.1" value="24.6"></td><td><input class="dy" type="number" step="1" min="1" max="31" value="20"></td><td class="c"></td><td class="e"></td><td class="d"></td></tr>
+<tr data-n="アヤ" data-t="21"><td>🐱 アヤさん</td><td>21</td><td><input class="ar" type="number" step="0.01" value="0.63"></td><td><input class="cr" type="number" step="0.1" value="24.2"></td><td><input class="dy" type="number" step="1" min="1" max="31" value="20"></td><td class="c"></td><td class="e"></td><td class="d"></td></tr>
+<tr class="t"><td>合計</td><td>103</td><td></td><td></td><td></td><td id="tc"></td><td id="te"></td><td id="td"></td></tr>
+</table></div>
+<p class="ck">提出者名 <input id="who" type="text" placeholder="名前" style="width:130px;text-align:left"></p>
+<div class="btns"><button type="button" id="b-copy">提出用にコピー</button><button type="button" id="b-save">ブラウザに保存</button><button type="button" id="b-reset">初期値に戻す</button><span id="msg" class="n"></span></div>
+<textarea id="out" readonly rows="9" aria-label="提出用の文面"></textarea>
+<p class="n">初期値：アポ率は9月と10月のコール数・アポ数を合算した実績（佐久間2.18%、仲村1.53%、アヤ0.63%）。接触率は9月の通電率（10月は通電数の集計がないため）。稼働日数は仮に20日です。「ブラウザに保存」は、この端末のこのブラウザにだけ保存されます。別の端末や、ブラウザのデータを消したあとは戻りません。</p>
+
+
 <h2>📞 10月の実績</h2>
 <div class="k">
 <div><span>コール</span><b>3,991</b><span>アヤ1,638 / 仲村1,641 / 佐久間712</span></div>
@@ -58,7 +87,7 @@ input{width:76px;font:inherit;padding:3px 8px;border:2px solid var(--line);borde
 <div><span>受注</span><b>6件</b><span>受注率 20.0%（対商談店舗）</span></div>
 </div>
 
-<h3>メンバー別</h3>
+<h3>アポインター別（アポを取った人ごと）</h3>
 <div class="w"><table>
 <tr><th>メンバー</th><th>コール</th><th>アポ</th><th>アポ率</th><th>詰め通過</th><th>商談した店舗</th><th>受注</th></tr>
 <tr><td>🐆 仲村さん</td><td>1,641</td><td>27</td><td>1.65%</td><td>11</td><td>15</td><td>1</td></tr>
@@ -66,6 +95,13 @@ input{width:76px;font:inherit;padding:3px 8px;border:2px solid var(--line);borde
 <tr><td>🐻 佐久間さん</td><td>712</td><td>14</td><td>1.97%</td><td>5</td><td>6</td><td>1</td></tr>
 </table></div>
 <p class="n">詰め通過・商談した店舗・受注は「そのメンバーが取ったアポ」の行き先です。稼働日数は仲村・アヤ17日、佐久間21日（商談対応と兼務のためコール数は少なめ）。</p>
+
+<h3>クローザー（営業）別</h3>
+<div class="w"><table>
+<tr><th>クローザー</th><th>行動数</th><th>受注</th><th>受注率（対行動数）</th></tr>
+<tr><td>🐻 佐久間さん</td><td>30</td><td>6</td><td>20.0%</td></tr>
+</table></div>
+<p class="n">行動数は、商談を行った店舗数です。上の表は「アポを取った人」ごと、この表は「商談して決める人」ごとの数字で、見方が別です。10月の受注6件はすべて佐久間さんの商談でした（社長向け10月月次報告の記載にもとづく）。</p>
 
 <h3>9月との比較</h3>
 <div class="w"><table>
@@ -113,48 +149,66 @@ input{width:76px;font:inherit;padding:3px 8px;border:2px solid var(--line);borde
 <h3>🐆 仲村さん</h3>
 <ul>
 <li>リストステータスの更新責任者</li>
+<li>対応予定（結果待ちを含む）の管理者</li>
 </ul>
 </div>
-
-<h2>🏆 受注15件に対するアポ数の目標</h2>
-<p class="n">受注率27%の場合、アポ103件が必要です。3人の分担は次のとおりです。</p>
-<div class="w"><table>
-<tr><th>アポインター</th><th>比率</th><th>アポ</th><th>入室</th><th>受注に絡む件数</th></tr>
-<tr><td>🐻 佐久間</td><td>4割</td><td>41件</td><td>22件</td><td>6件</td></tr>
-<tr><td>🐆 仲村</td><td>4割</td><td>41件</td><td>22件</td><td>6件</td></tr>
-<tr><td>🐱 アヤ</td><td>2割</td><td>21件</td><td>11件</td><td>3件</td></tr>
-<tr class="t"><td>合計</td><td></td><td>103件</td><td>56件</td><td>15件</td></tr>
-</table></div>
-
-<h3>必要なコール数（逆算）</h3>
-<p class="n">必要コール数 ＝ アポ目標 ÷ アポ率。通電見込み ＝ コール数 × 接触率。アポ率と接触率の初期値は実績から置いたもので、自分の数字に書き換えると計算し直します。</p>
-<p class="ck">月の稼働日数 <input id="days" type="number" value="20" min="1" max="31"> 日</p>
-<div class="w"><table id="calc">
-<tr><th>メンバー</th><th>アポ目標</th><th>アポ率（%）</th><th>接触率（%）</th><th>必要コール数</th><th>通電見込み</th><th>1日あたり</th></tr>
-<tr data-t="41"><td>🐻 佐久間さん</td><td>41</td><td><input class="ar" type="number" step="0.01" value="2.18"></td><td><input class="cr" type="number" step="0.1" value="27.7"></td><td class="c"></td><td class="e"></td><td class="d"></td></tr>
-<tr data-t="41"><td>🐆 仲村さん</td><td>41</td><td><input class="ar" type="number" step="0.01" value="1.53"></td><td><input class="cr" type="number" step="0.1" value="24.6"></td><td class="c"></td><td class="e"></td><td class="d"></td></tr>
-<tr data-t="21"><td>🐱 アヤさん</td><td>21</td><td><input class="ar" type="number" step="0.01" value="0.63"></td><td><input class="cr" type="number" step="0.1" value="24.2"></td><td class="c"></td><td class="e"></td><td class="d"></td></tr>
-<tr class="t"><td>合計</td><td>103</td><td></td><td></td><td id="tc"></td><td id="te"></td><td id="td"></td></tr>
-</table></div>
-<p class="n">アポ率の初期値：9月と10月のコール数・アポ数を合算した実績（佐久間2.18%、仲村1.53%、アヤ0.63%）。接触率の初期値：9月の通電率（佐久間27.7%、仲村24.6%、アヤ24.2%）。10月は通電数の集計がないため9月の値を使っています。</p>
 
 <div class="foot">🐾 🐾 🐾<br>© 2026 RUNBIRD INC. IS事業部</div>
 </main>
 <script>
 (function(){
+ var KEY='rb-oct-calc-v1';
  function f(n){return Math.round(n).toLocaleString()}
+ function rows(){return Array.prototype.slice.call(document.querySelectorAll('#calc tr[data-t]'))}
+ function msg(t){document.getElementById('msg').textContent=t}
  function calc(){
-  var days=parseFloat(document.getElementById('days').value)||20,tc=0,te=0;
-  document.querySelectorAll('#calc tr[data-t]').forEach(function(r){
-   var t=+r.dataset.t,ar=parseFloat(r.querySelector('.ar').value)/100,cr=parseFloat(r.querySelector('.cr').value)/100;
-   if(ar>0&&cr>0){var c=Math.ceil(t/ar),e=c*cr;tc+=c;te+=e;
-    r.querySelector('.c').textContent=f(c);r.querySelector('.e').textContent=f(e);r.querySelector('.d').textContent=f(c/days)}
-   else{r.querySelector('.c').textContent='―';r.querySelector('.e').textContent='―';r.querySelector('.d').textContent='―'}
+  var tc=0,te=0,td=0;
+  rows().forEach(function(r){
+   var t=+r.dataset.t,ar=parseFloat(r.querySelector('.ar').value)/100,cr=parseFloat(r.querySelector('.cr').value)/100,dy=parseFloat(r.querySelector('.dy').value);
+   var c=r.querySelector('.c'),e=r.querySelector('.e'),d=r.querySelector('.d');
+   if(ar>0&&cr>0&&dy>0){var n=Math.ceil(t/ar);tc+=n;te+=n*cr;td+=n/dy;c.textContent=f(n);e.textContent=f(n*cr);d.textContent=f(n/dy)}
+   else{c.textContent='―';e.textContent='―';d.textContent='―'}
   });
-  document.getElementById('tc').textContent=f(tc);document.getElementById('te').textContent=f(te);document.getElementById('td').textContent=f(tc/days);
+  document.getElementById('tc').textContent=f(tc);document.getElementById('te').textContent=f(te);document.getElementById('td').textContent=f(td);
+  document.getElementById('out').value=text(tc,te,td);
  }
- document.querySelectorAll('input').forEach(function(i){i.addEventListener('input',calc)});
- calc();
+ function text(tc,te,td){
+  var d=new Date(),ds=d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
+  var who=document.getElementById('who').value.trim();
+  var L=['【必要コール数の設定】受注15件・アポ103件の目標','提出日：'+ds,'提出者：'+(who||'（未入力）'),''];
+  rows().forEach(function(r){
+   var v=function(c){return r.querySelector(c).value||'―'};
+   L.push(r.dataset.n+'：アポ目標'+r.dataset.t+'件／アポ率'+v('.ar')+'%／接触率'+v('.cr')+'%／稼働'+v('.dy')+'日 → 必要コール'+r.querySelector('.c').textContent+'件（1日'+r.querySelector('.d').textContent+'件）、通電見込み'+r.querySelector('.e').textContent+'件');
+  });
+  L.push('','合計：必要コール'+f(tc)+'件、通電見込み'+f(te)+'件、1日合計'+f(td)+'件');
+  return L.join('\n');
+ }
+ function copy(){
+  var t=document.getElementById('out').value;
+  function fb(){var o=document.getElementById('out');o.removeAttribute('readonly');o.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}o.setAttribute('readonly','');msg(ok?'コピーしました':'コピーできませんでした。上の文面を選んでコピーしてください')}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){msg('コピーしました')},fb)}else{fb()}
+ }
+ function save(){
+  try{
+   var o={who:document.getElementById('who').value,rows:rows().map(function(r){return{ar:r.querySelector('.ar').value,cr:r.querySelector('.cr').value,dy:r.querySelector('.dy').value}})};
+   localStorage.setItem(KEY,JSON.stringify(o));msg('このブラウザに保存しました')
+  }catch(e){msg('保存できませんでした（ブラウザの設定で保存が止められている可能性があります）')}
+ }
+ function load(){
+  try{
+   var o=JSON.parse(localStorage.getItem(KEY)||'null');if(!o)return;
+   document.getElementById('who').value=o.who||'';
+   rows().forEach(function(r,i){var x=o.rows&&o.rows[i];if(!x)return;r.querySelector('.ar').value=x.ar;r.querySelector('.cr').value=x.cr;r.querySelector('.dy').value=x.dy});
+   msg('保存した内容を読み込みました')
+  }catch(e){}
+ }
+ var init=rows().map(function(r){return{ar:r.querySelector('.ar').value,cr:r.querySelector('.cr').value,dy:r.querySelector('.dy').value}});
+ function reset(){rows().forEach(function(r,i){r.querySelector('.ar').value=init[i].ar;r.querySelector('.cr').value=init[i].cr;r.querySelector('.dy').value=init[i].dy});try{localStorage.removeItem(KEY)}catch(e){}calc();msg('初期値に戻しました')}
+ document.querySelectorAll('#calc input,#who').forEach(function(i){i.addEventListener('input',function(){calc();msg('')})});
+ document.getElementById('b-copy').addEventListener('click',copy);
+ document.getElementById('b-save').addEventListener('click',save);
+ document.getElementById('b-reset').addEventListener('click',reset);
+ load();calc();
 })();
 </script>
 </body></html>
