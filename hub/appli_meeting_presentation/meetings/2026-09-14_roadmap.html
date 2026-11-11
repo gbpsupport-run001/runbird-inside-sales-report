@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社内回覧板アプリ 実装ロードマップ | Runbird IS事業部</title>
+<style>
+  :root{
+    --bg: #0b0e14; --panel: #12161f; --panel2: #161b26; --line: #232a38;
+    --gold: #d4af6a; --gold-soft: rgba(212,175,106,0.14);
+    --cyan: #4fd6d0; --cyan-soft: rgba(79,214,208,0.12);
+    --text: #eef1f6; --text-dim: #9aa4b4; --text-faint: #667088;
+    --red: #e08585;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: radial-gradient(1200px 600px at 15% -5%, #151b28 0%, var(--bg) 55%) fixed;
+    color: var(--text);
+    font-family: "Hiragino Sans","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+    line-height: 1.75; letter-spacing: 0.01em; padding-bottom: 60px;
+  }
+  section{ max-width: 900px; margin: 0 auto; padding: 56px 28px; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .eyebrow{ font-size:12.5px; color:var(--gold); letter-spacing:0.16em; text-transform:uppercase; font-weight:700; margin-bottom:14px;}
+  h1{ font-size:32px; font-weight:700; line-height:1.5; margin-bottom:18px;
+      background: linear-gradient(120deg,#fff 30%, var(--gold) 100%); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  h2{ font-size:23px; font-weight:700; margin-bottom:8px;}
+  .lede{ color:var(--text-dim); font-size:14px; max-width:640px; margin-bottom:22px;}
+  .section-tag{ font-size:11.5px; font-weight:700; letter-spacing:0.12em; color:var(--cyan); background:var(--cyan-soft); padding:4px 10px; border-radius:6px; display:inline-block; margin-bottom:14px;}
+  .section-tag.gold{ color:var(--gold); background:var(--gold-soft);}
+
+  .roadmap{ display:flex; flex-direction:column; gap:12px; margin:24px 0;}
+  .rstep{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 22px; display:flex; gap:18px; align-items:flex-start;}
+  .rstep .badge{ min-width:46px; height:46px; border-radius:12px; background:var(--gold-soft); color:var(--gold); font-weight:800; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .rstep.step2 .badge{ background:var(--cyan-soft); color:var(--cyan);}
+  .rstep.step3 .badge{ background:rgba(224,133,133,0.14); color:var(--red);}
+  .rstep.step4 .badge{ background:var(--gold-soft); color:var(--gold);}
+  .rstep h3{ font-size:15.5px; margin-bottom:4px;}
+  .rstep .cost{ font-size:12px; color:var(--text-faint); margin-bottom:6px;}
+  .rstep p{ font-size:13px; color:var(--text-dim);}
+  .arrow{ text-align:center; color:var(--text-faint); font-size:13px;}
+
+  .card-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:22px 0;}
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px;}
+  .card .k{ font-size:11.5px; color:var(--gold); font-weight:700; letter-spacing:0.06em; margin-bottom:8px;}
+  .card p{ font-size:13px; color:var(--text-dim);}
+
+  table{ width:100%; border-collapse:collapse; margin:20px 0; font-size:13px;}
+  th{ text-align:left; color:var(--gold); font-weight:600; padding:9px 12px; border-bottom:1px solid var(--line); font-size:12px;}
+  td{ padding:10px 12px; border-bottom:1px solid var(--line); color:var(--text-dim);}
+  tr:last-child td{ border-bottom:none;}
+  td.strong{ color:var(--text); font-weight:600;}
+
+  .callout{ background:var(--panel2); border-left:3px solid var(--gold); border-radius:0 12px 12px 0; padding:14px 18px; font-size:13px; color:var(--text-dim); margin:18px 0;}
+  .risk{ background:rgba(224,133,133,0.08); border:1px solid rgba(224,133,133,0.3); border-radius:12px; padding:16px 18px; font-size:13px; color:#e6b4b4; margin:18px 0;}
+  .risk b{ color:#f0c8c8;}
+
+  .stat-big{ font-size:38px; font-weight:800; color:var(--gold); line-height:1;}
+  .stat-big span{ font-size:16px; color:var(--text-dim); font-weight:500; margin-left:6px;}
+
+  footer{ max-width:900px; margin:0 auto; padding:40px 28px 0; text-align:center; font-size:12px; color:var(--text-faint);}
+  @media (max-width:680px){ .card-row{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<section>
+  <div class="eyebrow">IS事業部 発 / 2026.08 ご提案(2回目)</div>
+  <h1>社内回覧板アプリ<br>実装ロードマップ</h1>
+  <p class="lede">前回のご提案内容を踏まえ、今回は「何を・どの順番で作るか」に絞ってご説明します。低コスト・低工数なものから積み上げ、リスクの高い部分は土台を固めてから着手する順番です。</p>
+  <div class="roadmap">
+    <div class="rstep">
+      <div class="badge">1</div>
+      <div><h3>回覧板・称賛リアクション</h3><div class="cost">コスト:最小 / 工数:最小 / リスク:なし</div><p>機微データを扱わない、最も着手しやすい機能。ここから始めて早期に文化醸成の効果を検証します。</p></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="rstep step2">
+      <div class="badge">2</div>
+      <div><h3>研修の動画講座化・ロープレ中心化</h3><div class="cost">コスト:小 / 工数:中 / リスク:低</div><p>動画ホスティングのみ。この段階では視聴ログの活用はまだ行いません。</p></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="rstep step3">
+      <div class="badge">3</div>
+      <div><h3>視聴・ログインデータ→配置判断への活用</h3><div class="cost">コスト:中 / 工数:大 / リスク:高(社労士確認要)</div><p>就業規則整備・社労士確認が前提。1・2の土台が回ってから着手します。</p></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="rstep step4">
+      <div class="badge">4</div>
+      <div><h3>ポイント制度(称賛の見える化→配置判断連携)</h3><div class="cost">コスト:小 / 工数:中 / リスク:中</div><p>1と3の両方に依存するため最後。景品交換は行わず、非金銭的な承認と配置判断の加点、どちらの軸にするかご判断いただきたいです。</p></div>
+    </div>
+  </div>
+  <div class="callout"><b>この順番にした理由:</b> リスク・コストが低いものから小さく試し、兆しを確認しながら次の投資判断をする設計です。1回目のご提案内容(効果・リスク詳細)は前回資料の通りです。</div>
+</section>
+
+<section>
+  <div class="section-tag">STEP 1</div>
+  <h2>回覧板・称賛リアクション ── 最優先</h2>
+  <p class="lede">最初に着手する理由は、コスト・工数・リスクの全てが最小で、かつ前回確認した効果(称賛文化とアポ率の相関)にも直結するためです。</p>
+  <div class="card-row">
+    <div class="card"><div class="k">コスト</div><p>Firebase Hosting無料枠内。Claude Code契約のみ(月2,000〜3,000円程度)。</p></div>
+    <div class="card"><div class="k">工数</div><p>単純なCRUD+リアクション機能。数日〜1週間程度で着手可能な規模。</p></div>
+  </div>
+  <div class="stat-big">+0.23<span>pt(お盆前後の実績)</span></div>
+  <p class="lede" style="margin-top:10px;">称賛文化が自然発生した週にアポ率が上向いた実績があり、これを仕組み化する一歩目です。</p>
+</section>
+
+<section>
+  <div class="section-tag">STEP 2</div>
+  <h2>研修の動画講座化・ロープレ中心化</h2>
+  <p class="lede">クロージング研修・書類研修が特定講師に依存している状態を解消します。この段階ではまだ「視聴データの活用」はしません。</p>
+  <table>
+    <tr><th>今の課題</th><th>変更後</th></tr>
+    <tr><td>講師1人への属人化。安心感が生まれ本番対応力が育ちにくい</td><td class="strong">動画でインプット→ロープレで実践に一本化</td></tr>
+    <tr><td>講師役の工数(人件費)がかかり続ける</td><td class="strong">ライブ座学を廃止し、その分の人件費を削減</td></tr>
+  </table>
+  <div class="callout">Step1のインフラ(Firebase Hosting・Googleログイン認証)をそのまま流用できるため、追加コストは動画ホスティング分のみです。</div>
+</section>
+
+<section>
+  <div class="section-tag">STEP 3</div>
+  <h2>視聴・ログインデータ → 配置判断への活用</h2>
+  <p class="lede">Step1・2で土台となる仕組みが安定稼働してから着手する、最もリスクの高いフェーズです。</p>
+  <ul style="margin:18px 0; padding-left:20px; font-size:13px; color:var(--text-dim);">
+    <li style="margin-bottom:8px;"><b style="color:var(--text);">閲覧範囲:</b> 視聴状況は管理者のみ閲覧可能。全体公開・ランキング化はしません。</li>
+    <li style="margin-bottom:8px;"><b style="color:var(--text);">用途:</b> 人事評価そのものには使わず、クローザー配置判断の材料の一つとして活用します。</li>
+    <li><b style="color:var(--text);">整備:</b> 本人への非開示で運用するため、就業規則への記載・社労士確認を導入前に行います。</li>
+  </ul>
+  <div class="risk"><b>ご確認いただきたい点:</b> 本人非開示運用のため、Step1・2が軌道に乗り、社内整備(就業規則・社労士確認)が完了した段階で着手する想定です。順番を後段に置いているのはこのためです。</div>
+</section>
+
+<section>
+  <div class="section-tag">STEP 4</div>
+  <h2>ポイント制度(称賛の見える化 → 配置判断連携)</h2>
+  <p class="lede">Step1(称賛リアクション)とStep3(配置判断の仕組み)の両方が揃って初めて機能するため、最後に位置づけています。</p>
+  <div class="card-row">
+    <div class="card"><div class="k">案1</div><p>非金銭的な承認。ランキング表示など見える化のみ。文化醸成が目的で、金銭・評価には結びつけません。</p></div>
+    <div class="card"><div class="k">案3</div><p>配置判断の加点要素。研修データ(Step3)と合わせて、クローザー登用など配置判断の材料の一つに加えます。</p></div>
+  </div>
+  <div class="callout">賞与・昇給などの人事評価に反映するかどうかも含め、社長のご判断を伺いたいです。</div>
+</section>
+
+<footer>
+  IS事業部 &nbsp;|&nbsp; 2026.08 ご提案(2回目) &nbsp;|&nbsp; 実装ロードマップ
+</footer>
+
+</body>
+</html>

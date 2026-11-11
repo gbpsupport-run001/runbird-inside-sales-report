@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社内アプリ導入提案 ── 社内サイトへの統合 | Runbird IS事業部</title>
+<style>
+  :root{
+    --bg: #f7f6f2;
+    --panel: #ffffff;
+    --panel2: #fbf9f4;
+    --line: #e7e2d8;
+    --gold: #b8863f;
+    --gold-soft: #f5ead4;
+    --cyan: #1f9c93;
+    --cyan-soft: #e2f5f2;
+    --navy: #1c2438;
+    --text: #22262f;
+    --text-dim: #5b6270;
+    --text-faint: #94988f;
+    --red: #c65b4e;
+    --red-soft: #fbe9e6;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Hiragino Sans","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+    line-height: 1.8; letter-spacing: 0.01em; padding-bottom: 60px;
+  }
+  section{ max-width: 900px; margin: 0 auto; padding: 56px 28px; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .eyebrow{ font-size:12.5px; color:var(--gold); letter-spacing:0.16em; text-transform:uppercase; font-weight:700; margin-bottom:14px;}
+  h1{ font-size:32px; font-weight:800; line-height:1.55; margin-bottom:18px; color:var(--navy);}
+  h1 .accent{ color: var(--gold); }
+  h2{ font-size:22px; font-weight:800; margin-bottom:8px; color:var(--navy);}
+  .lede{ color:var(--text-dim); font-size:14px; max-width:640px; margin-bottom:22px;}
+  .section-tag{ font-size:11.5px; font-weight:700; letter-spacing:0.12em; color:var(--cyan); background:var(--cyan-soft); padding:4px 10px; border-radius:6px; display:inline-block; margin-bottom:14px;}
+  .section-tag.gold{ color:var(--gold); background:var(--gold-soft);}
+  .section-tag.red{ color:var(--red); background:var(--red-soft);}
+
+  .card-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:22px 0;}
+  .card-row.three{ grid-template-columns: repeat(3,1fr); }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px; box-shadow: 0 2px 10px rgba(28,36,56,0.04);}
+  .card .k{ font-size:11.5px; color:var(--gold); font-weight:700; letter-spacing:0.06em; margin-bottom:10px;}
+  .card h3{ font-size:15px; color:var(--navy); margin-bottom:8px;}
+  .card p{ font-size:13px; color:var(--text-dim);}
+
+  .split{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin:26px 0; align-items:stretch;}
+  .split .box{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px; box-shadow: 0 2px 10px rgba(28,36,56,0.04);}
+  .split .box.keep{ border-color: rgba(31,156,147,0.35); background: linear-gradient(180deg, var(--cyan-soft), #fff 55%);}
+  .split .box.new{ border-color: rgba(184,134,63,0.35); background: linear-gradient(180deg, var(--gold-soft), #fff 55%);}
+  .split h3{ font-size:15px; color:var(--navy); margin-bottom:10px;}
+  .split ul{ padding-left:18px; }
+  .split li{ font-size:13px; color:var(--text-dim); margin-bottom:6px;}
+
+  .flow{ display:flex; flex-direction:column; gap:10px; margin:24px 0;}
+  .fstep{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 22px; display:flex; gap:16px; align-items:flex-start; box-shadow: 0 2px 10px rgba(28,36,56,0.04);}
+  .fstep .badge{ min-width:42px; height:42px; border-radius:11px; background:var(--gold-soft); color:var(--gold); font-weight:800; font-size:15px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .fstep.cyan .badge{ background:var(--cyan-soft); color:var(--cyan);}
+  .fstep.red .badge{ background:var(--red-soft); color:var(--red);}
+  .fstep h4{ font-size:14.5px; color:var(--navy); margin-bottom:4px;}
+  .fstep p{ font-size:12.5px; color:var(--text-dim);}
+  .farrow{ text-align:center; color:var(--text-faint); font-size:13px;}
+
+  table{ width:100%; border-collapse:collapse; margin:20px 0; font-size:13px; background:var(--panel); border-radius:12px; overflow:hidden; box-shadow: 0 2px 10px rgba(28,36,56,0.04);}
+  th{ text-align:left; color:var(--gold); font-weight:700; padding:11px 14px; border-bottom:1px solid var(--line); font-size:12px; background: var(--gold-soft);}
+  td{ padding:11px 14px; border-bottom:1px solid var(--line); color:var(--text-dim);}
+  tr:last-child td{ border-bottom:none;}
+  td.strong{ color:var(--navy); font-weight:700;}
+
+  .callout{ background:var(--panel2); border-left:4px solid var(--gold); border-radius:0 14px 14px 0; padding:16px 20px; font-size:13px; color:var(--text-dim); margin:20px 0;}
+  .callout b{ color:var(--navy); }
+  .callout.cyan{ border-left-color: var(--cyan); }
+  .risk{ background:var(--red-soft); border:1px solid rgba(198,91,78,0.25); border-radius:14px; padding:18px 20px; font-size:13px; color:#8a3f34; margin:20px 0;}
+  .risk b{ color:#6e2f26;}
+
+  .stat-row{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin:26px 0; align-items:center;}
+  .stat-big{ font-size:40px; font-weight:800; color:var(--gold); line-height:1;}
+  .stat-big span{ font-size:15px; color:var(--text-dim); font-weight:500; margin-left:6px;}
+
+  .perm-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:10px; margin:22px 0;}
+  .tool-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:14px; margin:22px 0;}
+  .tool-card{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow: 0 2px 10px rgba(28,36,56,0.04); text-decoration:none; display:block; transition: transform .15s ease, box-shadow .15s ease;}
+  .tool-card:hover{ transform: translateY(-2px); box-shadow: 0 6px 18px rgba(28,36,56,0.08);}
+  .tool-card .tag{ font-size:11px; color:var(--cyan); font-weight:700; letter-spacing:0.05em; margin-bottom:8px;}
+  .tool-card h3{ font-size:15px; color:var(--navy); margin-bottom:6px;}
+  .tool-card p{ font-size:12.5px; color:var(--text-dim);}
+  .tool-card .link{ font-size:11.5px; color:var(--gold); margin-top:10px; font-weight:600;}
+  .perm{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 14px; text-align:center; box-shadow: 0 2px 10px rgba(28,36,56,0.04);}
+  .perm .lv{ font-size:11px; color:var(--cyan); font-weight:700; margin-bottom:8px; letter-spacing:0.05em;}
+  .perm .who{ font-size:13px; color:var(--navy); font-weight:700; margin-bottom:6px;}
+  .perm p{ font-size:11.5px; color:var(--text-dim);}
+
+  .cta-box{ background: linear-gradient(135deg, var(--gold-soft), var(--cyan-soft)); border:1px solid var(--line); border-radius:18px; padding:34px; text-align:center;}
+  .cta-box h3{ font-size:18px; color:var(--navy); margin-bottom:10px;}
+  .cta-box p{ font-size:13px; color:var(--text-dim);}
+
+  footer{ max-width:900px; margin:0 auto; padding:40px 28px 0; text-align:center; font-size:12px; color:var(--text-faint);}
+  @media (max-width:680px){ .card-row, .card-row.three, .split, .perm-grid, .tool-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<section>
+  <div class="eyebrow">IS事業部 発 / 2026.09.26 ご提案(2回目)</div>
+  <h1>バラバラなシステムを、<br><span class="accent">ひとつの社内サイト</span>にまとめる</h1>
+  <p class="lede">今回は機能の話に入る前に、まず「何を作り」「何を作らないか」の範囲を見直しました。AXT・FocusUはそのまま、既存の社内ポータル(intra.runbird.net)は今後この「社内サイト」に統一していきます。あわせて情報の守り方、社内で実績ができた後の展開の可能性もご説明します。</p>
+  <div class="card-row three">
+    <div class="card"><div class="k">01</div><h3>作る範囲の整理</h3><p>アポ・顧客管理はAXT、勤怠はFocusUのまま。社内ポータルはこの社内サイトに統一する。</p></div>
+    <div class="card"><div class="k">02</div><h3>情報の守り方</h3><p>誰が管理者になるか、権限機能でどこまでアクセス制限をかけるか。</p></div>
+    <div class="card"><div class="k">03</div><h3>事業展望</h3><p>社内実績ができれば「会社アプリ使いませんか」で外販できる保守管理システムに。</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-tag gold">全体像</div>
+  <h2>バラバラなシステムを、1つに</h2>
+  <p class="lede">現状、顧客管理・勤怠・社内ポータル・研修資料などがそれぞれ別の場所に散らばっています。今回の社内サイトは、これらの入口を1つにまとめる位置づけです。</p>
+  <div class="flow">
+    <div class="fstep">
+      <div class="badge">今</div>
+      <div><h4>バラバラな状態</h4><p>AXT(顧客管理)、FocusU(勤怠)、intra.runbird.net(ポータル)、研修資料、称賛のやり取りがそれぞれ別々の場所に存在</p></div>
+    </div>
+    <div class="farrow">↓</div>
+    <div class="fstep cyan">
+      <div class="badge">先</div>
+      <div><h4>社内サイトに統一</h4><p>各システムへの入口・社員同士のやり取り・研修をひとつのサイトに集約。既存の社内ポータルはここに統一していく</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-tag gold">対象範囲</div>
+  <h2>何を作り、何を作らないか</h2>
+  <p class="lede">前回、勤怠管理・社内ポータルを新規で作るとお伝えしましたが、確認したところ両方すでに社内で動いているものがありました。そこで今回、作る範囲を絞り直しました。</p>
+  <div class="split">
+    <div class="box">
+      <h3>すでにある仕組み(そのまま使う)</h3>
+      <ul>
+        <li><b style="color:var(--navy);">AXT</b> ── アポイント管理・顧客管理</li>
+        <li><b style="color:var(--navy);">FocusU</b> ── 勤怠管理(出退勤・シフト)</li>
+      </ul>
+      <p style="font-size:12.5px; color:var(--text-faint); margin-top:12px;">→ この社内サイトでは作り直しません。二重管理を避けます。</p>
+    </div>
+    <div class="box new">
+      <h3>この社内サイトに統一していく部分</h3>
+      <ul>
+        <li><b style="color:var(--navy);">既存の社内ポータル(intra.runbird.net)</b>の内容(社員連絡先・定例MTGアーカイブ・就業規則・宿泊予約・FAQなど)</li>
+        <li><b style="color:var(--navy);">称賛・回覧板機能</b>(社員同士のやり取り)</li>
+        <li><b style="color:var(--navy);">研修の動画講座化</b>(視聴ログで進捗を可視化)</li>
+        <li><b style="color:var(--navy);">社員一人ひとりの専用アバター</b></li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">既存の社内ポータルは情報が整理されて置いてあるものの、社長ご自身も「開く習慣がない」とおっしゃっていました。今回の社内サイトは、その置き場を統一しつつ、そこに「人が能動的に開きたくなる理由」を足すのが目的です。</div>
+</section>
+
+<section>
+  <div class="section-tag red">情報の守り方</div>
+  <h2>誰が管理し、情報漏洩をどう防ぐか</h2>
+  <p class="lede">「誰が管理するのか」「ノウハウが外に漏れないか」というご懸念に対する回答です。</p>
+  <div class="risk">
+    <b>懸念:</b> 佐久間さん個人がソースコード・データを管理する状態は、属人化のリスクがあります。ノウハウが集約される場所だからこそ、個人の持ち物ではなく会社の資産として管理する必要があります。
+  </div>
+  <div class="flow">
+    <div class="fstep">
+      <div class="badge">1</div>
+      <div><h4>ソースコードは会社管理に</h4><p>個人アカウントではなく、会社名義のGitHubリポジトリ等で一元管理。属人化を避けます。</p></div>
+    </div>
+    <div class="farrow">↓</div>
+    <div class="fstep cyan">
+      <div class="badge">2</div>
+      <div><h4>権限機能でアクセス制限</h4><p>役職・事業部・研修進捗に応じて、閲覧・編集できる範囲を分けます。</p></div>
+    </div>
+    <div class="farrow">↓</div>
+    <div class="fstep red">
+      <div class="badge">3</div>
+      <div><h4>保守体制を明文化</h4><p>誰が更新・アップデートを担当するか、事前にルール化します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-tag gold">見た目</div>
+  <h2>社員一人ひとりの専用アバター</h2>
+  <p class="lede">社内サイトにログインすると、自分専用のアバターが出迎える形にします。称賛のやり取りや研修進捗も、このアバターを通じて表示します。</p>
+  <div class="card-row">
+    <div class="card"><div class="k">狙い</div><h3>「自分ごと」にする</h3><p>共通のポータル画面ではなく、自分のアバターがいることで、社内サイトを開く動機になります。</p></div>
+    <div class="card"><div class="k">連動</div><h3>研修・称賛と連動</h3><p>研修が進む、称賛をもらう、といった行動がアバターの見た目や状態に反映される形も検討できます。</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-tag red">情報の守り方</div>
+  <h2>権限機能のイメージ</h2>
+  <p class="lede">社内ポータルで既に「社員ログイン」と「代理店様ログイン」が分かれている仕組みをそのまま踏襲し、社員側をさらに研修進捗に応じて段階分けします。</p>
+  <div class="perm-grid">
+    <div class="perm"><div class="lv">LV1</div><div class="who">新人</div><p>基礎研修動画のみ閲覧可。クロージング研修は非表示</p></div>
+    <div class="perm"><div class="lv">LV2</div><div class="who">サブクローザー</div><p>基礎+応用研修が解放。社内サイトでの称賛・投稿可</p></div>
+    <div class="perm"><div class="lv">LV3</div><div class="who">クローザー</div><p>全研修動画+商談分析ツール利用可</p></div>
+    <div class="perm"><div class="lv">LV4</div><div class="who">管理職</div><p>配置判断データ・全社ポータル管理権限あり</p></div>
+  </div>
+  <div class="callout cyan">研修の進捗に応じて鍵が開いていく設計にすれば、「早く先に進みたい」というゲーム的な動機づけにもなります。加盟店用アカウントも同様に、別区分でアクセス範囲を制限できます。</div>
+</section>
+
+<section>
+  <div class="section-tag gold">既に動いているもの</div>
+  <h2>すでに稼働中のツール群も、この社内サイトに集約</h2>
+  <p class="lede">これまで別々に作ってきたIS事業部のツールも、入口をこの社内サイトにまとめます。実物はリンクからご確認いただけます。</p>
+  <div class="tool-grid">
+    <a class="tool-card" href="https://gbpsupport-run001.github.io/runbird-inside-sales-report/hub/character/" target="_blank" rel="noopener">
+      <div class="tag">研修</div>
+      <h3>テレアポ研修 by ズーミー</h3>
+      <p>キャラクターと進める新人向けテレアポ研修サイト</p>
+      <div class="link">gbpsupport-run001.github.io/is_character_demosite ↗</div>
+    </a>
+    <a class="tool-card" href="https://gbpsupport-run001.github.io/runbird-inside-sales-report/hub/character/characters.html" target="_blank" rel="noopener">
+      <div class="tag">研修</div>
+      <h3>候補キャラ図鑑</h3>
+      <p>研修に登場するキャラクターの一覧。今後のアバター展開の土台にもなる</p>
+      <div class="link">.../characters.html ↗</div>
+    </a>
+    <a class="tool-card" href="https://gbpsupport-run001.github.io/runbird-inside-sales-report/hub/manual/" target="_blank" rel="noopener">
+      <div class="tag">マニュアル</div>
+      <h3>営業マニュアル(研修資料参照)</h3>
+      <p>これまでの研修資料を落とし込んだ営業マニュアルサイト</p>
+      <div class="link">gbpsupport-run001.github.io/is_manual ↗</div>
+    </a>
+    <a class="tool-card" href="https://gbpsupport-run001.github.io/runbird-inside-sales-report/hub/rumbird-is-shodan-analyzer/" target="_blank" rel="noopener">
+      <div class="tag">分析</div>
+      <h3>商談分析ツール</h3>
+      <p>商談ログを読み込ませて分析・点数化するツール</p>
+      <div class="link">gbpsupport-run001.github.io/rumbird-is-shodan-analyzer ↗</div>
+    </a>
+  </div>
+  <div class="callout">これらもバラバラな置き場所になっているので、社内サイトからワンクリックで開けるようにまとめます。</div>
+</section>
+
+<section>
+  <div class="section-tag cyan">この先の展開</div>
+  <h2>社内実績の先にある事業展開</h2>
+  <p class="lede">まずは社内(IS・IT事業部)で運用し実績を作ることが前提です。その先に、次のような展開の可能性があります。</p>
+  <div class="card-row">
+    <div class="card"><div class="k">STEP A</div><h3>加盟店の管理基盤として展開</h3><p>フランチャイズ管理は現状ラインでのやり取りが中心で属人化しています。ログイン機能・権限管理を使えば、加盟店ごとの研修進捗・資料閲覧を一元管理できます。</p></div>
+    <div class="card"><div class="k">STEP B</div><h3>「会社アプリ使いませんか」で外販</h3><p>社内で使い勝手と保守体制が固まれば、他社向けの保守管理システムとして販売できる可能性があります。</p></div>
+  </div>
+  <div class="callout cyan">現状バラバラに存在する顧客管理・勤怠・ポータルの入口を1つにまとめた実績自体が、他社への提案材料になります。</div>
+</section>
+
+<footer>
+  IS事業部 &nbsp;|&nbsp; 2026.09.26 ご提案(2回目) &nbsp;|&nbsp; 社内サイトへの統合
+</footer>
+
+</body>
+</html>

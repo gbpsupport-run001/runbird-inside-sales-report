@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社内回覧板アプリ導入のご提案 | Runbird IS事業部</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg: #0b0e14;
+    --panel: #12161f;
+    --panel2: #161b26;
+    --line: #232a38;
+    --gold: #d4af6a;
+    --gold-soft: rgba(212,175,106,0.14);
+    --cyan: #4fd6d0;
+    --cyan-soft: rgba(79,214,208,0.12);
+    --text: #eef1f6;
+    --text-dim: #9aa4b4;
+    --text-faint: #667088;
+    --red: #e08585;
+    --green: #7fd6a8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: radial-gradient(1200px 600px at 15% -5%, #151b28 0%, var(--bg) 55%) fixed;
+    color: var(--text);
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", -apple-system, sans-serif;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+    padding-bottom: 80px;
+  }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 28px; }
+
+  /* Header */
+  header.hero{
+    padding: 90px 28px 60px;
+    max-width: 980px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow{
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+  .hero h1{
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.5;
+    background: linear-gradient(120deg, #ffffff 30%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 22px;
+  }
+  .hero .sub{
+    font-size: 15.5px;
+    color: var(--text-dim);
+    max-width: 640px;
+  }
+  .hero .meta{
+    margin-top: 34px;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+  .hero .meta span b{ color: var(--text-dim); font-weight: 600; }
+
+  .pillars{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 40px;
+  }
+  .pillar{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 18px;
+  }
+  .pillar .num{ color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .pillar .lbl{ font-size: 16px; font-weight: 700; }
+
+  /* Sections */
+  section{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 64px 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  section:last-of-type{ border-bottom: none; }
+
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .section-tag{
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--cyan);
+    background: var(--cyan-soft);
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .section-tag.gold{ color: var(--gold); background: var(--gold-soft); }
+  h2{
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  h2.lead{ font-size: 20px; color: var(--text-dim); font-weight: 500; margin-bottom: 30px;}
+  .lede{
+    color: var(--text-dim);
+    font-size: 14.5px;
+    max-width: 680px;
+    margin-bottom: 34px;
+  }
+
+  .cards{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 26px 0;
+  }
+  .card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px;
+  }
+  .card h3{ font-size: 15px; margin-bottom: 10px; color: var(--text); }
+  .card p{ font-size: 13.5px; color: var(--text-dim); }
+  .card .icon{
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    background: var(--gold-soft);
+    color: var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-weight: 700;
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+
+  .stat-row{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+    margin: 26px 0;
+  }
+  .stat-big{
+    font-size: 46px;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-big span{ font-size: 20px; color: var(--text-dim); font-weight: 500; margin-left: 8px;}
+  .stat-cap{ font-size: 13px; color: var(--text-dim); margin-top: 10px; }
+  .chart-box{ height: 220px; }
+
+  .callout{
+    background: var(--panel2);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    margin: 20px 0;
+  }
+  .callout.warn{ border-left-color: var(--red); }
+  .callout b{ color: var(--text); }
+
+  .list{ margin: 18px 0; }
+  .list li{
+    list-style: none;
+    padding: 14px 0 14px 26px;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .list li:last-child{ border-bottom: none; }
+  .list li::before{
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 21px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+  }
+  .list li b{ color: var(--text); font-weight: 600; }
+
+  .funnel{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 26px 0;
+  }
+  .funnel-step{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .funnel-step .t{ font-size: 14px; font-weight: 600; }
+  .funnel-step .n{ font-size: 13px; color: var(--gold); font-weight: 700; }
+  .funnel-arrow{ text-align:center; color: var(--text-faint); font-size: 12px; }
+
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 13.5px;
+  }
+  th{
+    text-align: left;
+    color: var(--gold);
+    font-weight: 600;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+  }
+  td{
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--text-dim);
+  }
+  tr:last-child td{ border-bottom: none; }
+  td.strong{ color: var(--text); font-weight: 600; }
+
+  .compare{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 26px 0;
+  }
+  .compare .col{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px;
+  }
+  .compare .col.bot{ border-color: rgba(79,214,208,0.35); background: linear-gradient(180deg, var(--cyan-soft), transparent 60%), var(--panel); }
+  .compare h4{ font-size: 14px; margin-bottom: 12px; }
+  .compare .row{ display:flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 13px; color: var(--text-dim);}
+  .compare .row:last-child{ border-bottom:none; }
+  .compare .row b{ color: var(--text); }
+
+  .steps{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 26px 0;
+  }
+  .step{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .step .when{ font-size: 12px; color: var(--cyan); font-weight: 700; margin-bottom: 10px; letter-spacing: 0.05em;}
+  .step ul{ margin-top: 10px; padding-left: 16px; }
+  .step ul li{ font-size: 12.5px; color: var(--text-dim); margin-bottom: 6px; }
+
+  .risk-note{
+    background: rgba(224,133,133,0.08);
+    border: 1px solid rgba(224,133,133,0.3);
+    border-radius: 12px;
+    padding: 18px 20px;
+    font-size: 13.5px;
+    color: #e6b4b4;
+    margin: 20px 0;
+  }
+  .risk-note b{ color: #f0c8c8; }
+
+  .summary-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 30px 0;
+  }
+  .summary-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px;
+  }
+  .summary-card .tag{ font-size: 11.5px; color: var(--gold); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 8px;}
+  .summary-card p{ font-size: 13.5px; color: var(--text-dim); }
+
+  footer{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 50px 28px 0;
+    text-align:center;
+  }
+  .cta-box{
+    background: linear-gradient(135deg, var(--gold-soft), var(--cyan-soft));
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 36px;
+    text-align: center;
+  }
+  .cta-box h3{ font-size: 19px; margin-bottom: 10px; }
+  .cta-box p{ font-size: 13.5px; color: var(--text-dim); }
+  footer .sig{ margin-top: 40px; font-size: 12px; color: var(--text-faint); padding-bottom: 20px;}
+
+  @media (max-width: 720px){
+    .pillars, .cards, .stat-row, .compare, .steps, .summary-grid{ grid-template-columns: 1fr; }
+    .hero h1{ font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">IS事業部 発 &nbsp;/&nbsp; 2026.08.20 ご提案</div>
+  <h1>称賛の輪を、仕組みにする。<br>社内回覧板アプリ導入のご提案</h1>
+  <p class="sub">現場のちょっとした気づきと称賛を、日々の仕組みとして根づかせるための社内限定アプリです。低コストでまず小さく試し、2週間で兆しを確認しながら進めます。</p>
+  <div class="meta">
+    <span><b>提出元</b> &nbsp;IS事業部</span>
+    <span><b>対象</b> &nbsp;IT・IS事業部 計13名</span>
+    <span><b>検証期間</b> &nbsp;導入後2週間〜1ヶ月</span>
+  </div>
+  <div class="pillars">
+    <div class="pillar"><div class="num">01</div><div class="lbl">売上アップ</div></div>
+    <div class="pillar"><div class="num">02</div><div class="lbl">効率アップ</div></div>
+    <div class="pillar"><div class="num">03</div><div class="lbl">導入リスク</div></div>
+  </div>
+</header>
+
+<section>
+  <div class="section-head"><span class="section-tag gold">OVERVIEW</span></div>
+  <h2>何を作るか</h2>
+  <h2 class="lead">社内限定の「回覧板」アプリ</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">01</div>
+      <h3>気づきの回覧板</h3>
+      <p>正式なログには残らない、現場のちょっとした気づき・コツを気軽に投稿できる場所。</p>
+    </div>
+    <div class="card">
+      <div class="icon">02</div>
+      <h3>称賛リアクション</h3>
+      <p>投稿にお互い称賛を送り合う。投稿へのハードルを下げ、好循環を生む。</p>
+    </div>
+    <div class="card">
+      <div class="icon">03</div>
+      <h3>研修の動画講座化</h3>
+      <p>クロージング研修・アポインター研修を動画化し、取り組み姿勢を可視化する。</p>
+    </div>
+  </div>
+  <div class="callout">
+    <b>開発方針:</b> Claude Code で自社開発 → Firebase Hosting（Google製・無料枠内）に公開 → 自社Googleアカウントのみログイン可。外部インフラ費・ドメイン費なし。低コストで小さく始め、検証しながら広げる設計です。
+  </div>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag">① SALES UP</span></div>
+  <h2>アポ率に好転の兆し</h2>
+  <p class="lede">称賛し合う文化が自然発生した週と、アポ率が上向いた週が重なりました。</p>
+
+  <div class="stat-row">
+    <div>
+      <div class="stat-big">+0.23<span>pt（約1.3倍）</span></div>
+      <div class="stat-cap">お盆前 0.67% → お盆明け 0.90%<br>コール数は減少（4,629→3,205件）した中での上昇</div>
+    </div>
+    <div class="chart-box"><canvas id="apptChart"></canvas></div>
+  </div>
+
+  <div class="callout">
+    <b>スコープと留意点</b><br>
+    比較期間が短いため、商談化率・受注率は検証対象外。今回はアポ創出力（商談機会の入口）への効果として提示します。お盆明け特有の要因が一部影響している可能性もあり、導入後も継続モニタリングして効果を検証します。
+  </div>
+  <div class="callout">
+    <b>位置づけ</b><br>
+    「アポが増えれば売上に繋がる」の入口部分の実績です。中長期的な売上増の土台として提示します。
+  </div>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag">② EFFICIENCY UP</span></div>
+  <h2>13名のうち、まず届く相手を見極める</h2>
+  <p class="lede">「変わりたい・足掻きたいと思っている層」に最初に効かせ、そこからチームに波及させる考え方です。</p>
+
+  <div class="compare">
+    <div class="col">
+      <h4>AXT登録アポインター（IT・IS計）</h4>
+      <div class="row"><span>全体</span><b>13名</b></div>
+      <div class="row"><span>仮対象（行動変容の余地あり層）</span><b>約11名（85%）</b></div>
+    </div>
+    <div class="col bot">
+      <h4>対象（着火層）</h4>
+      <div class="row"><span>人数</span><b>4〜5名（40%）</b></div>
+      <div class="row"><span>波及の見立て</span><b>早ければ2週間、遅くとも1ヶ月以内</b></div>
+    </div>
+  </div>
+  <div class="callout">
+    <b>ここから波及</b><br>
+    対象4〜5名の意識・行動変化 → チーム全体へ波及 → 早ければ2週間、遅くとも1ヶ月以内に数字へ反映される想定です。
+  </div>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag">② EFFICIENCY UP</span></div>
+  <h2>2段構えで効果を検証する</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="when">2週間後</div>
+      <b>先行指標をチェック</b>
+      <ul>
+        <li>称賛メッセージの投稿数・頻度</li>
+        <li>回覧板の既読率・反応率</li>
+        <li>ログイン頻度（自主的に開いているか）</li>
+      </ul>
+    </div>
+    <div class="step">
+      <div class="when">1ヶ月後</div>
+      <b>成果指標を本格評価</b>
+      <ul>
+        <li>既存KPIダッシュボードで導入前後を比較</li>
+        <li>特に対象4〜5名個人のアポ率推移を追跡</li>
+      </ul>
+    </div>
+    <div class="step">
+      <div class="when">随時</div>
+      <b>簡易ヒアリング</b>
+      <ul>
+        <li>対象メンバーへ気持ちの変化を軽く確認</li>
+        <li>数字が動く前の「兆し」を定性的に把握</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">先行指標が動かなければ早期に軌道修正します。1回の失敗で終わらせず、小さく試して確かめる設計です。</div>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag">② EFFICIENCY UP</span></div>
+  <h2>研修改革：講師依存からロープレ中心へ</h2>
+
+  <div class="compare">
+    <div class="col">
+      <h4>今の課題</h4>
+      <p style="font-size:13px; color:var(--text-dim);">クロージング研修・書類研修が特定の1人の講師に依存。教わったことへの安心感が生まれ、本番で臨機応変に対応する力が育ちにくい。講師役の工数（人件費）もかかり続ける。</p>
+    </div>
+    <div class="col bot">
+      <h4>動画で自主性をデータ化</h4>
+      <p style="font-size:13px; color:var(--text-dim);">ログイン機能を土台に、単純な「視聴した／していない」ではなく、取り組み姿勢そのものを捉える（ログイン時間帯／自主的な視聴か／スキップの有無）。</p>
+    </div>
+  </div>
+
+  <div class="funnel">
+    <div class="funnel-step"><span class="t">知識のインプット</span><span class="n">動画講座（クロージング・書類研修とも）</span></div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step"><span class="t">実践</span><span class="n">ロープレ中心に一本化。講師によるライブ座学は廃止</span></div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step"><span class="t">コスト</span><span class="n">研修工数が減る分、講師役の人件費を削減</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag">② EFFICIENCY UP</span></div>
+  <h2>研修データの扱いと配置判断への活用</h2>
+  <ul class="list">
+    <li><b>閲覧範囲：</b>視聴状況は管理者のみが閲覧可能。全体に公開・ランキング化はしません。</li>
+    <li><b>用途：</b>人事評価そのものには使わず、クローザーとして現場に配置する際の判断材料の一つとして活用します。</li>
+    <li><b>整備：</b>本人への非開示で運用するため、就業規則への記載や社労士への確認など、社内整備を導入前に行います。</li>
+  </ul>
+  <div class="risk-note">
+    <b>ご確認いただきたい点：</b> ロープレの実践評価と動画研修への取り組みデータをあわせて、クローザー登用の判断材料とする設計です。本人非開示での運用となるため、事前の社内整備（就業規則・社労士確認）を前提にご判断をお願いします。
+  </div>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag">② EFFICIENCY UP</span></div>
+  <h2>回覧板のポイント制度：ご提案</h2>
+  <p class="lede">気づきの回覧板は社内SNSのイメージです。良い投稿にはみんなで「いいね」ならぬポイントを送り合う仕組みを想定しています。</p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">1</div>
+      <h3>非金銭的な承認</h3>
+      <p>ランキング表示など、見える化のみ。文化醸成が目的で、金銭・評価には一切結びつけません。</p>
+    </div>
+    <div class="card">
+      <div class="icon">2</div>
+      <h3>配置判断の加点要素</h3>
+      <p>研修データと合わせて、クローザー登用など配置判断の材料の一つに加えます。</p>
+    </div>
+  </div>
+  <div class="callout">賞与・昇給などの人事評価に反映するかどうかも含め、社長のご判断を伺いたいです。</div>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag gold">Q&A</span></div>
+  <h2>Cursorで作る予定のBotだけでは足りない理由</h2>
+  <p class="lede">Cursorで商談・テレアポログを読み込ませ、質問すれば答えるBotを作る計画があります。役割が違うため、両方あってはじめて機能します。</p>
+  <table>
+    <tr><th>Bot（知識のインプット）</th><th>回覧板（人間関係・感情のアウトプット）</th></tr>
+    <tr><td>受け身。聞かれたら答えるだけ</td><td class="strong">能動的な発信の場。聞く力がなくても情報に触れられる</td></tr>
+    <tr><td>拾えるのは業務の結果ログのみ</td><td class="strong">誰が称賛し合い、誰の発信が減っているか＝離職兆候が現れる</td></tr>
+    <tr><td>部署をまたいだ横のつながりは生まれない</td><td class="strong">IT・IS事業部などの間の壁を下げ、採用の幅も広げる</td></tr>
+    <tr><td>AIに聞いても承認された感覚は得られない</td><td class="strong">人から称賛されることがモチベーションになる</td></tr>
+  </table>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag">③ RISK</span></div>
+  <h2>コストは低く抑えられる見込み</h2>
+  <table>
+    <tr><th>項目</th><th>内容</th><th>概算費用</th></tr>
+    <tr><td>開発</td><td>Claude Code（Proプラン）で自社開発。開発期間中のみ契約</td><td class="strong">月2,000〜3,000円程度</td></tr>
+    <tr><td>公開・運用インフラ</td><td>Firebase Hosting（無料枠：10GB保存/月10GB転送）</td><td class="strong">0円</td></tr>
+    <tr><td>アクセス制限</td><td>Googleログイン認証を自社ドメイン限定に設定</td><td class="strong">0円（実装コストのみ）</td></tr>
+    <tr><td>キャラクター画像</td><td>AI画像生成ツール等で作成</td><td class="strong">0〜月数千円</td></tr>
+    <tr><td>独自ドメイン</td><td>Firebase無料サブドメインを使用するため不要</td><td class="strong">0円</td></tr>
+  </table>
+  <div class="callout">
+    <b>参考：既製ツール（Unipos等）を導入する場合</b><br>
+    初期費用 約30万円 ＋ 月額850〜1,800円/アカウント。30名以上での利用が推奨されており、対象規模（4〜5名）には費用対効果が見合わない可能性があります。<br>
+    → 自社開発なら桁違いに低コストで、小さく試すことができます。
+  </div>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag">③ RISK</span></div>
+  <h2>社外に漏れない構成にする</h2>
+  <div class="funnel">
+    <div class="funnel-step"><span class="t">Claude Codeで開発</span><span class="n">HTML/CSS/JSを自社で開発。外部ベンダー不要</span></div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step"><span class="t">Firebase Hostingへ公開</span><span class="n">Google製の無料ホスティング。自社の静的サイトとして配信</span></div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step"><span class="t">Googleログイン認証で保護</span><span class="n">自社ドメインのGoogleアカウントのみアクセス許可。社外からは閲覧不可</span></div>
+  </div>
+  <ul class="list">
+    <li><b>運用コスト：</b>保守・機能追加の人的コストは発生します（誰が・どのくらいの時間対応するかは運用フェーズで明確化）。</li>
+    <li><b>研修データ：</b>管理者限定閲覧・配置判断への活用は、就業規則への記載や社労士確認など事前整備を行います。</li>
+    <li><b>無料枠の管理：</b>仕様変更の可能性があるため、運用開始後も定期的に利用状況を確認します。</li>
+  </ul>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag gold">FUTURE</span></div>
+  <h2>将来展望：加盟店の教育基盤としての活用</h2>
+  <div class="compare">
+    <div class="col">
+      <h4>なぜ加盟店展開か</h4>
+      <p style="font-size:13px; color:var(--text-dim);">自社で社員を一人ひとり育成するコストと比べ、加盟店展開は低リスクで多角化しやすい。ただし展開を広げるほど、加盟店側の教育（企業文化の浸透）が事業の成否を左右する。</p>
+    </div>
+    <div class="col bot">
+      <h4>進め方（案）</h4>
+      <div class="row"><span>Step 1</span><b>社内13名で仕組みを検証・改善（今回の提案範囲）</b></div>
+      <div class="row"><span>Step 2</span><b>加盟店向けは別インスタンスで構築・別管理</b></div>
+    </div>
+  </div>
+  <div class="callout">
+    <b>今回の仕組みがそのまま使える</b><br>
+    研修の動画講座化・ロープレ設計・回覧板による文化醸成は、社内向けに磨いたものを加盟店向けにも転用できる仕組みです。社内で効果が確認できた研修・文化醸成の型を、加盟店向けにアレンジして展開します。
+  </div>
+  <div class="callout">※ 今回はまず社内向けの導入可否をご判断いただき、加盟店展開は別途あらためてご相談したいです。</div>
+</section>
+
+<section>
+  <div class="section-head"><span class="section-tag gold">SUMMARY</span></div>
+  <h2>まとめ</h2>
+  <h2 class="lead">小さく・安く始めて、2週間で兆しを確認する</h2>
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="tag">売上アップ</div>
+      <p>お盆前後でアポ率 0.67%→0.90%。称賛文化とアポ創出力の好相関を確認しました。</p>
+    </div>
+    <div class="summary-card">
+      <div class="tag">効率アップ</div>
+      <p>対象4〜5名から着火しチームへ波及。研修はロープレ中心に再設計し、人件費も削減します。</p>
+    </div>
+    <div class="summary-card">
+      <div class="tag">導入リスク</div>
+      <p>自社開発＋無料インフラで低コスト。社外非公開の構成、運用面の備えも整理済みです。</p>
+    </div>
+    <div class="summary-card">
+      <div class="tag">将来展望</div>
+      <p>検証後は、社内で磨いた仕組みを加盟店の教育基盤としても展開できる可能性があります。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="sig">IS事業部 &nbsp;|&nbsp; 2026.08.20 ご提案</div>
+</footer>
+
+<script>
+  const ctx = document.getElementById('apptChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['お盆前\n8/3-8/7(5日間)', 'お盆明け\n8/17-8/19(3日間)'],
+      datasets: [{
+        label: '全体アポ率(%)',
+        data: [0.67, 0.90],
+        backgroundColor: ['rgba(154,164,180,0.4)', 'rgba(212,175,106,0.85)'],
+        borderRadius: 6,
+        barThickness: 60
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: { label: (c) => `アポ率 ${c.parsed.y}%` }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#9aa4b4', font: { size: 11 } }, grid: { display: false } },
+        y: { ticks: { color: '#9aa4b4', font: { size: 11 }, callback: (v) => v + '%' }, grid: { color: 'rgba(255,255,255,0.06)' } }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

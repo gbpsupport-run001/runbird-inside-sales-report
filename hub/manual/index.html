@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IS事業部 営業マニュアル | RUNBIRD</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0D1F3C;--blue:#1A4B8C;--accent:#2E7FE0;--light:#EAF2FF;
+  --gold:#C9973A;--gold-bg:#FFF8EC;--bg:#F5F7FB;--gray:#F0F3F8;
+  --text:#1A1A2E;--muted:#6B7A9A;--border:#DCE4F0;
+  --teal:#0E9475;--teal-bg:#E6F7F3;--red:#D63030;--red-bg:#FEF0F0;
+  --purple:#6D28D9;--purple-bg:#F3EEFF;--sw:240px;
+}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.7}
+
+.layout{display:flex;min-height:100vh}
+.sidebar{width:var(--sw);flex-shrink:0;background:var(--navy);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;display:flex;flex-direction:column;transition:transform .25s ease}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:#2a3d5a;border-radius:4px}
+.sb-logo{padding:.9rem 1rem;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:9px;flex-shrink:0}
+.logo-img{width:38px;height:38px;border-radius:50%;object-fit:cover;clip-path:circle(50% at 50% 50%);border:2px solid rgba(201,151,58,.45);flex-shrink:0}
+.logo-text strong{display:block;font-size:13px;font-weight:700;color:#fff;letter-spacing:.06em}
+.logo-text span{font-size:9px;color:#4a6a99;letter-spacing:.04em;line-height:1.4}
+.nav-s{padding:.4rem 0;flex:1}
+.nav-gl{font-size:9px;letter-spacing:.16em;color:#3a5578;padding:.65rem 1rem .25rem;text-transform:uppercase;font-weight:700}
+.nav-i{display:flex;align-items:center;gap:7px;padding:.42rem 1rem .42rem 1.05rem;font-size:11.5px;color:#8ba3c7;border-left:3px solid transparent;transition:all .15s;text-decoration:none;cursor:pointer}
+.nav-i:hover{background:rgba(255,255,255,.05);color:#c8d8f0}
+.nav-i.active{background:rgba(46,127,224,.15);color:#7EC8FF;border-left-color:var(--accent);font-weight:600}
+.ni{font-size:13px;width:16px;flex-shrink:0;text-align:center}
+
+.mob-hd{display:none;position:fixed;top:0;left:0;right:0;height:50px;background:var(--navy);z-index:300;align-items:center;padding:0 1rem;gap:9px;border-bottom:1px solid rgba(255,255,255,.07)}
+.mob-logo{display:flex;align-items:center;gap:7px;flex:1}
+.mob-logo img{width:30px;height:30px;border-radius:50%;object-fit:cover;clip-path:circle(50% at 50% 50%);border:1.5px solid rgba(201,151,58,.4)}
+.mob-logo span{font-size:12px;font-weight:700;color:#fff;letter-spacing:.06em}
+.ham{background:none;border:none;color:#8ba3c7;font-size:20px;cursor:pointer;padding:4px;line-height:1}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:150}
+.overlay.show{display:block}
+
+.main{margin-left:var(--sw);flex:1;min-width:0}
+.page-hero{background:linear-gradient(135deg,var(--navy) 0%,#162d54 100%);padding:2rem 2.4rem 1.8rem;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(201,151,58,.12) 0%,transparent 70%)}
+.hero-ey{font-size:10px;letter-spacing:.16em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:.4rem}
+.page-hero h1{font-size:20px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:.5rem}
+.page-hero p{font-size:12px;color:#6b88b5;line-height:1.8;max-width:400px}
+.hero-tags{display:flex;gap:6px;margin-top:.9rem;flex-wrap:wrap}
+.hero-tag{font-size:10px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.06);color:#7fa8d0;border:1px solid rgba(255,255,255,.09)}
+
+.ca{padding:1.8rem 2.4rem 4rem}
+.page-section{display:none}
+.page-section.active{display:block}
+
+.sec-hd{display:flex;align-items:center;gap:12px;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:2px solid var(--border)}
+.sec-ic{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.ic-blue{background:var(--light);color:var(--accent)}
+.ic-gold{background:var(--gold-bg);color:var(--gold)}
+.ic-teal{background:var(--teal-bg);color:var(--teal)}
+.ic-red{background:var(--red-bg);color:var(--red)}
+.ic-purple{background:var(--purple-bg);color:var(--purple)}
+.sec-hd h2{font-size:17px;font-weight:700;color:var(--text)}
+.sec-hd p{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+.lc{background:#fff;border-radius:12px;border:1px solid var(--border);margin-bottom:1.1rem;overflow:hidden}
+.lh{display:flex;align-items:center;gap:10px;padding:.85rem 1.2rem;cursor:pointer;border-bottom:1px solid transparent;user-select:none;transition:background .12s}
+.lh:hover{background:#FAFBFD}
+.lh.open{border-bottom:1px solid var(--border);background:#FAFBFD}
+.ln{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lm{flex:1}
+.lm h3{font-size:13.5px;font-weight:700;color:var(--text)}
+.lm span{font-size:11px;color:var(--muted)}
+.lchev{font-size:14px;color:var(--muted);transition:transform .2s}
+.lchev.open{transform:rotate(180deg)}
+.lb{display:none;padding:1.1rem 1.3rem}
+.lb.open{display:block}
+
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:11px;position:relative}
+.step:not(:last-child)::before{content:"";position:absolute;left:14px;top:32px;width:2px;height:calc(100% - 10px);background:var(--border)}
+.sd{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;margin-top:2px}
+.sb{flex:1;padding-bottom:1rem}
+.sb h4{font-size:13px;font-weight:700;margin-bottom:.3rem}
+.sb p{font-size:12.5px;color:var(--muted);line-height:1.75}
+
+.cn{margin-top:.5rem;padding:.55rem .85rem;border-radius:7px;font-size:12px;line-height:1.75}
+.cn-note{background:var(--light);border-left:3px solid var(--accent);color:#1a3a6e}
+.cn-warn{background:var(--gold-bg);border-left:3px solid var(--gold);color:#7A5200}
+.cn-danger{background:var(--red-bg);border-left:3px solid var(--red);color:#8B0000}
+.cn-tip{background:var(--purple-bg);border-left:3px solid var(--purple);color:#4C1D95}
+.cn-teal{background:var(--teal-bg);border-left:3px solid var(--teal);color:#0a5c48}
+
+.sc{background:var(--navy);border-radius:8px;padding:.85rem 1rem;margin-top:.6rem;color:#c8d8f0;font-size:12px;line-height:1.9}
+.sc-lbl{font-size:9px;color:var(--gold);font-weight:700;letter-spacing:.12em;display:block;margin-bottom:.4rem}
+.hl{color:#7FC8FF;font-weight:500}
+.arr{color:#3a5578;display:block;font-size:11px;margin:.2rem 0 .2rem .5rem}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:.65rem}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:.65rem}
+.gc{background:var(--gray);border-radius:8px;padding:.8rem .95rem;border:1px solid var(--border)}
+.gc h4{font-size:12.5px;font-weight:700;margin-bottom:.3rem;display:flex;align-items:center;gap:5px}
+.gc p{font-size:12px;color:var(--muted);line-height:1.7}
+.gc.good{border-color:#9EC8FF;background:#F0F6FF}.gc.good h4{color:var(--blue)}
+.gc.bad{border-color:#ffaaaa;background:#FFF5F5}.gc.bad h4{color:var(--red)}
+
+.dt{width:100%;border-collapse:collapse;font-size:12px;margin-top:.55rem;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.dt th{background:var(--navy);color:#c8d8f0;padding:7px 11px;text-align:left;font-weight:500;font-size:11px}
+.dt td{padding:7px 11px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text)}
+.dt tr:last-child td{border-bottom:none}
+.dt tr:nth-child(even) td{background:#FAFBFD}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
+.b-bl{background:var(--light);color:var(--blue)}
+.b-go{background:var(--gold-bg);color:#7A5200}
+.b-re{background:var(--red-bg);color:#B03030}
+.b-gr{background:var(--teal-bg);color:#0a5c48}
+
+.out-list{display:flex;flex-direction:column;gap:9px}
+.oi{border-radius:10px;border:1px solid var(--border);overflow:hidden}
+.oq{background:var(--gold-bg);padding:.65rem .95rem;font-size:12.5px;font-weight:700;color:#6B4A00;display:flex;gap:7px;align-items:flex-start;border-bottom:1px solid #f0e0b8}
+.oa{padding:.75rem .95rem;font-size:12.5px;color:var(--text);line-height:1.85;background:#fff}
+
+.phase-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.2rem}
+.ph-card{background:#fff;border-radius:10px;border:1px solid var(--border);padding:.8rem .9rem;cursor:pointer;transition:all .15s;text-align:center}
+.ph-card:hover,.ph-card.active{border-color:var(--accent);background:var(--light)}
+.ph-num{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:.25rem}
+.ph-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:.2rem}
+.ph-sub{font-size:10px;color:var(--muted)}
+.phase-content{display:none}
+.phase-content.active{display:block}
+
+.pb{background:#fff;border-radius:9px;border:1px solid var(--border);padding:1rem 1.1rem;margin-top:.75rem}
+.pb-t{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:.55rem}
+.pi{display:flex;gap:7px;font-size:12.5px;line-height:1.7;align-items:flex-start;margin-bottom:5px}
+.pn{width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+
+.ai-cards{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:.75rem}
+.aic{background:var(--purple-bg);border-radius:9px;padding:.85rem .95rem;border:1px solid #DDD6FE}
+.aic h4{font-size:12px;font-weight:700;color:#4C1D95;margin-bottom:.3rem}
+.aic p{font-size:11.5px;color:#5B21B6;line-height:1.7}
+.pr{background:var(--navy);border-radius:8px;padding:.85rem 1rem;margin-top:.6rem;color:#c8d8f0;font-size:12px;line-height:1.85}
+.pr .plbl{font-size:9px;color:#a78bfa;font-weight:700;letter-spacing:.12em;display:block;margin-bottom:.4rem}
+
+.fb-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:.5rem;background:#e8f4fd;color:#1a4b8c}
+.sub-t{font-size:13px;font-weight:700;color:var(--navy);margin:1rem 0 .6rem;display:flex;align-items:center;gap:6px}
+.divider{height:1px;background:var(--border);margin:.9rem 0}
+.mt{margin-top:.75rem}.mb{margin-bottom:.75rem}
+
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding-top:50px}
+  .mob-hd{display:flex}
+  .ca{padding:1.2rem 1rem 3rem}
+  .page-hero{padding:1.4rem 1.1rem 1.3rem}
+  .g2,.g3,.ai-cards{grid-template-columns:1fr}
+  .phase-cards{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<div class="mob-hd">
+  <div class="mob-logo">
+    <img src="data:image/jpeg;base64,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" alt="logo">
+    <span>RUNBIRD IS</span>
+  </div>
+  <button class="ham" onclick="toggleSB()">☰</button>
+</div>
+<div class="overlay" id="overlay" onclick="toggleSB()"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <img src="data:image/jpeg;base64,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" alt="RUNBIRD" class="logo-img">
+    <div class="logo-text">
+      <strong>RUNBIRD</strong>
+      <span>IS事業部<br>営業マニュアル</span>
+    </div>
+  </div>
+  <nav class="nav-s">
+    <div class="nav-gl">営業マインド</div>
+    <div class="nav-i active" onclick="show('mind',this)"><span class="ni">🧠</span>営業マインド・基礎</div>
+
+    <div class="nav-gl">アポイント研修</div>
+    <div class="nav-i" onclick="show('apo-step',this)"><span class="ni">🎓</span>新人研修ステップ</div>
+    <div class="nav-i" onclick="show('apo-prep',this)"><span class="ni">🔍</span>事前調査・リスト確認</div>
+    <div class="nav-i" onclick="show('apo-script',this)"><span class="ni">📞</span>アポトーク建て付け</div>
+    <div class="nav-i" onclick="show('apo-paper',this)"><span class="ni">📝</span>アポ紙の書き方</div>
+    <div class="nav-i" onclick="show('apo-confirm',this)"><span class="ni">✅</span>前確・当日準備</div>
+
+    <div class="nav-gl">Zoom商談フロー</div>
+    <div class="nav-i" onclick="show('zoom-phase',this)"><span class="ni">📈</span>成長フェーズ Phase1〜4</div>
+    <div class="nav-i" onclick="show('zoom-tate',this)"><span class="ni">📋</span>たてつけ・条件確認</div>
+    <div class="nav-i" onclick="show('zoom-meo',this)"><span class="ni">📊</span>内容説明（MEO）</div>
+    <div class="nav-i" onclick="show('zoom-close',this)"><span class="ni">🎯</span>テスクロ・クロージング</div>
+    <div class="nav-i" onclick="show('zoom-hear',this)"><span class="ni">🎧</span>ヒアリング・4つの不</div>
+
+    <div class="nav-gl">切り返し</div>
+    <div class="nav-i" onclick="show('out',this)"><span class="ni">🛡️</span>OUT返し集（商談）</div>
+    <div class="nav-i" onclick="show('out-apo',this)"><span class="ni">📵</span>OUT返し集（アポ）</div>
+
+    <div class="nav-gl">AI活用</div>
+    <div class="nav-i" onclick="show('ai',this)"><span class="ni">✨</span>AI活用コツ</div>
+  </nav>
+</aside>
+
+<main class="main">
+  <div class="page-hero">
+    <div class="hero-ey">IS事業部 / 営業オペレーション</div>
+    <h1>営業マニュアル</h1>
+    <p>新人研修ステップから商談フェーズ別技術・アポトーク建て付けまで。ランバードIS事業部の全知識。</p>
+    <div class="hero-tags">
+      <span class="hero-tag">新人アポ研修</span>
+      <span class="hero-tag">アポトーク建て付け</span>
+      <span class="hero-tag">商談Phase1〜4</span>
+      <span class="hero-tag">4つの不・BATN</span>
+      <span class="hero-tag">AI活用（18時〜）</span>
+    </div>
+  </div>
+  <div class="ca">
+
+    <!-- 営業マインド -->
+    <div class="page-section active" id="sec-mind">
+      <div class="sec-hd"><div class="sec-ic ic-blue">🧠</div><div><h2>営業マインド・基礎</h2><p>営業マンと販売員の違い / BtoB心構え / コンサル営業の思考法</p></div></div>
+      <div class="lc">
+        <div class="lh open" onclick="tgl(this)"><div class="ln">1</div><div class="lm"><h3>販売員 vs 営業マン</h3><span>なぜ「商品説明だけ」では売れないのか</span></div><span class="lchev open">▾</span></div>
+        <div class="lb open">
+          <div class="g2">
+            <div class="gc bad"><h4>❌ 販売員</h4><p>「欲しい人を待つ」インバウンド接客。商品説明が上手ければ売れるという前提で動く。</p></div>
+            <div class="gc good"><h4>✅ 営業マン</h4><p>「まだ必要と思っていない人」にアプローチするアウトバウンド接客。<strong>必要性に気づいてもらう</strong>ところから始める。</p></div>
+          </div>
+          <div class="cn cn-note mt">同じ商品でも、誰がどう届けるかで結果が変わる。商品力に「人柄・特別感・ワクワク」を乗せることが営業マンの仕事。</div>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">2</div><div class="lm"><h3>経営者が動く理由は「費用対効果」のみ</h3><span>根拠なき自信が説得力を作る</span></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <p style="font-size:12.5px;color:var(--muted);line-height:1.8">10万かけて20〜40万取れると思えば動くのが経営者。100%の商材はない。<strong>「どれだけ高い確率で売上を伸ばせるか」を根拠を持って見せること</strong>が大事。</p>
+          <div class="cn cn-warn mt">根拠なき自信が説得力を生む。「これは絶対効きます！」と断言できる状態を自分の中で作ってから商談へ。迷いは声に出る。</div>
+          <div class="cn cn-tip mt">🔑 安齋さんFB：「3.3万円で戦っていない」── 価格を謝るのではなく、価格に見合う価値を先に積み上げること。「乗り遅れてるから保険のための3.3万円」でリスクヘッジを語る。</div>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">3</div><div class="lm"><h3>コンサル営業の思考ステップ</h3><span>機能説明→メリット→使った後のイメージ</span></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="pb">
+            <div class="pb-t">📚 コンサル営業の3ステップ</div>
+            <div class="pi"><span class="pn">1</span><span>商品の機能を説明する（口コミ返信代行・投稿代行）</span></div>
+            <div class="pi"><span class="pn">2</span><span>それがなぜ重要かを伝える（上位表示のカギだから）</span></div>
+            <div class="pi"><span class="pn">3</span><span>使った後のイメージを見せる（「毎月〇人がマップからお店を見つける」）</span></div>
+          </div>
+          <div class="cn cn-note mt">「リアルタイムでお店を探してる人に、ここでやってますってチラシを配れるようなもん」── この一言で伝わる。</div>
+          <div class="cn cn-tip mt">普段歩いているときも「このお店どう経営してるんだろう」「集客の悩みは何だろう」と考える癖をつけること。業種理解が商談の深さを作る。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 新人アポインター研修ステップ -->
+    <div class="page-section" id="sec-apo-step">
+      <div class="sec-hd"><div class="sec-ic ic-gold">🎓</div><div><h2>新人アポインター研修ステップ</h2><p>まず知っておくべき7ステップ — ステップ順に実践すること</p></div></div>
+      <div class="lc">
+        <div class="lh open" onclick="tgl(this)"><div class="ln">01</div><div class="lm"><h3>声の大きさ — ここから全部始まる</h3><span>どんなに上手いトークも聞こえなければゼロ</span></div><span class="lchev open">▾</span></div>
+        <div class="lb open">
+          <div class="cn cn-note mb">基準イメージ：<strong>2個先の島まで届くくらいの声</strong>。部活でちょっと親しい先輩に話しかける感覚。「聞こえるかな？」じゃなく<strong>「聞かせてあげる」</strong>マインドで。</div>
+          <p style="font-size:12.5px;color:var(--muted);line-height:1.8">トーンとか間とかアクセントとか、色々あるけど、まず声が届かないと全部意味がない。声量が土台になる。</p>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">02</div><div class="lm"><h3>架電数 — まず数を打たないと何も始まらない</h3><span>断られ慣れることが成長への近道</span></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="g3">
+            <div class="gc"><h4>① 電話に慣れる</h4><p>断られることを怖がっていたらいつまでも慣れない。断られ慣れすることが成長への近道。</p></div>
+            <div class="gc"><h4>② メンタルを鍛える</h4><p>落ち込む暇があったら次にかける。感情は後でいい。切り替えの速さが架電数を作る。</p></div>
+            <div class="gc"><h4>③ 体を作る</h4><p>声量・テンションを1日維持できる体がアポの土台になる。コンディション管理も仕事。</p></div>
+          </div>
+          <div class="cn cn-warn mt">今はまだAPOを取ることよりも、電話に慣れることが先。結果より数を優先するフェーズ。</div>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">03</div><div class="lm"><h3>スクリプトを理解する — 「風」じゃダメ</h3><span>読み上げるだけのロボットにならないために</span></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="g2">
+            <div class="gc bad"><h4>❌ 理解してる「風」</h4><p>読み上げるだけ。相手の反応に対応できない。棒読みでロボットみたい。なぜこの言葉を使うかわかっていない。</p></div>
+            <div class="gc good"><h4>✅ 本当の理解</h4><p>なぜその言葉を使うか言える。自分の言葉に置き換えられる。相手の反応を聞きながら話せる。スクリプトがなくても流れを説明できる。</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">04</div><div class="lm"><h3>相手のアウトに疑問を持つ</h3><span>納得して終わるな — 興味を持って聞き返す</span></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="g2">
+            <div class="gc bad"><h4>❌ 納得して終了</h4><p>相手：「今は忙しいんで」<br>あなた：「そうですよね、失礼しました…」→ 終了</p></div>
+            <div class="gc good"><h4>✅ 疑問を持って掘り下げる</h4><p>相手：「今は忙しいんで」<br>あなた：「あ、そうなんですか？どのくらい忙しい感じですか？」</p></div>
+          </div>
+          <div class="cn cn-note mt">相手のアウトを「そうですよね」で受け取って終わりにするのが一番もったいない。相手の言葉を「本当かな？」と疑う姿勢が大事。</div>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">05</div><div class="lm"><h3>間・アクセント・強弱 — 声の技術が信頼を作る</h3><span>顔が見えない電話で信頼を作るのは声だけ</span></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <table class="dt">
+            <thead><tr><th>技術</th><th>効果</th></tr></thead>
+            <tbody>
+              <tr><td>⏸ 間</td><td>相手が考える時間を作れる。「この人は余裕がある」と思われる</td></tr>
+              <tr><td>🎵 アクセント</td><td>重要な言葉が際立つ。聞き流されなくなる</td></tr>
+              <tr><td>📢 強弱</td><td>感情・緊急感・重要度を声だけで伝えられる</td></tr>
+              <tr><td>😊 リアクション</td><td>相手が「ちゃんと聞いてくれてる」と感じる。信頼UP</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">06</div><div class="lm"><h3>アウト返し — 教わるものじゃない</h3><span>魔法の言葉はない。自分だけの返しを作れ</span></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="cn cn-warn mb">「この言葉を言えばアポれる」なんて魔法はない。アウト返しは相手によって違う。型を当てはめるな。</div>
+          <div class="pb">
+            <div class="pb-t">🔑 正しいアウト返しの作り方</div>
+            <div class="pi"><span class="pn">1</span><span>「正解を教えてください」という姿勢をやめる</span></div>
+            <div class="pi"><span class="pn">2</span><span>アウト返しは相手によって違う。型を当てはめるな</span></div>
+            <div class="pi"><span class="pn">3</span><span>自分で試して、振り返って、自分だけの返しを作れ</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">07</div><div class="lm"><h3>相手をイメージして架電する</h3><span>リストの向こうに人がいる</span></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="g2">
+            <div class="gc bad"><h4>❌ 数字として架電</h4><p>リストをただ消化してる。相手の業種や状況を考えない。どんな相手にも同じトーン。「断られた」で終わり。</p></div>
+            <div class="gc good"><h4>✅ 人をイメージして架電</h4><p>事前にお客様情報を確認する。どんな状況の人かイメージする。「この人に合った話し方」で話す。言葉一つ一つに思いやりをもつ。</p></div>
+          </div>
+          <div class="cn cn-tip mt">架電前にGoogleマップを開いて、お店の雰囲気・口コミ数・投稿状況を30秒だけ確認する。これだけで第一声の説得力が変わる。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- アポトーク建て付け -->
+    <div class="page-section" id="sec-apo-script">
+      <div class="sec-hd"><div class="sec-ic ic-gold">📞</div><div><h2>アポトーク建て付け理解ガイド</h2><p>なぜそのセリフなのか — 左：セリフ / 右：設計の意図</p></div></div>
+      <div class="cn cn-note mb">太字のセリフは特に意識してほしいポイント。「言わされてる感」ではなく、<strong>なぜその言葉なのかを理解して使う</strong>こと。</div>
+
+      <div class="sub-t">▌ 冒頭 〜最初の30秒で信頼の入口を作る〜</div>
+      <table class="dt">
+        <thead><tr><th width="44%">📞 セリフ</th><th>💡 設計の意図</th></tr></thead>
+        <tbody>
+          <tr><td>（相手が「もしもし」と言ってから）もしもし、</td><td>先に言うとコールセンター感が出てガチャ切りされやすい。相手が先に言ってから返すことで「業者っぽさ」を消す。</td></tr>
+          <tr><td>（YouTube / インスタ / TikTok）<strong>撮影取材の件で</strong></td><td>「営業の件で」は即切りされる。「撮影・取材」にすることで興味を引く。媒体は相手がすでに対策しているものを避けて選ぶ。</td></tr>
+          <tr><td>ご連絡した<strong>GBPサポートの〇〇</strong>と申します。</td><td>「ランバード」を名乗らないのは口コミ・クレーム対策と、後の商談で攻めやすくするため。商談でランバードとして改めて信頼を築く。</td></tr>
+          <tr><td>あ、今<strong>30秒だけ</strong>お電話大丈夫ですか？</td><td>「5分」だと断られやすい。「30秒」なら断りにくく、その短い会話で相手の人柄と脈を確認できる。この電話の目的はZoomアポを取ることだけ。</td></tr>
+        </tbody>
+      </table>
+
+      <div class="sub-t mt">▌ 本題 〜「営業じゃない」空気を作りながら日切りする〜</div>
+      <table class="dt">
+        <thead><tr><th width="44%">📞 セリフ</th><th>💡 設計の意図</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CMの撮影と取材にご協力</strong>してくれる店舗様を探してまして、</td><td>実際には撮影しない。「売り込み」ではなく「お客さんが増えるやつのお声がけ」というトーンで相手の防衛本能を下げる。</td></tr>
+          <tr><td><strong>今週から〇〇市での事例店</strong>を募集してるんですね。</td><td>「今週」「〇〇市」と絞ることで緊急性と特別感を作る。今始まる新しい企画だというニュアンスで日切りしやすくする。</td></tr>
+          <tr><td>ご新規のお客様増えても、<strong>まだ対応はできますか？</strong></td><td>キャパ確認と期待値の植え付けを同時にする一石二鳥の質問。「新規が増える前提の話」と暗に匂わせながらスタッフ・席数の余裕を確認する。</td></tr>
+        </tbody>
+      </table>
+
+      <div class="sub-t mt">▌ クロージング 〜Zoomに落とす〜</div>
+      <table class="dt">
+        <thead><tr><th width="44%">📞 セリフ</th><th>💡 設計の意図</th></tr></thead>
+        <tbody>
+          <tr><td>実際の事例動画を、<strong>ご代表に画面見てもらいながら</strong>、どれくらいの反響が見込めそうかお伝えさせていただければと思いまして。</td><td>「見てもらいながら」で一緒に確認するだけというライトな印象を作る。「反響が見込めそうか」で相手のメリットを先に提示する。</td></tr>
+          <tr><td>大体<strong>皆さんZoomで2〜30分</strong>ほどでご一緒に見てもらってるのですが、</td><td>「皆さん」という言葉でスタンダード感を出し断りにくくする。2〜30分という短い設定で心理的ハードルを下げる。</td></tr>
+          <tr><td>普段だと<strong>午前中と午後だとどちらがご都合</strong>よかったですか？</td><td>「行くかどうか」ではなく「午前か午後か」の2択にすることで、Zoomに参加する前提の会話に持ち込む。</td></tr>
+        </tbody>
+      </table>
+
+      <div class="sub-t mt">▌ 断り対応の建て付け</div>
+      <div class="out-list">
+        <div class="oi"><div class="oq"><span>💬</span>「資料送って」</div><div class="oa">「今回オンラインでお時間をいただいた方にだけ資料のお渡しをしているので、内容を見て、いるかいらないかジャッジいただいているのですが〜」で日切り。<br><span style="color:var(--muted);font-size:11.5px">★ 資料を送ると「検討した気分」で終わる。内心は「これ問い合わせ殺到しちゃうくらい良いものだから実際に見てもらっている」という自信で言い切る。</span></div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「うちは規模が小さいので」</div><div class="oa">「今回、個人事業主様に気に入ってもらいやすい内容なので、合うかどうかだけ判断いただきたいんですね！」で日切りに戻る。<br><span style="color:var(--muted);font-size:11.5px">★ 「じゃあいらないですね」は絶対に言わない。断ることで損するのはあなた、という空気を作る。</span></div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「いくらかかるの？」</div><div class="oa">「大体皆様1日1,000〜2,000円とかで参加してもらっているので…内容次第だと思うので実際見てもらって判断してもらっているんですね！」<br><span style="color:var(--muted);font-size:11.5px">★ 金額を先に明確に言わない理由は、伝えた瞬間にそれだけで判断されて終わるから。「1日1,000円」で安く見せつつ「内容次第」でZoomに引き込む。</span></div></div>
+      </div>
+    </div>
+
+    <!-- 事前調査 -->
+    <div class="page-section" id="sec-apo-prep">
+      <div class="sec-hd"><div class="sec-ic ic-blue">🔍</div><div><h2>事前調査・リスト確認</h2><p>電話する前に必ずやること — 準備が第一声の質を決める</p></div></div>
+      <div class="lc">
+        <div class="lh open" onclick="tgl(this)"><div class="ln">1</div><div class="lm"><h3>基本情報の調査 + Googleマップ確認</h3></div><span class="lchev open">▾</span></div>
+        <div class="lb open">
+          <div class="g2">
+            <div class="gc"><h4>📋 必ず調べること</h4><p>・法人名（正式名称）<br>・代表者名（可能なら）<br>・業種・店舗の雰囲気<br>・店舗数（複数店舗か）<br>・出しているWeb媒体</p></div>
+            <div class="gc"><h4>🗺️ Googleマップ確認</h4><p>・口コミ数と★の評価<br>・口コミへの返信有無<br>・写真の枚数・最終更新日<br>・投稿の有無・頻度<br>・営業時間・情報の正確さ</p></div>
+          </div>
+          <div class="cn cn-note mt">「口コミに全然返信できていない」「投稿が数年前で止まっている」を事前確認しておくと、電話中に具体的な課題として刺せる。</div>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">2</div><div class="lm"><h3>リスト媒体の使い分け</h3></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <table class="dt">
+            <thead><tr><th>媒体カテゴリ</th><th>主な媒体</th><th>狙い目業種</th></tr></thead>
+            <tbody>
+              <tr><td>SNS・ブログ系</td><td>Instagram / TikTok / アメブロ</td><td>美容・サロン系</td></tr>
+              <tr><td>飲食特化</td><td>食べログ / ホットペッパーグルメ</td><td>飲食業全般</td></tr>
+              <tr><td>美容特化</td><td>ホットペッパービューティー / 楽天ビューティー</td><td>美容院・ネイル・エステ</td></tr>
+              <tr><td>健康・整体</td><td>イーパーク / エキテン</td><td>整骨院・マッサージ</td></tr>
+              <tr><td>新店系</td><td>号外ネット / 開店ポータル</td><td>オープン直後の店舗</td></tr>
+            </tbody>
+          </table>
+          <div class="cn cn-tip mt">オープン直後の店舗は「アカウントを管理していない」ケースが多く刺さりやすい。「今からで間に合う」トークが有効。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- アポ紙 -->
+    <div class="page-section" id="sec-apo-paper">
+      <div class="sec-hd"><div class="sec-ic ic-teal">📝</div><div><h2>アポ紙の書き方</h2><p>電話を切ったら即記入 — 商談担当者への引き継ぎ書類</p></div></div>
+      <div class="lc">
+        <div class="lh open" onclick="tgl(this)"><div class="ln">1</div><div class="lm"><h3>必須記入項目一覧</h3></div><span class="lchev open">▾</span></div>
+        <div class="lb open">
+          <table class="dt">
+            <thead><tr><th>項目</th><th>内容・ポイント</th><th>重要度</th></tr></thead>
+            <tbody>
+              <tr><td>アポ獲得日時</td><td>コールした日時を正確に</td><td><span class="badge b-re">必須</span></td></tr>
+              <tr><td>アポインター名</td><td>自分の名前を記入</td><td><span class="badge b-re">必須</span></td></tr>
+              <tr><td>店舗名・法人名</td><td>正式名称で（略称NG）</td><td><span class="badge b-re">必須</span></td></tr>
+              <tr><td>担当者名・役職</td><td>代表・店長など / 男女・年齢目安も</td><td><span class="badge b-re">必須</span></td></tr>
+              <tr><td>業種</td><td>「飲食」ではなく「焼肉店」など具体的に</td><td><span class="badge b-re">必須</span></td></tr>
+              <tr><td>電話番号</td><td>折り返し先・前確用</td><td><span class="badge b-re">必須</span></td></tr>
+              <tr><td>メールアドレス</td><td>Zoomリンク送付先</td><td><span class="badge b-re">必須</span></td></tr>
+              <tr><td>商談日時・場所</td><td>Zoom or 訪問、ZoomリンクURLも</td><td><span class="badge b-re">必須</span></td></tr>
+              <tr><td>前確日時</td><td>前日に電話する日時を先に決めておく</td><td><span class="badge b-re">必須</span></td></tr>
+              <tr><td>代表の人柄</td><td>悪い / 普通 / 良い で3段階評価</td><td><span class="badge b-go">推奨</span></td></tr>
+              <tr><td>通話時間</td><td>何分話したかの目安</td><td><span class="badge b-go">推奨</span></td></tr>
+              <tr><td>GBPの運用状況</td><td>管理してるか・口コミ返信してるか</td><td><span class="badge b-go">推奨</span></td></tr>
+              <tr><td>トーク内容・反応</td><td>「マップ使っている」「忙しいと言っていた」等</td><td><span class="badge b-go">推奨</span></td></tr>
+              <tr><td>詰め直し内容</td><td>どんなアウトが来てどう返したか</td><td><span class="badge b-go">推奨</span></td></tr>
+            </tbody>
+          </table>
+          <div class="cn cn-danger mt">「だいたい書いた」ではなく全項目埋めること。担当者が困るのはアポインターの責任。</div>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">2</div><div class="lm"><h3>良いアポ紙 vs 悪いアポ紙</h3></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="g2">
+            <div class="gc good"><h4>✅ 良いアポ紙</h4><p>・担当者名・日時・場所が正確<br>・代表の温度感・人柄メモあり<br>・前確の日時も書いてある<br>・業種が具体的（「居酒屋」「美容院」）<br>・読んだだけで商談準備が進む状態</p></div>
+            <div class="gc bad"><h4>❌ 悪いアポ紙</h4><p>・「〇〇さんって言ってた」（曖昧）<br>・日時が「夕方ごろ」<br>・前確の記録なし<br>・業種が「飲食」だけ<br>・担当者が不安になる</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 前確 -->
+    <div class="page-section" id="sec-apo-confirm">
+      <div class="sec-hd"><div class="sec-ic ic-blue">✅</div><div><h2>前確・当日準備</h2><p>商談前日に必ず実施 — ドタキャン防止と信頼感UP</p></div></div>
+      <div class="lc">
+        <div class="lh open" onclick="tgl(this)"><div class="ln">1</div><div class="lm"><h3>前確の電話（商談前日）</h3></div><span class="lchev open">▾</span></div>
+        <div class="lb open">
+          <div class="sc"><span class="sc-lbl">📞 トーク</span>「お世話になります。株式会社ランバードの〇〇です。<span class="hl">明日〇時にお約束いただいていた件でご確認のご連絡</span>でして、明日の〇時からZoom（orご訪問）でお間違いないでしょうか？ご担当は〇〇様でよろしかったですか？」</div>
+          <div class="cn cn-danger mt">前確なしで当日訪問はNG。ドタキャン・日程ミスのリスクが跳ね上がる。</div>
+        </div>
+      </div>
+      <div class="lc">
+        <div class="lh" onclick="tgl(this)"><div class="ln">2</div><div class="lm"><h3>当日の準備チェック</h3></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="g2">
+            <div class="gc"><h4>🎯 商談担当者がやること</h4><p>・アポ紙を読み込む（人柄・反応を把握）<br>・業種・店舗を事前に調べておく<br>・Googleマップで店舗情報を確認<br>・Zoomリンクを先に送っておく<br>・開始5分前に入室して待機</p></div>
+            <div class="gc"><h4>📞 アポインターがやること</h4><p>・前確完了をアポ紙に記録<br>・担当者に「前確OK」を連絡<br>・当日変更があれば即連絡<br>・アポ時間帯のミスがないか確認<br>（17時オープンに13時アポを入れない等）</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 成長フェーズ -->
+    <div class="page-section" id="sec-zoom-phase">
+      <div class="sec-hd"><div class="sec-ic ic-purple">📈</div><div><h2>商談と向き合う技術 — 成長フェーズ</h2><p>Phase1〜4：テレアポ土台 → Zoom入門 → 構造理解 → 再現性ある型</p></div></div>
+      <div class="phase-cards">
+        <div class="ph-card active" onclick="showPh('p1',this)"><div class="ph-num">PHASE 1</div><div class="ph-title">土台を作る</div><div class="ph-sub">入社1〜4ヶ月</div></div>
+        <div class="ph-card" onclick="showPh('p2',this)"><div class="ph-num">PHASE 2</div><div class="ph-title">商談に入る</div><div class="ph-sub">4〜6ヶ月</div></div>
+        <div class="ph-card" onclick="showPh('p3',this)"><div class="ph-num">PHASE 3</div><div class="ph-title">構造で動く</div><div class="ph-sub">6〜10ヶ月</div></div>
+        <div class="ph-card" onclick="showPh('p4',this)"><div class="ph-num">PHASE 4</div><div class="ph-title">型で回す</div><div class="ph-sub">10ヶ月〜</div></div>
+      </div>
+      <div class="phase-content active" id="ph-p1">
+        <div class="cn cn-warn mb">断りが来たら、勝負開始。受け入れて終わりにしない。</div>
+        <div class="lc"><div class="lh open" onclick="tgl(this)"><div class="ln">①</div><div class="lm"><h3>マインド：断りをそのまま受け入れない</h3></div><span class="lchev open">▾</span></div>
+        <div class="lb open"><p style="font-size:12.5px;color:var(--muted);line-height:1.8">入社直後は「説明すれば伝わる」「良い話だから聞いてもらえる」という前提で電話していた時期。断られると次の返しがなく、そのまま終話してしまう。<br><strong>断りは終わりではなく、そこから本当のアポが始まる</strong>という認識への転換が最初のターニングポイント。</p></div></div>
+        <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">②</div><div class="lm"><h3>技術：Phase1で鍛えること</h3></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="g2">
+            <div class="gc"><h4>① 権限の瞬時判断</h4><p>声質・返答テンポで「決裁者か/他人事か」を判断。決裁者でなければ名前を聞いてオーナーへのルートを作る。「その辺オーナーさんに聞きたいんで折り返しもらえますか？」</p></div>
+            <div class="gc"><h4>② 報告の精度</h4><p>「こういうニュアンスだと思った」はNG。相手が言った言葉をそのまま報告する。「思ったこと」ではなく「話したこと」を共有する。</p></div>
+            <div class="gc"><h4>③ アポ時間帯の設定</h4><p>17時オープンの飲食店に13時のアポを入れない。昼営業のない業態には開店前に余裕のある時間帯を選ぶ。架電前に必ず営業時間を確認する。</p></div>
+            <div class="gc"><h4>④ メール・連絡の基本</h4><p>日程候補はピンポイントで2〜3個。広い時間帯を丸ごと渡さない。お礼メールはシンプルに。詳細説明は次回商談でやる。</p></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="phase-content" id="ph-p2">
+        <div class="cn cn-warn mb">概要を伝えてまず自己紹介から始める。いきなり深い話に入りすぎない。</div>
+        <div class="lc"><div class="lh open" onclick="tgl(this)"><div class="ln">①</div><div class="lm"><h3>Zoom商談の骨格（P1〜P6）</h3></div><span class="lchev open">▾</span></div>
+        <div class="lb open">
+          <div class="steps">
+            <div class="step"><div class="sd">P1</div><div class="sb"><h4>今日はGoogleマップの話であることを確認</h4><p>「今回がどういうお話かを最初にお伝えすると…」で入る。</p></div></div>
+            <div class="step"><div class="sd">P2</div><div class="sb"><h4>怪しい会社ではなくGoogleパートナー</h4><p>「GoogleパートナーとしてGoogleの代わりに動く存在」だと伝える。</p></div></div>
+            <div class="step"><div class="sd">P3</div><div class="sb"><h4>事例店の話で即判断させる</h4><p>「やるかやらないか」をここで即判断させる。長々説明しない。ここが認識できてるなら長々説明する必要はない。</p></div></div>
+            <div class="step"><div class="sd">P6</div><div class="sb"><h4>キャパ確認</h4><p>「費用を10〜20万かけられるか / パソコンを2〜3時間操作できるか」でキャパを確認。</p></div></div>
+          </div>
+        </div></div>
+        <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">②</div><div class="lm"><h3>ヒアリング基本項目（優先順）</h3></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <table class="dt">
+            <thead><tr><th>項目</th><th>なぜ聞くか</th></tr></thead>
+            <tbody>
+              <tr><td>キャパ（スタッフ数・1日対応可能人数）</td><td>新規が来ても対応できるか。「受け入れる余地がある前提」の話にする</td></tr>
+              <tr><td>客単価・売上の現状</td><td>費用対効果のシミュレーションに使う</td></tr>
+              <tr><td>集客満足度・広告費</td><td>現状への不満を確認。改善余地を見せる</td></tr>
+              <tr><td>今後の展望・未来イメージ</td><td>「なりたい姿」に対して企画を当てる</td></tr>
+              <tr><td>代表1人で経営しているか</td><td>「相談したい」を事前に潰す。決裁者かを確認する</td></tr>
+            </tbody>
+          </table>
+          <div class="cn cn-tip mt">「口コミってどれくらい返信できてますか？」→ 「ふ〜ん」「う〜ん」は不満のサイン。「みなさん苦労するんですけど、代表は問題なく増やせてる感じですか？」と拾う。<br>相手が言いかけた時は必ず深掘り「なんか言いかけてたじゃないですか〜」</div>
+        </div></div>
+      </div>
+      <div class="phase-content" id="ph-p3">
+        <div class="cn cn-warn mb">費用対効果ではなく、リスクヘッジで語る。「乗り遅れてるから保険のための3.3万円です」。</div>
+        <div class="lc"><div class="lh open" onclick="tgl(this)"><div class="ln">①</div><div class="lm"><h3>4つの不 — 断りの根本分類</h3></div><span class="lchev open">▾</span></div>
+        <div class="lb open">
+          <div class="g2">
+            <div class="gc"><h4>🔴 不信</h4><p>格下は信用されない。最初の印象・話し方で決まる。第一声のトーン・速度・声量で信頼の入口を作る。</p></div>
+            <div class="gc"><h4>🟡 不要</h4><p>代表が求める状態をイメージさせていない。「新規が増えたら嬉しいですよね？」でYESを引き出してから話す。</p></div>
+            <div class="gc"><h4>🟠 不適</h4><p>相手の「ふ〜ん」「う〜ん」を逃さない。ここに課題が隠れている。「言いかけてたじゃないですか〜」と引き出す。</p></div>
+            <div class="gc"><h4>🔵 不急</h4><p>1エリア1業種1店舗の認識を持たせる。「今週しかない」「このエリアで残り1枠」で緊急性を作る。</p></div>
+          </div>
+        </div></div>
+        <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">②</div><div class="lm"><h3>BATN — クロージングの4軸</h3></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <table class="dt">
+            <thead><tr><th>軸</th><th>確認すること</th><th>潰し方</th></tr></thead>
+            <tbody>
+              <tr><td><strong>B</strong>udget</td><td>「いくらなら」ではなく「なぜその金額？」</td><td>「1日1,000〜2,000円のジャブ」「費用対は合う」</td></tr>
+              <tr><td><strong>A</strong>uthority</td><td>代表1人で経営しているか確認</td><td>「代表1人で経営？」を先に確認して潰す</td></tr>
+              <tr><td><strong>T</strong>iming</td><td>いつまでに何人集客したいか</td><td>「いつまで様子見するの？」で緊急性を作る</td></tr>
+              <tr><td><strong>N</strong>eeds</td><td>企画が合うか / WEB集客の時代性に納得してるか</td><td>「インスタは大企業向け。今月何人来た？」</td></tr>
+            </tbody>
+          </table>
+        </div></div>
+        <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">③</div><div class="lm"><h3>外部・内部要因の事前潰し</h3></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="sub-t" style="margin-top:0">外部要因</div>
+          <table class="dt">
+            <thead><tr><th>要因</th><th>事前の潰し方</th></tr></thead>
+            <tbody>
+              <tr><td>他の人に相談したい</td><td>「代表1人で経営？」を先に確認</td></tr>
+              <tr><td>広告不要感がある</td><td>「WEB集客、前から考えてましたか？」</td></tr>
+              <tr><td>他業者と比較したい</td><td>詳しそうな人だけ先手。「どんな会社ですか？」と深掘り</td></tr>
+              <tr><td>様子見・タイミング待ち</td><td>「MEOの話、他で聞いたことある？」でMEO前提の認識を確認</td></tr>
+            </tbody>
+          </table>
+          <div class="sub-t">内部要因</div>
+          <table class="dt">
+            <thead><tr><th>要因</th><th>腹落ちの作り方</th></tr></thead>
+            <tbody>
+              <tr><td>一晩考えたい</td><td>事例店の「あ〜」を流すな。スタート時の距離感が原因</td></tr>
+              <tr><td>良いとは思うけど…</td><td>「ぶっちゃけ合わないっすか？」まで言っていい</td></tr>
+              <tr><td>長期契約がネック</td><td>「家賃はずっとかかる」論法で応える</td></tr>
+              <tr><td>予算が合うか不安</td><td>「支出か投資か」の問題整理をする</td></tr>
+              <tr><td>不安が大きい</td><td>「効果への不安」と「使いこなせるか不安」どっちが大きい？を聞く</td></tr>
+            </tbody>
+          </table>
+        </div></div>
+      </div>
+      <div class="phase-content" id="ph-p4">
+        <div class="cn cn-tip mb">気持ちが8割。午前中にアポを絶対取ったろ！という熱量から始める。営業マンも飽きる。アプローチを変える・相手に合わせてトーンを変える柔軟性を持つ。</div>
+        <div class="lc"><div class="lh open" onclick="tgl(this)"><div class="ln">①</div><div class="lm"><h3>相手タイプ別クロージング</h3></div><span class="lchev open">▾</span></div>
+        <div class="lb open">
+          <table class="dt">
+            <thead><tr><th>タイプ</th><th>返し方</th></tr></thead>
+            <tbody>
+              <tr><td>「自分でやる」タイプ</td><td>「いつまで自分でやって、結果の様子を見るの？」</td></tr>
+              <tr><td>「金額次第」タイプ</td><td>「1日1,000〜2,000円のジャブ。10〜20%来たら費用対合いますよ」<br>→「あ〜15です！笑（本来はですよ？笑）→1,000円ならやるじゃないですか？」</td></tr>
+              <tr><td>煮え切らないタイプ</td><td>「死ぬか動画作るかだったらどっちですか？」（5月FBより）</td></tr>
+              <tr><td>「旦那に相談します」タイプ</td><td>何を相談するか言語化させ、3人で15分の同席提案へ</td></tr>
+            </tbody>
+          </table>
+        </div></div>
+        <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">②</div><div class="lm"><h3>値段の伝え方 / Zoom設計の最適解</h3></div><span class="lchev">▾</span></div>
+        <div class="lb">
+          <div class="g2">
+            <div class="gc"><h4>💰 値段の伝え方</h4><p>値段を言うときに申し訳なさそうにしない。「当たり前に安いぜ」という態度で出す。金額を謝ると相手も「やっぱり高い」と感じる。</p></div>
+            <div class="gc"><h4>🖥️ Zoom設計の最適解</h4><p><strong>Zoom時間は15分一択</strong>（1時間は警戒・疲弊を招く）。冒頭：①会社名・目的→②問題提起→③ゴール提示→④時間2択でクロージング。事例店の話は冒頭1分以内に出す。</p></div>
+          </div>
+          <div class="cn cn-note mt">安齋さんFB：「3.3万円で戦っていない」── 価格に見合う価値を先に積み上げてからクロージングへ。</div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- たてつけ -->
+    <div class="page-section" id="sec-zoom-tate">
+      <div class="sec-hd"><div class="sec-ic ic-gold">📋</div><div><h2>たてつけ・条件確認</h2><p>Zoom開始〜概要〜事例店立てつけ〜条件4つ確認</p></div></div>
+      <div class="lc"><div class="lh open" onclick="tgl(this)"><div class="ln">1</div><div class="lm"><h3>Zoom開始・概要・会社紹介</h3></div><span class="lchev open">▾</span></div>
+      <div class="lb open">
+        <div class="sc"><span class="sc-lbl">📞 Zoom開始</span>「お世話になります！株式会社ランバードの〇〇と申します、よろしくお願いします！」<br>【カメラOFFなら】「あれ？すみません、<span class="hl">カメラ機能がオフになっているみたいなんですが〜</span>」<br>「ありがとうございます！トラブル防止のために<span class="hl">レコーディングをとらせてもらっているんですが、よろしいでしょうか？</span>」</div>
+        <div class="sc" style="margin-top:.6rem"><span class="sc-lbl">📞 概要</span>「今回お時間いただいたのが、<span class="hl">meoクラウドというシステムのご提案</span>でして。時代的にお店を探すときに地図（MAP）から探す方が増えているんですね。〇〇を探している方にダイレクトにご代表のお店を地図上で見つけてもらえる環境を作れるシステムのお話です！」</div>
+        <div class="sc" style="margin-top:.6rem"><span class="sc-lbl">📞 会社紹介</span>「弊社が<span class="hl">株式会社ランバード</span>、本社が東京都中央区晴海。沖縄にも支店を構えてます。中小企業さんのコンサルをやってまして、<span class="hl">なるべく手間や費用負担をかけずに集客していきましょう</span>ってレクチャーしている会社なんですね。」</div>
+      </div></div>
+      <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">2</div><div class="lm"><h3>たてつけ「事例店募集」</h3><span>「選ぶ側」の立ち位置を作る</span></div><span class="lchev">▾</span></div>
+      <div class="lb">
+        <div class="sc"><span class="sc-lbl">📞 トーク</span>「今回なんですが、何か買ってください・やってくださいというお話ではなくて、<span class="hl">こちらのエリアで事例店さんを募集しておりまして</span>、どれだけ集客が伸びたかのデータが欲しいんですね。なので効果が出やすそう・意欲がある店舗さんとご一緒したいと思っていまして。条件がいくつかありますので、協力できないと思ったらこのタイミングでお断りいただいても大丈夫なので、一緒に確認をお願いします！」</div>
+        <div class="cn cn-note mt">安齋さんFB：「たてつけの理由→事例店なんでやるのかやらないのか。じゃあ今はやらないとって人はバイバイ。即決させるため。」</div>
+      </div></div>
+      <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">3</div><div class="lm"><h3>条件4つ（全部YESを取る）</h3></div><span class="lchev">▾</span></div>
+      <div class="lb">
+        <div class="g2">
+          <div class="gc"><h4>条件①　キャパヒアリング</h4><p>「新規をもっと増やしていきたいという気持ちはいかがですか？」<br><small style="color:var(--muted)">追加で自分らに費用を出すことが出来るかを確認するから、具体的な数字を尋問する必要はない。話すキッカケ。</small></p></div>
+          <div class="gc"><h4>条件②　データ提供</h4><p>「上手くいった際にどれくらい数字が伸びたかのデータをください」</p></div>
+          <div class="gc"><h4>条件③　継続意欲</h4><p>「計画倒産を予定している事業者様は対象外なんですが、問題ないですよね？」</p></div>
+          <div class="gc"><h4>条件④　情報共有</h4><p>「お店独自の情報やイベントをできる限り教えていただきたい」</p></div>
+        </div>
+        <div class="cn cn-danger mt">条件にNOが出た場合は、ここで砕けてYESをなんとか取ること。4つ全部YESを取ってから次へ進む。</div>
+      </div></div>
+    </div>
+
+    <!-- 内容説明MEO -->
+    <div class="page-section" id="sec-zoom-meo">
+      <div class="sec-hd"><div class="sec-ic ic-teal">📊</div><div><h2>内容説明 — MEOとは</h2><p>検索の仕組み → マップの重要性 → meoクラウドの価値</p></div></div>
+      <div class="lc"><div class="lh open" onclick="tgl(this)"><div class="ln">1</div><div class="lm"><h3>Google検索の3段構造</h3></div><span class="lchev open">▾</span></div>
+      <div class="lb open">
+        <table class="dt">
+          <thead><tr><th>表示エリア</th><th>費用感</th><th>中小企業への適性</th></tr></thead>
+          <tbody>
+            <tr><td>① リスティング（広告）</td><td>月20〜50万〜</td><td><span class="badge b-re">中小企業には重い</span></td></tr>
+            <tr><td>② <strong>MEO（地図）</strong></td><td>月3万〜</td><td><span class="badge b-gr">狙い目！</span></td></tr>
+            <tr><td>③ SEO（自然検索）</td><td>月20〜50万〜</td><td><span class="badge b-re">中小企業には重い</span></td></tr>
+          </tbody>
+        </table>
+        <div class="cn cn-note mt">「スポンサーを大手がかける理由は、クリックを期待してるんじゃなくて、名前を売るため。全国に支店があるから費用対効果取れる。中小企業には不向き。」</div>
+      </div></div>
+      <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">2</div><div class="lm"><h3>上位表示のカギ・meoクラウドがやること</h3></div><span class="lchev">▾</span></div>
+      <div class="lb">
+        <div class="cn cn-warn mb">よくある勘違い：「近いから表示される」は間違い。Googleは「関連性・視認性・知名度・距離」で順位を決める。</div>
+        <div class="g2">
+          <div class="gc"><h4>🔑 カギ① 口コミへの全件返信</h4><p>★のみも含め全件に返信が必要。悪い口コミも含めてシステムと弊社が代行。</p></div>
+          <div class="gc"><h4>🔑 カギ② 高品質な投稿</h4><p>キーワードを混ぜた1000文字以上の投稿を月1〜2回。これが手間の筆頭。</p></div>
+          <div class="gc"><h4>🛡️ 改ざん防止</h4><p>24時間365日監視。ライバル店等による書き換えをブロック。</p></div>
+          <div class="gc"><h4>📊 月次レポート</h4><p>マップ経由の来店人数・認知人数を毎月レポートで可視化。</p></div>
+        </div>
+        <div class="cn cn-note mt">「リアルタイムでお店を探してる人に、ここでやってますってチラシを配れるようなもん。見つけてもらえたら10〜20%は来るじゃないですか？」</div>
+      </div></div>
+    </div>
+
+    <!-- クロージング -->
+    <div class="page-section" id="sec-zoom-close">
+      <div class="sec-hd"><div class="sec-ic ic-red">🎯</div><div><h2>テスクロ・クロージング</h2><p>テストクロージング → プラン選択 → 事例店価格で畳み込む</p></div></div>
+      <div class="lc"><div class="lh open" onclick="tgl(this)"><div class="ln">1</div><div class="lm"><h3>テストクロージング（必ずYESを取る）</h3></div><span class="lchev open">▾</span></div>
+      <div class="lb open">
+        <div class="sc"><span class="sc-lbl">📞 トーク</span>「こういったMEO対策をすることで、地図上でお店を見つけてもらう環境を強化していくのって、ご代表としてはいかがですか？」</div>
+        <div class="sc" style="margin-top:.6rem"><span class="sc-lbl">📞 NOが出た場合</span>「そうですよね。ちなみに、どのあたりで迷われてますか？<span class="hl">費用面ですか？それとも効果の面ですか？</span>」<span class="arr">↓ 原因特定 → 該当のOUT返しで解消 → 再テスクロ</span></div>
+        <div class="cn cn-danger mt">テスクロでNOが出たら原因を特定して解消すること。テスクロなしでクロージングに進まない。</div>
+      </div></div>
+      <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">2</div><div class="lm"><h3>プラン提示 → 事例店価格で畳み込む</h3></div><span class="lchev">▾</span></div>
+      <div class="lb">
+        <div class="sc"><span class="sc-lbl">📞 プラン提示</span>「肝心な料金ですが、3つのプランがありまして。選ぶ基準は<span class="hl">どんなキーワードで上位に表示されたら嬉しいか</span>というところなんですが、どんなキーワードで上がりたいですか？」<span class="arr">↓ キーワードを言わせる → プランを提示</span>「それであればこのプランになるので、<span class="hl">〇人の新規の方が来れば回収できる計算</span>ですね。費用対としては非常にとりやすいと思うんですがどうですか？」</div>
+        <div class="sc" style="margin-top:.6rem"><span class="sc-lbl">📞「高い」と言われたら → 事例店価格で畳み込む</span>「今回、<span class="hl">事例店様としてのお声がけなので、全てのプランを半額でやらせてもらってるんですね！</span>先ほど〇人ぐらいは見えるとおっしゃっていただいたので、めちゃくちゃ回収しやすいと思います！ただ、1エリア1業種1店舗の条件がありまして、いいね！と思ってもらえるならぜひご一緒したいのですがいかがですか？」</div>
+        <div class="cn cn-warn mt">月額3万円以上の費用対効果を見せられているか必ず意識。「新規〇人で回収できる」という数字を必ず出す。</div>
+      </div></div>
+    </div>
+
+    <!-- ヒアリング・4つの不 -->
+    <div class="page-section" id="sec-zoom-hear">
+      <div class="sec-hd"><div class="sec-ic ic-purple">🎧</div><div><h2>ヒアリング・4つの不</h2><p>フィードバックノートより — 実戦Tips集</p></div></div>
+      <div class="lc"><div class="lh open" onclick="tgl(this)"><div class="ln">1</div><div class="lm"><h3>ヒアリングで潰す8項目</h3></div><span class="lchev open">▾</span></div>
+      <div class="lb open">
+        <table class="dt">
+          <thead><tr><th>ヒアリング項目</th><th>潰す目的</th></tr></thead>
+          <tbody>
+            <tr><td>キャパ / 客数</td><td>受け入れ余地の確認・費用対シミュレーション</td></tr>
+            <tr><td>集客満足度</td><td>現状への不満を引き出す</td></tr>
+            <tr><td>広告費</td><td>「今払ってる広告費との比較」で割安感を出す</td></tr>
+            <tr><td>客単価・売上</td><td>何人来れば回収できるかの計算に使う</td></tr>
+            <tr><td>営業日数</td><td>月の売上計算に使う</td></tr>
+            <tr><td>今後の展望</td><td>「なりたい姿」に企画を当てる</td></tr>
+            <tr><td>リテラシー</td><td>MEO / WEB集客の理解度を把握</td></tr>
+            <tr><td>代表1人で経営？</td><td>「相談して決めたい」を事前に潰す</td></tr>
+          </tbody>
+        </table>
+      </div></div>
+      <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">2</div><div class="lm"><h3>実戦フィードバック Tips（FBノートより）</h3></div><span class="lchev">▾</span></div>
+      <div class="lb">
+        <div class="fb-tag">📋 6/23 商談タブ</div>
+        <div class="cn cn-tip mb">AI動画でどうしても引っかかりが悪い人には → 「実はこれAIです」を最後の切り札として使う。「実写で作らせてもらってる方が良いですか？→ 実はこれAIです」で驚かせる。</div>
+        <div class="fb-tag">📋 6/16 商談タブ</div>
+        <div class="cn cn-note mb">「自分でやる」「金額次第」はクロージング前に言い出すパターン。<br>・「自分でやる」→「いつまで自分でやって結果の様子を見るの？」<br>・「金額次第」→「あ〜15です！笑 本来はですよ？笑 →1,000円ならやるじゃないですか？」<br>今回1日1,000〜2,000円のジャブ→10〜20%は来るじゃないですか？だから費用対は合うんですよね。</div>
+        <div class="fb-tag">📋 6/5 商談タブ</div>
+        <div class="cn cn-note mb">「インスタは大企業向け」と断言 + 「今月インスタで何人来た？」<br>「PVはわかるけど予約数はわからない」は正論。焦って論破しようとすると関係が壊れる。<br>→「わからないまま払い続けてる1万円と、うちは500回再生が保証されてて来店数がデータで見える。どっちが怖いですか？」</div>
+        <div class="fb-tag">📋 3/31 MEO営業会議</div>
+        <div class="cn cn-warn">ITとの違いは攻めじゃなくて守り。乗り遅れてるから保険のための3.3万円。「最低限やらなきゃいけないこと。もっと売上上がってるはずですけどそれ取りこぼしてる。」<br>→不安を煽るトーク、費用対ではなくリスクヘッジで語る。</div>
+      </div></div>
+    </div>
+
+    <!-- OUT返し（商談） -->
+    <div class="page-section" id="sec-out">
+      <div class="sec-hd"><div class="sec-ic ic-gold">🛡️</div><div><h2>OUT返し集（商談）</h2><p>Zoom商談でよくある断り文句への切り返し</p></div></div>
+      <div class="out-list">
+        <div class="oi"><div class="oq"><span>💬</span>「成果報酬のMEOの話を聞いたことがある（or やって効果がなかった）」</div><div class="oa">成果報酬型って罠があって、5〜10キーワードを一緒に決めませんでしたか？その中に<span style="color:var(--accent);font-weight:700">「上位表示されやすいけど誰も検索していない言葉」</span>が混ざるようになっていて、それで成果報酬完了になってしまうんですね。誰も検索しないキーワードで上位表示され続けてお金がかかるだけ。うちは完全に別物で、<span style="color:var(--accent);font-weight:700">Googleが提示している上位表示の条件を整えるシステム</span>です。</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「今はお金がない / 予算がない」</div><div class="oa">だからこそ今回の事例店プランなんですね。通常の<span style="color:var(--accent);font-weight:700">半額</span>でご提供させていただいているので、先ほどおっしゃった〇人の新規さんが来てくれれば、初月で回収できる計算になります。むしろ今一番使いやすいタイミングなんですよ。</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「少し考えたい / 持ち帰らせてほしい」</div><div class="oa">もちろんです！ただ、事例として<span style="color:var(--accent);font-weight:700">1エリア1業種1店舗</span>の枠でやっているので、今このエリアで動けるのはご代表だけなんですね。考えている間に枠が埋まってしまう可能性があって、その場合は通常価格でのご案内になってしまいます。どこで迷われているかを教えてもらえれば一緒に解決できることもあります！</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「ホットペッパーや他の広告で十分」</div><div class="oa">ホットペッパーさんって掲載料が月数万〜十数万かかるうえに、<span style="color:var(--accent);font-weight:700">お客さんが他の店と比較して選ぶ</span>環境なんですね。MEOは「〇〇市 居酒屋」で検索した人が直接ご代表のお店を見つける流れなので、比較されにくいんですよ。来店率が4割超え。ホットペッパーと組み合わせると相乗効果もあります。</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「Googleマップはもう登録している」</div><div class="oa">ご登録されているのは素晴らしいです！ただ登録しているだけでは上位表示されないんですね。上位表示のカギは<span style="color:var(--accent);font-weight:700">口コミ全件への返信</span>と<span style="color:var(--accent);font-weight:700">1000文字以上の高品質な投稿を月1〜2回</span>続けること。これを手動でやり続けるのはかなりきつい作業なので、それを丸ごと代行するのがmeoクラウドです。</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「今は忙しくて対応できない」</div><div class="oa">だからこそ<span style="color:var(--accent);font-weight:700">完全丸投げ</span>の企画なんですよ。ご代表にやってもらうことはほぼありません。唯一お願いしたいのはお店の情報を都度教えてもらうことだけ。忙しいときほど、集客を仕組みに任せる選択が効いてきます。</div></div>
+      </div>
+    </div>
+
+    <!-- OUT返し（アポ） -->
+    <div class="page-section" id="sec-out-apo">
+      <div class="sec-hd"><div class="sec-ic ic-gold">📵</div><div><h2>OUT返し集（アポイント）</h2><p>テレアポでよくある断り文句への切り返し</p></div></div>
+      <div class="out-list">
+        <div class="oi"><div class="oq"><span>💬</span>「営業電話うざい」</div><div class="oa"><span style="color:var(--accent);font-weight:700">「営業電話来ないための対策なんで」</span>── 逆説的に入ることで相手の興味を引く。</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「なんの話なの？ / 細かく説明して」</div><div class="oa">「今回が、お店のインターネットの情報を整備して、多くの方にお店を知ってもらう内容になっているので、個人事業主さんにすごい喜んでもらっているんですね！ただ、お電話だと伝わりづらい内容なのでビデオ通話でみなさんお時間いただいてまして、今からのお時間はいかがでしたか？」<br><span style="color:var(--muted);font-size:11.5px">→ 埒が明かない場合：「MEOって聞いたことありますか？ → ない → であれば内容がわかりづらいんで〜」で日切り</span></div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「資料送って」</div><div class="oa">「今回オンラインでお時間をいただいた方にだけ資料のお渡しをしているので、内容を見て、いるかいらないかジャッジいただいているのですが〜」で日切り。<br><span style="color:var(--muted);font-size:11.5px">※ 送らないと話聞かないと言われた場合は捨て。</span></div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「ZOOMしたことない」</div><div class="oa">「今回ZOOMだけではなく、テレビ電話とかでも対応させていただいているので大丈夫です！であれば〇時ごろテレビ電話でよろしいでしょうか？」（日切り）</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「うち規模小さいんで〜」</div><div class="oa">「今回、個人事業主様に気に入ってもらいやすい内容なので、そこが合うかどうかを判断いただきたいんですね！ただお電話だとわかりづらいというお声が多いので〜」で日切りに戻る。</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「いくらかかるの？」</div><div class="oa">「大体皆様<span style="color:var(--accent);font-weight:700">1日1,000〜2,000円</span>とかで参加してもらっているので、費用対としては非常に取りやすいって言っていただいているのですが、内容次第だとは思うので実際見てもらって判断してもらっているんですね！ちなみにこの後のお時間はいかがですか？」</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「他に頼んでるよ」</div><div class="oa">「そこも踏まえて、今よりコスト抑えて効率的にできる可能性があるので、一度診断をさせてもらっているのですが、ご迷惑じゃない時間帯は午前と午後どちらがよろしいでしょうか？」</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「オープンしたて・様子見」</div><div class="oa">「いつまで？夏頃から始まる企画なんで今から話聞く人は多いですよ」── 「今からが絶対いいタイミング」と断言する。</div></div>
+        <div class="oi"><div class="oq"><span>💬</span>「過去にトラブルがあった」</div><div class="oa">「ちなみにどういう感じでした？（共感→合わなかったら断ればいい）」── まず共感してから違いを説明する。いきなり否定しない。</div></div>
+      </div>
+    </div>
+
+    <!-- AI活用 -->
+    <div class="page-section" id="sec-ai">
+      <div class="sec-hd"><div class="sec-ic ic-purple">✨</div><div><h2>AI活用コツ（Claude・ChatGPT）</h2><p>基本は18時以降の振り返り時間に — 営業スキルを加速させる</p></div></div>
+      <div class="cn cn-tip mb">⏰ <strong>基本は18時以降の振り返り時間</strong>に使うこと。荷電中・商談中にAIに頼る癖をつけると思考力が落ちる。まず自分で考えてから、AIで整理・強化する使い方が◎</div>
+      <div class="lc"><div class="lh open" onclick="tgl(this)"><div class="ln">1</div><div class="lm"><h3>営業に使える6つの活用法</h3></div><span class="lchev open">▾</span></div>
+      <div class="lb open">
+        <div class="ai-cards">
+          <div class="aic"><h4>🎤 ロープレ相手として使う</h4><p>「経営者役をやってほしい。MEOの営業を受ける立場で、最初は懐疑的に反応して」と指示するだけでリアルなロープレ相手になる。</p></div>
+          <div class="aic"><h4>🛡️ OUT返しの強化</h4><p>「今日『成果報酬で十分』と言われて切り返せなかった。もっと良い返し方を教えて」のように具体的な状況を伝えると改善案が出る。</p></div>
+          <div class="aic"><h4>📝 商談・アポの振り返り</h4><p>電話・商談後に流れをメモして貼り付けるだけで客観的なフィードバックが得られる。改善ポイントを次の荷電前に確認する習慣を。</p></div>
+          <div class="aic"><h4>🏢 業種リサーチ</h4><p>「明日、整体院の代表と商談します。集客の悩みを3つ教えて」と聞いておくと商談でのヒアリング精度が上がる。</p></div>
+          <div class="aic"><h4>💡 トーク改善</h4><p>「このトーク（文章を貼る）をもっと自然でわかりやすく直して」と貼り付けるだけ。ただし出てきた文を<strong>そのまま使わない</strong>こと。</p></div>
+          <div class="aic"><h4>📊 費用対効果の計算</h4><p>「客単価8000円・月3.3万円のサービス、何人来店で回収できる？」のような計算も瞬時に出る。商談前に数字を準備できる。</p></div>
+        </div>
+      </div></div>
+      <div class="lc"><div class="lh" onclick="tgl(this)"><div class="ln">2</div><div class="lm"><h3>すぐ使えるプロンプト例</h3></div><span class="lchev">▾</span></div>
+      <div class="lb">
+        <div class="pr"><span class="plbl">ロープレ用</span>「あなたは居酒屋を経営している50代の社長です。MEOのセールスを受ける立場で、最初は「他で似た話を聞いたことがある」と少し懐疑的に反応してください。私が営業をかけるので、自然に会話してください。」</div>
+        <div class="pr" style="margin-top:.6rem"><span class="plbl">振り返り用（アポ）</span>「今日のテレアポを振り返ります。【状況】〇〇業、代表と話せた。【展開】最初は「間に合っている」と言われたが粘って10分話した。【結果】「また今度」で切られた。どこが原因で次回どう改善すべきか教えてください。」</div>
+        <div class="pr" style="margin-top:.6rem"><span class="plbl">業種リサーチ用</span>「明日、〇〇業の代表と商談します。この業種の経営者が普段抱えている集客の悩みを3つ教えてください。また、商談で使えるヒアリング質問も3つ提案してください。」</div>
+        <div class="cn cn-warn mt">AIの回答はあくまで「たたき台」。そのまま使わず必ず自分の言葉に直すこと。AIに頼りすぎると自分で考える力が落ちる。</div>
+      </div></div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<script>
+const sMap={
+  'mind':'sec-mind','apo-step':'sec-apo-step','apo-prep':'sec-apo-prep',
+  'apo-script':'sec-apo-script','apo-paper':'sec-apo-paper','apo-confirm':'sec-apo-confirm',
+  'zoom-phase':'sec-zoom-phase','zoom-tate':'sec-zoom-tate','zoom-meo':'sec-zoom-meo',
+  'zoom-close':'sec-zoom-close','zoom-hear':'sec-zoom-hear',
+  'out':'sec-out','out-apo':'sec-out-apo','ai':'sec-ai'
+};
+function show(key,el){
+  document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-i').forEach(n=>n.classList.remove('active'));
+  const s=document.getElementById(sMap[key]);
+  if(s)s.classList.add('active');
+  if(el)el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(window.innerWidth<=768)toggleSB(false);
+}
+function tgl(h){
+  const b=h.nextElementSibling,c=h.querySelector('.lchev'),o=b.classList.contains('open');
+  b.classList.toggle('open',!o);h.classList.toggle('open',!o);c.classList.toggle('open',!o);
+}
+function showPh(id,el){
+  document.querySelectorAll('.phase-content').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ph-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById('ph-'+id).classList.add('active');
+  if(el)el.classList.add('active');
+}
+function toggleSB(force){
+  const s=document.getElementById('sidebar'),o=document.getElementById('overlay');
+  const open=force===false?false:!s.classList.contains('open');
+  s.classList.toggle('open',open);o.classList.toggle('show',open);
+}
+</script>
+</body>
+</html>
