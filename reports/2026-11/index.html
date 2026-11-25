@@ -1,50 +1,106 @@
-<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width, initial-scale=1, viewport-fit=cover"><title>IS事業部 11月 月次報告（中間） | Runbird</title><style>:root{--bg:#fbfaf7;--fg:#1d2433;--mut:#667085;--line:#e3e0d8;--card:#fff;--acc:#d9482b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#161a22;--fg:#e8eaf0;--mut:#9aa3b5;--line:#2b3140;--card:#1d222d;--acc:#ff7a59;color-scheme:dark}}
-:root[data-theme=dark]{--bg:#161a22;--fg:#e8eaf0;--mut:#9aa3b5;--line:#2b3140;--card:#1d222d;--acc:#ff7a59;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.8 "Noto Sans JP","Hiragino Sans",Meiryo,sans-serif}
-main{max-width:820px;margin:0 auto;padding:32px 18px 60px}h1{font-size:28px;margin:.2em 0}h2{font-size:19px;margin:2.4em 0 .6em;padding-left:10px;border-left:4px solid var(--acc)}
-.sub,.n{color:var(--mut);font-size:13px}.n{margin:.5em 0}.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:18px 0}.k div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px}.k b{display:block;font-size:26px;line-height:1.3}.k span{font-size:12px;color:var(--mut)}
-.nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.nav a,.nav span{padding:6px 16px;border-radius:999px;border:1px solid var(--line);font-size:13.5px;text-decoration:none;color:var(--fg);background:var(--card)}.nav span{background:var(--acc);border-color:var(--acc);color:#fff}
-h3{font-size:15px;margin:1.6em 0 .4em}ul{padding-left:1.3em;margin:.4em 0}.w{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--card)}th,td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left;white-space:nowrap}th{color:var(--mut);font-weight:600}
-</style>
-<style>.rbnav{position:relative;z-index:9999;font:13px/1.6 "Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;background:#fff;color:#1d2433;border-bottom:1px solid #d8d8d8;padding:8px 14px;box-sizing:border-box;text-align:left}.rbnav div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:2px 0}.rbnav b{font-weight:600;color:#667085;min-width:5.5em}.rbnav a,.rbnav span{padding:2px 12px;border-radius:999px;border:1px solid #d0d0d0;text-decoration:none;color:#1d2433;background:#fff}.rbnav span{background:#1d2433;border-color:#1d2433;color:#fff}@media(prefers-color-scheme:dark){.rbnav{background:#1d222d;color:#e8eaf0;border-color:#2b3140}.rbnav a{background:#1d222d;color:#e8eaf0;border-color:#3a4254}.rbnav span{background:#e8eaf0;color:#1d222d;border-color:#e8eaf0}}</style></head><body><!--rbnav--><style>.rbnav{position:relative;z-index:9999;font:13px/1.6 "Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;background:#fff;color:#1d2433;border-bottom:1px solid #d8d8d8;padding:8px 14px;box-sizing:border-box;text-align:left}.rbnav div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:2px 0}.rbnav b{font-weight:600;color:#667085;min-width:5.5em}.rbnav a,.rbnav span{padding:2px 12px;border-radius:999px;border:1px solid #d0d0d0;text-decoration:none;color:#1d2433;background:#fff}.rbnav span{background:#1d2433;border-color:#1d2433;color:#fff}@media(prefers-color-scheme:dark){.rbnav{background:#1d222d;color:#e8eaf0;border-color:#2b3140}.rbnav a{background:#1d222d;color:#e8eaf0;border-color:#3a4254}.rbnav span{background:#e8eaf0;color:#1d222d;border-color:#e8eaf0}}</style><nav class="rbnav" aria-label="資料一覧"><div><b>事業部向け</b><a href="../../reports/2026-08/">8月</a><a href="../../reports/2026-09/">9月</a><a href="../../reports/2026-10/">10月</a><span aria-current="page">11月</span><a href="../../reports/2026-10/payments/">10月 入金予定</a></div></nav><!--/rbnav-->
+<!doctype html><html lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width, initial-scale=1, viewport-fit=cover"><title>IS事業部 11月 月次報告（中間） | Runbird</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap"><style>
+:root{
+--bg:#FFF8F0;--card:#FFFFFF;--fg:#2B2118;--mut:#8A7A68;--line:#F0E4D3;
+--orange:#FF8A3D;--orange2:#FFB25E;--sky:#38BDF8;--green:#2FBF8F;--pink:#F76FA5;--purple:#8B7CF6;--gold:#E5A83B;
+--shadow:0 6px 24px rgba(255,138,61,.10),0 2px 6px rgba(43,33,24,.05);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.85 "Noto Sans JP","Hiragino Sans",Meiryo,sans-serif}
+main{max-width:880px;margin:0 auto;padding:0 18px 70px}
+.hero{position:relative;overflow:hidden;margin:0 -18px;padding:46px 36px 40px;background:linear-gradient(120deg,#FFE8D1 0%,#FFF3E0 40%,#DFF3FF 100%);border-bottom:3px solid #FFD9AE}
+.hero::before{content:'';position:absolute;top:-70px;right:-40px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,178,94,.45) 0%,transparent 65%)}
+.hero::after{content:'';position:absolute;bottom:-110px;left:6%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.30) 0%,transparent 65%)}
+.hero-inner{position:relative;z-index:2}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.22em;color:#E06E1B;font-weight:700;margin:0 0 10px}
+.hero h1{font-size:clamp(28px,5.4vw,40px);margin:0 0 6px;line-height:1.3;font-weight:900}
+.hero.sub{color:#7A6752;font-size:13.5px;margin:2px 0}
+.hero.lead{background:rgba(255,255,255,.75);border:1px solid #FFE1BC;border-radius:16px;padding:14px 18px;margin-top:18px;font-size:15px}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 6px}
+.k div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+.k.lab{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;color:var(--mut);display:block;margin-bottom:2px}
+.k b{display:block;font-size:30px;line-height:1.25;font-weight:900}
+.k span{font-size:12px;color:var(--mut)}
+.k div:nth-child(1){border-top:6px solid var(--sky)}
+.k div:nth-child(2){border-top:6px solid var(--orange)}
+.k div:nth-child(3){border-top:6px solid var(--green)}
+.k div:nth-child(4){border-top:6px solid var(--pink)}
+.k div:nth-child(5){border-top:6px solid var(--gold)}
+.k div:nth-child(6){border-top:6px solid var(--purple)}
+section{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:8px 26px 22px;margin:26px 0}
+h2{font-size:20px;font-weight:900;margin:22px 0 8px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h2.no{font-family:"JetBrains Mono",monospace;font-size:24px;color:var(--orange);font-weight:700}
+h2.en{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.16em;color:var(--mut);font-weight:400}
+h3{font-size:15.5px;margin:1.5em 0.4em}
+p{margin:.5em 0}
+.sub,.n{color:var(--mut);font-size:13px}
+ul{padding-left:1.3em;margin:.4em 0}
+li{margin:.3em 0}
+.w{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;background:#fff}
+th,td{padding:8px 10px;text-align:left;white-space:nowrap;border-bottom:1px solid #F6ECDD}
+th{background:#FFF4E4;color:#8A6D3B;font-weight:700;font-size:12.5px}
+tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even) td{background:#FFFBF4}
+.bar{height:12px;background:#FDEBD3;border-radius:99px;overflow:hidden;margin:4px 0 2px}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange2),var(--orange))}
+.bar.g i{background:linear-gradient(90deg,#5ED3A7,var(--green))}
+.bar.s i{background:linear-gradient(90deg,#7DD3FC,var(--sky))}
+.prow{display:grid;grid-template-columns:130px 1fr 110px;gap:10px;align-items:center;margin:10px 0;font-size:13.5px}
+.prow.v{text-align:right;font-weight:700}
+.good{color:#0E9F6E;font-weight:700}
+.bad{color:#E05252;font-weight:700}
+.tag{display:inline-block;background:#FFF1DE;color:#B25E09;border-radius:99px;padding:1px 10px;font-size:12px;margin-right:6px}
+footer{color:var(--mut);font-size:12.5px;text-align:center;margin-top:34px}
+@media(max-width:640px){.hero{padding:34px 20px 30px}.prow{grid-template-columns:96px 1fr 92px}section{padding:6px 16px 18px}}
+</style></head><body><!--rbnav--><style>.rbnav{position:relative;z-index:9999;font:13px/1.6 "Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;background:#fff;color:#1d2433;border-bottom:1px solid #d8d8d8;padding:8px 14px;box-sizing:border-box;text-align:left}.rbnav div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:2px 0}.rbnav b{font-weight:600;color:#667085;min-width:5.5em}.rbnav a,.rbnav span{padding:2px 12px;border-radius:999px;border:1px solid #d0d0d0;text-decoration:none;color:#1d2433;background:#fff}.rbnav span{background:#1d2433;border-color:#1d2433;color:#fff}</style><nav class="rbnav" aria-label="資料一覧"><div><b>事業部向け</b><a href="../../reports/2026-08/">8月</a><a href="../../reports/2026-09/">9月</a><a href="../../reports/2026-10/">10月</a><span aria-current="page">11月</span><a href="../../reports/2026-10/payments/">10月 入金予定</a></div></nav><!--/rbnav-->
 <main>
-<p class=sub>IS_DIV // NOV_2026 // 11/1〜11/25時点（中間・11/26以降は反映前）</p>
-<h1>IS事業部 11月 月次報告（中間）</h1>
-<p class=sub>AUTHOR: 佐久間 一彰 ｜ MEMBERS: アヤ / 仲村 / 佐久間 ｜ AXTコール履歴・LINE WORKS（商談結果報告／スケジュール板）ベース。自己申告の朝報告ではなく一次記録から集計</p>
-
-<h2>目標と進捗</h2>
-<ul>
-<li>11月の目標：受注15件（受注率27%想定でアポ103件）、入室率65%以上</li>
-<li>11/25時点（稼働17日／21日＝81.0%経過）：受注 <b>1件</b>（目標の6.7%）、アポ <b>45件</b>（目安103件の43.7%）</li>
-<li>受注率（対行動数）は3.3%で、想定の27%を大きく下回っています。11/18以降の商談12件は全て未受注でした。残り4営業日は、追い・再営・再営予定の12件を決め切れるかが焦点です</li>
-</ul>
-
-<h2>11月の実績（中間）</h2>
-<p>11月（25日時点）はチーム合算で <b>コール3,380件・アポ45件（アポ率1.33%）・受注1件</b>。初期費用は¥260,000（一括分）、月額は¥0、合計¥260,000。行動数（正式に結果報告のあった商談）は30件で、受注率は10月の20.0%に対して <b>3.3%</b> です。</p>
-<div class=k>
-<div><b>3,380</b><span>総コール<br>仲村1,414 / アヤ1,121 / 佐久間845</span></div>
-<div><b>45</b><span>アポ（アポ率 1.33%）</span></div>
-<div><b>1件</b><span>受注（目標15件）</span></div>
-<div><b>3.3%</b><span>受注率（受注1件 ÷ 行動数30件）</span></div>
-<div><b>26万円</b><span>初期費用 ¥260,000（一括）</span></div>
-<div><b>0万円</b><span>新規月額 ¥0／月</span></div>
+<div class=hero>
+<div class=hero-inner>
+<p class=eyebrow>IS_DIV // NOV_2026 // MONTHLY PERFORMANCE REPORT</p>
+<h1>IS事業部 11月 月次報告</h1>
+<p class=sub>2026.11.01 – 11.25（中間） ｜ AUTHOR: 佐久間 一彰 ｜ MEMBERS: アヤ / 仲村 / 佐久間</p>
+<div class=lead>11月（25日時点）はチーム合算で <b>コール3,380件・アポ45件（アポ率1.33%）・受注1件</b>。初期費用は¥260,000（一括分）、月額は¥0。行動数（正式に結果報告のあった商談）は30件、受注率は10月の20.0%に対して <b>3.3%</b> です。数字は自己申告の朝報告ではなく、AXTコール履歴・LINE WORKSの一次記録から集計しています。</div>
+</div>
 </div>
 
-<h2>10月との比較</h2>
+<div class=k>
+<div><span class=lab>TOTAL CALLS // NOV</span><b>3,380</b><span>仲村1,414 / アヤ1,121 / 佐久間845</span></div>
+<div><span class=lab>APO // NOV</span><b>45</b><span>アポ率 1.33%</span></div>
+<div><span class=lab>ORDERS // NOV</span><b>1件</b><span>目標15件</span></div>
+<div><span class=lab>ORDER RATE</span><b>3.3%</b><span>受注1件 ÷ 行動数30件</span></div>
+<div><span class=lab>INITIAL FEE</span><b>26万円</b><span>¥260,000（一括）</span></div>
+<div><span class=lab>MONTHLY SALES</span><b>0万円</b><span>新規月額 ¥0／月</span></div>
+</div>
+
+<section>
+<h2><span class=no>01</span>目標と進捗 <span class=en>GOALS &amp; PROGRESS</span></h2>
+<div class=prow><div>受注（目標15件）</div><div class=bar><i style="width:6.7%"></i></div><div class=v>1件 ・ 6.7%</div></div>
+<div class=prow><div>アポ（目安103件）</div><div class="bar s"><i style="width:43.7%"></i></div><div class=v>45件 ・ 43.7%</div></div>
+<div class=prow><div>稼働日（21日）</div><div class="bar g"><i style="width:81%"></i></div><div class=v>17日 ・ 81.0%</div></div>
+<ul>
+<li>11月の目標：受注15件（受注率27%想定でアポ103件）、入室率65%以上</li>
+<li>受注率（対行動数）は3.3%で、想定の27%を大きく下回っています。11/18以降の商談12件は全て未受注でした</li>
+<li>残り4営業日は、追い・再営・再営予定の12件を決め切れるかが焦点です</li>
+</ul>
+</section>
+
+<section>
+<h2><span class=no>02</span>10月との比較 <span class=en>VS OCTOBER</span></h2>
 <div class=w><table>
-<tr><th>指標</th><th>10月（月間・30日時点）</th><th>11月（25日時点・中間）</th><th>差</th></tr>
+<tr><th>指標</th><th>10月（月間）</th><th>11月（25日時点）</th><th>差</th></tr>
 <tr><td>コール数</td><td>3,991</td><td>3,380</td><td>―（期間が違うため単純比較なし）</td></tr>
 <tr><td>アポ数</td><td>47</td><td>45</td><td>―</td></tr>
-<tr><td>アポ率</td><td>1.18%</td><td>1.33%</td><td>▲0.15pt</td></tr>
+<tr><td>アポ率</td><td>1.18%</td><td>1.33%</td><td><span class=good>▲0.15pt</span></td></tr>
 <tr><td>受注件数</td><td>6件</td><td>1件</td><td>―</td></tr>
-<tr><td>受注率（対行動数）</td><td>20.0%（6/30）</td><td>3.3%（1/30）</td><td>▼16.7pt</td></tr>
+<tr><td>受注率（対行動数）</td><td>20.0%（6/30）</td><td>3.3%（1/30）</td><td><span class=bad>▼16.7pt</span></td></tr>
 <tr><td>初期費用</td><td>¥2,715,000</td><td>¥260,000</td><td>※</td></tr>
 <tr><td>月額</td><td>¥99,000</td><td>¥0</td><td>※</td></tr>
 </table></div>
 <p class=n>※ 11月は中間値（25日時点）で、10月は月間の暫定値。売上・件数の差は出していません。</p>
+</section>
 
-<h2>メンバー別 コール数・アポ数</h2>
+<section>
+<h2><span class=no>03</span>メンバー別 コール数・アポ数 <span class=en>MEMBER CALLS &amp; APO</span></h2>
 <div class=w><table>
 <tr><th>MEMBER</th><th>稼働日数</th><th>コール数</th><th>1日平均</th><th>アポ数</th><th>アポ率</th></tr>
 <tr><td>仲村玲美</td><td>15日</td><td>1,414件</td><td>94件</td><td>20件</td><td>1.41%</td></tr>
@@ -53,20 +109,24 @@ h3{font-size:15px;margin:1.6em 0 .4em}ul{padding-left:1.3em;margin:.4em 0}.w{ove
 <tr><td>合計</td><td>―</td><td>3,380件</td><td>―</td><td>45件</td><td>1.33%</td></tr>
 </table></div>
 <p class=n>稼働日数はコール記録のある日数。佐久間は商談対応と兼務のためコール数が少なめです。アヤは11/18以降コール数が急増しました（1日平均125件）が、アポ率は0.62%と低く、効率が課題です。仲村のコール記録は11/24分までです（11/25分は未収録）。仲村の旧期間分（11/17まで）はエクスポート上限（1,000件）に達していた可能性があり、コール数は下限として見てください。</p>
+</section>
 
-<h2>アポインター別 詰め通過・行動数・受注</h2>
+<section>
+<h2><span class=no>04</span>アポインター別 詰め通過・行動数・受注 <span class=en>BY APPOINTER</span></h2>
 <div class=w><table>
 <tr><th>アポ出所</th><th>11月アポ</th><th>詰め通過</th><th>詰め通過率（対アポ）</th><th>行動数</th><th>受注</th><th>受注率（対行動数）</th></tr>
 <tr><td>仲村</td><td>20</td><td>12</td><td>60.0%</td><td>10</td><td>0</td><td>0.0%</td></tr>
-<tr><td>佐久間</td><td>18</td><td>8</td><td>44.4%</td><td>5</td><td>1</td><td>20.0%</td></tr>
+<tr><td>佐久間</td><td>18</td><td>8</td><td>44.4%</td><td>5</td><td>1</td><td><span class=good>20.0%</span></td></tr>
 <tr><td>アヤ</td><td>7</td><td>5</td><td>71.4%</td><td>6</td><td>0</td><td>0.0%</td></tr>
 <tr><td>3名計</td><td>45</td><td>25</td><td>55.6%</td><td>21</td><td>1</td><td>4.8%</td></tr>
 <tr><td>その他（窪田・田場・濱島・下薗・本田・高城・冨鶴ほか）</td><td>―</td><td>8</td><td>―</td><td>9</td><td>0</td><td>0.0%</td></tr>
 <tr><td>全体</td><td>―</td><td>33</td><td>―</td><td>30</td><td>1</td><td>3.3%</td></tr>
 </table></div>
 <p class=n>詰め通過＝スケジュール板に赤い〇（⭕）が付いた案件数（11/2〜11/25の商談予定51件を1件ずつ仕分け：詰め通過33／詰めなしGo 5／不明9／詰め不通過4）。行動数＝正式な商談結果報告があった件数です（11/24分まで）。IT事業部の案件（板のに入っている「IT」と付く案件）はISの集計から除外し、「IT振り／IT商談済／ITNGから」の案件（ITからISへ振られISが商談したもの）は含めています。</p>
+</section>
 
-<h2>営業マン別 受注数・受注率</h2>
+<section>
+<h2><span class=no>05</span>営業マン別 受注数・受注率 <span class=en>BY CLOSER</span></h2>
 <div class=w><table>
 <tr><th>営業マン（クローザー）</th><th>行動数</th><th>受注</th><th>受注率（対行動数）</th></tr>
 <tr><td>佐久間一彰</td><td>20</td><td>1</td><td>5.0%</td></tr>
@@ -76,20 +136,23 @@ h3{font-size:15px;margin:1.6em 0 .4em}ul{padding-left:1.3em;margin:.4em 0}.w{ove
 <tr><td>アヤ瑠笑夢</td><td>0</td><td>0</td><td>―</td></tr>
 <tr><td>全体</td><td>30</td><td>1</td><td>3.3%</td></tr>
 </table></div>
-<p class=n>営業マン別は、実際に商談を担当した人（クローザー）ベースで数えています。吉村準平はクローザー専門で、前半5件は報告に「営業：吉村さん」の記載があるもの（下町ウルフ・08-HACHI・mivo・ひだまり相談室・カリジュワ）、後半5件は吉村準平が入室し自ら結果報告したもの（ほどきや晴ればれ・ひだまり相談室（再営）・フットケアめぐる・カイロプラクティックapple・よろずやD）です。佐久間は残り20件で、うちLien.Doux・Bar88・たまゆらの風・ATOMYの4件は吉村準平が営業監督として同席しており、表の「営業監督として同席」行はその内数の追記です（クローザーは佐久間のため、二重に数えていません）。仲村が報告した下町ウルフは資料担当としての参加で、クローザーは吉村準平のため吉村準平側に数えています。受注1件（買取はるきち）は佐久間の受注です。</p>
+<p class=n>営業マン別は、実際に商談を担当した人（クローザー）ベースで数えています。吉村準平はクローザー専門で、前半5件は報告に「営業：吉村さん」の記載があるもの（下町ウルフ・08-HACHI・mivo・ひだまり相談室・カリジュワ）、後半5件は吉村準平が入室し自ら結果報告したもの（ほどきや晴ればれ・ひだまり相談室（再営）・フットケアめぐる・カイロプラクティックapple・よろずやD）です。佐久間は残り20件で、うちLien.Doux・Bar88・たまゆらの風・ATOMYの4件は吉村準平が営業監督として同席しており、表の「営業監督として同席」行はその内数の追記です（クローザーは佐久間のため、二重に数えていません）。受注1件（買取はるきち）は佐久間の受注です。</p>
+</section>
 
-<h2>商談結果の内訳</h2>
+<section>
+<h2><span class=no>06</span>商談結果と受注実績 <span class=en>RESULTS &amp; ORDERS</span></h2>
 <p>正式な結果報告30件の内訳は、GET 1件／NG 17件／追い 4件／再営 3件／再営予定 5件です。NGの主因は「今のタイミングではない」「集客に困っていない」「金額」でした。追い・再営・再営予定の12件が月末までの決定候補です（Niinselah Shinjuku Center＝追い、ZERONE・よろずやD・ひだまり相談室＝再営予定、Hoa Fit、山田気功整体、栢盛、龍雲、熊本フィールドプロ、たまゆらの風ほか）。</p>
-
-<h2>受注実績（GET案件）</h2>
 <div class=w><table>
-<tr><th>SHOP</th><th>受注日</th><th>アポ出所</th><th>商談担当</th><th>初期費用（一括は総額）</th><th>月額（月々払い）</th><th>契約</th><th>運用開始</th></tr>
+<tr><th>SHOP</th><th>受注日</th><th>アポ出所</th><th>商談担当</th><th>初期費用（一括は総額）</th><th>月額</th><th>契約</th><th>運用開始</th></tr>
 <tr><td>買取はるきち（株式会社ハルスカイ）</td><td>11/5</td><td>佐久間</td><td>佐久間</td><td>¥260,000</td><td>―</td><td>3か月・一括（BUZZ＋）</td><td>12/1</td></tr>
 <tr><td>合計 1件</td><td>―</td><td>―</td><td>―</td><td>¥260,000</td><td>¥0</td><td>―</td><td>―</td></tr>
 </table></div>
 <p class=n>電子契約・クレカ登録済み。ITNGからの案件です。別枠として、株式会社すし匠齋藤の特定技能追加採用は11/17に紹介1〜2名・1名あたり初期費用¥420,000の条件で先方の了承を取得済みで、紹介成立時に売上が立つ見込み案件のため、上の受注件数・金額には含めていません（11/25時点で紹介成立の記録はありません）。</p>
+</section>
 
-<h2>アポ・成約はどのリストから出たか</h2>
+<section>
+<h2><span class=no>07</span>架電分析 <span class=en>CALL ANALYSIS</span></h2>
+<h3>アポはどのリストから出たか</h3>
 <div class=w><table>
 <tr><th>リスト区分</th><th>コール</th><th>アポ</th><th>アポ率</th><th>アポに占める割合</th></tr>
 <tr><td>GM特特上即かけ</td><td>1,908</td><td>24</td><td>1.26%</td><td>53%</td></tr>
@@ -100,8 +163,7 @@ h3{font-size:15px;margin:1.6em 0 .4em}ul{padding-left:1.3em;margin:.4em 0}.w{ove
 <tr><td>その他（求人用リストなど）</td><td>364</td><td>6</td><td>1.65%</td><td>13%</td></tr>
 </table></div>
 <p class=n>受注1件（買取はるきち）はITNGからの案件です。その他のアポ6件はすべて佐久間の求人用リストからのアポです。リスト区分はAXTのリスト名で判定しています。</p>
-
-<h2>架電分析：業種別</h2>
+<h3>業種別</h3>
 <div class=w><table>
 <tr><th>業種</th><th>コール</th><th>アポ</th><th>アポ率</th></tr>
 <tr><td>その他</td><td>793</td><td>16</td><td>2.02%</td></tr>
@@ -113,8 +175,7 @@ h3{font-size:15px;margin:1.6em 0 .4em}ul{padding-left:1.3em;margin:.4em 0}.w{ove
 <tr><td>サービス</td><td>171</td><td>1</td><td>0.58%</td></tr>
 </table></div>
 <p class=n>飲食のアポ8件はすべて佐久間（飲食コール298件・アポ率2.7%）です。仲村・アヤは飲食コールをしているものの、アポはまだ出ていません。</p>
-
-<h2>架電分析：都道府県別（アポ数上位）</h2>
+<h3>都道府県別（アポ数上位）</h3>
 <div class=w><table>
 <tr><th>都道府県</th><th>コール</th><th>アポ</th><th>アポ率</th></tr>
 <tr><td>大阪府</td><td>480</td><td>7</td><td>1.46%</td></tr>
@@ -128,8 +189,7 @@ h3{font-size:15px;margin:1.6em 0 .4em}ul{padding-left:1.3em;margin:.4em 0}.w{ove
 <tr><td>岐阜県</td><td>96</td><td>2</td><td>2.08%</td></tr>
 <tr><td>愛知県</td><td>419</td><td>2</td><td>0.48%</td></tr>
 </table></div>
-
-<h2>架電分析：リスト鮮度別</h2>
+<h3>リスト鮮度別</h3>
 <div class=w><table>
 <tr><th>鮮度</th><th>コール</th><th>アポ</th><th>アポ率</th></tr>
 <tr><td>0〜2日</td><td>1,775</td><td>28</td><td>1.58%</td></tr>
@@ -137,8 +197,10 @@ h3{font-size:15px;margin:1.6em 0 .4em}ul{padding-left:1.3em;margin:.4em 0}.w{ove
 <tr><td>15日〜</td><td>434</td><td>2</td><td>0.46%</td></tr>
 </table></div>
 <p class=n>鮮度0〜2日のアポ率は1.58%で、アポ45件のうち28件（62%）が鮮度0〜2日から出ています。</p>
+</section>
 
-<h2>データについて</h2>
+<section>
+<h2><span class=no>08</span>データについて <span class=en>DATA NOTES</span></h2>
 <ul>
 <li>出典：AXTコール履歴（2026-11-01〜11-25、3名分・計3,380件）、LINE WORKS「IS事業部×業務」の商談結果報告（11/24分まで）、「IS事業部行動共有」のスケジュール板（11/25分まで）</li>
 <li>朝の行動予定報告（自己申告）は参考程度とし、数字は一次記録から数え直しています。受注数については自己申告（佐久間1件）とも一致しています</li>
@@ -146,5 +208,8 @@ h3{font-size:15px;margin:1.6em 0 .4em}ul{padding-left:1.3em;margin:.4em 0}.w{ove
 <li>入室率は、商談予定日ベースのアポ一覧と未入室記録の突合が要るため、この中間時点では算出していません</li>
 <li>これは中間報告です。月末に11/26以降のデータを反映して確定版に更新します</li>
 </ul>
+</section>
+
+<footer>IS_DIV // NOV_2026 // Runbird Inside Sales Report</footer>
 </main>
 </body></html>
