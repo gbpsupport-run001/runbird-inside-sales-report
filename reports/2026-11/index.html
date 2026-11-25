@@ -51,6 +51,28 @@ tbody tr:nth-child(even) td{background:#FFFBF4}
 .bad{color:#E05252;font-weight:700}
 .tag{display:inline-block;background:#FFF1DE;color:#B25E09;border-radius:99px;padding:1px 10px;font-size:12px;margin-right:6px}
 footer{color:var(--mut);font-size:12.5px;text-align:center;margin-top:34px}
+
+/* animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes drift{from{background-position:0 0}to{background-position:48px 48px}}
+.hero::before{animation:breathe 7s ease-in-out infinite}
+.hero::after{animation:breathe 9s ease-in-out infinite reverse}
+.hero{background-image:linear-gradient(120deg,#FFE8D1 0%,#FFF3E0 40%,#DFF3FF 100%),radial-gradient(rgba(255,138,61,.13) 1.5px,transparent 1.5px);background-size:200% 200%,24px 24px;animation:drift 14s linear infinite}
+.hero-inner>*{opacity:0;animation:fadeUp .7s ease forwards}
+.hero-inner>*:nth-child(2){animation-delay:.12s}
+.hero-inner>*:nth-child(3){animation-delay:.24s}
+.hero-inner>*:nth-child(4){animation-delay:.36s}
+.k div{opacity:0;animation:fadeUp .6s ease forwards;transition:transform .25s ease,box-shadow .25s ease}
+.k div:nth-child(2){animation-delay:.08s}.k div:nth-child(3){animation-delay:.16s}.k div:nth-child(4){animation-delay:.24s}.k div:nth-child(5){animation-delay:.32s}.k div:nth-child(6){animation-delay:.4s}
+.k div:hover{transform:translateY(-4px)}
+section{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+section.in{opacity:1;transform:none}
+.bar i{width:0;transition:width 1.2s cubic-bezier(.22,.8,.3,1) .15s}
+tbody tr{transition:background .2s}
+h2 .no{display:inline-block;transition:transform .3s}
+section.in h2 .no{animation:fadeUp .5s ease}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}section{opacity:1;transform:none}.bar i{width:auto}}
 @media(max-width:640px){.hero{padding:34px 20px 30px}.prow{grid-template-columns:96px 1fr 92px}section{padding:6px 16px 18px}}
 </style></head><body><!--rbnav--><style>.rbnav{position:relative;z-index:9999;font:13px/1.6 "Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;background:#fff;color:#1d2433;border-bottom:1px solid #d8d8d8;padding:8px 14px;box-sizing:border-box;text-align:left}.rbnav div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:2px 0}.rbnav b{font-weight:600;color:#667085;min-width:5.5em}.rbnav a,.rbnav span{padding:2px 12px;border-radius:999px;border:1px solid #d0d0d0;text-decoration:none;color:#1d2433;background:#fff}.rbnav span{background:#1d2433;border-color:#1d2433;color:#fff}</style><nav class="rbnav" aria-label="資料一覧"><div><b>事業部向け</b><a href="../../reports/2026-08/">8月</a><a href="../../reports/2026-09/">9月</a><a href="../../reports/2026-10/">10月</a><span aria-current="page">11月</span><a href="../../reports/2026-10/payments/">10月 入金予定</a></div></nav><!--/rbnav-->
 <main>
@@ -64,19 +86,19 @@ footer{color:var(--mut);font-size:12.5px;text-align:center;margin-top:34px}
 </div>
 
 <div class=k>
-<div><span class=lab>TOTAL CALLS // NOV</span><b>3,380</b><span>仲村1,414 / アヤ1,121 / 佐久間845</span></div>
-<div><span class=lab>APO // NOV</span><b>45</b><span>アポ率 1.33%</span></div>
-<div><span class=lab>ORDERS // NOV</span><b>1件</b><span>目標15件</span></div>
-<div><span class=lab>ORDER RATE</span><b>3.3%</b><span>受注1件 ÷ 行動数30件</span></div>
-<div><span class=lab>INITIAL FEE</span><b>26万円</b><span>¥260,000（一括）</span></div>
+<div><span class=lab>TOTAL CALLS // NOV</span><b class=count data-to="3380" data-comma="1">0</b><span>仲村1,414 / アヤ1,121 / 佐久間845</span></div>
+<div><span class=lab>APO // NOV</span><b class=count data-to="45">0</b><span>アポ率 1.33%</span></div>
+<div><span class=lab>ORDERS // NOV</span><b class=count data-to="1" data-suffix="件">0</b><span>目標15件</span></div>
+<div><span class=lab>ORDER RATE</span><b class=count data-to="3.3" data-dec="1" data-suffix="%">0</b><span>受注1件 ÷ 行動数30件</span></div>
+<div><span class=lab>INITIAL FEE</span><b class=count data-to="26" data-suffix="万円">0</b><span>¥260,000（一括）</span></div>
 <div><span class=lab>MONTHLY SALES</span><b>0万円</b><span>新規月額 ¥0／月</span></div>
 </div>
 
 <section>
 <h2><span class=no>01</span>目標と進捗 <span class=en>GOALS &amp; PROGRESS</span></h2>
-<div class=prow><div>受注（目標15件）</div><div class=bar><i style="width:6.7%"></i></div><div class=v>1件 ・ 6.7%</div></div>
-<div class=prow><div>アポ（目安103件）</div><div class="bar s"><i style="width:43.7%"></i></div><div class=v>45件 ・ 43.7%</div></div>
-<div class=prow><div>稼働日（21日）</div><div class="bar g"><i style="width:81%"></i></div><div class=v>17日 ・ 81.0%</div></div>
+<div class=prow><div>受注（目標15件）</div><div class=bar><i data-w="6.7%"></i></div><div class=v>1件 ・ 6.7%</div></div>
+<div class=prow><div>アポ（目安103件）</div><div class="bar s"><i data-w="43.7%"></i></div><div class=v>45件 ・ 43.7%</div></div>
+<div class=prow><div>稼働日（21日）</div><div class="bar g"><i data-w="81%"></i></div><div class=v>17日 ・ 81.0%</div></div>
 <ul>
 <li>11月の目標：受注15件（受注率27%想定でアポ103件）、入室率65%以上</li>
 <li>受注率（対行動数）は3.3%で、想定の27%を大きく下回っています。11/18以降の商談12件は全て未受注でした</li>
@@ -212,4 +234,12 @@ footer{color:var(--mut);font-size:12.5px;text-align:center;margin-top:34px}
 
 <footer>IS_DIV // NOV_2026 // Runbird Inside Sales Report</footer>
 </main>
+
+<script>
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('.bar i').forEach(b=>{b.style.width=b.dataset.w});io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+function count(el){const to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.dec||0),suf=el.dataset.suffix||'',comma=el.dataset.comma;const t0=performance.now(),dur=1100;function step(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);let v=(to*e).toFixed(dec);if(comma)v=Number(v).toLocaleString('ja-JP');el.textContent=v+suf;if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}
+const io2=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){count(e.target);io2.unobserve(e.target)}})},{threshold:.4});
+document.querySelectorAll('.count').forEach(el=>io2.observe(el));
+</script>
 </body></html>
