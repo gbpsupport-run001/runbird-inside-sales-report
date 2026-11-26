@@ -62,7 +62,8 @@ details[open ] summary::before{content:'▾ '}
 details .w{margin:0 10px 10px;border:0}
 
 .pie-wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin:14px 0}
-.pie{width:180px;height:180px;border-radius:50%;box-shadow:var(--shadow);flex:none}
+.pie{width:180px;height:180px;border-radius:50%;box-shadow:var(--shadow);flex:none;position:relative}
+.pie span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:57%;height:57%;background:var(--card);border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:14.5px;line-height:1.35;box-shadow:inset 0 0 0 1px var(--line)}
 .legend{list-style:none;padding:0;margin:0}
 .legend li{margin:6px 0;font-size:14px}
 .legend .dot{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:8px;vertical-align:-1px}
@@ -178,10 +179,12 @@ section.in h2 .no{animation:fadeUp .5s ease}
 <section>
 <h2><span class=no>06</span>営業マン別 受注数・受注率</h2>
 <div class=pie-wrap>
-<div class=pie style="background:conic-gradient(#FF8A3D 0 66.7%,#38BDF8 66.7% 100%)"></div>
+<div class=pie style="background:conic-gradient(#FF8A3D 0 51.9%,#FFC38F 51.9% 66.7%,#38BDF8 66.7% 100%)"><span>行動<br>27件</span></div>
 <ul class=legend>
-<li><span class=dot style="background:#FF8A3D"></span>佐久間一彰：行動 18件（66.7%）・受注 1件・受注率 5.6%</li>
-<li><span class=dot style="background:#38BDF8"></span>吉村準平：行動 9件（33.3%）・受注 0件・受注率 0.0%</li>
+<li><span class=dot style="background:#FF8A3D"></span>佐久間一彰（単独）：14件（51.9%）</li>
+<li><span class=dot style="background:#FFC38F"></span>佐久間一彰（吉村準平が営業監督として同行）：4件（14.8%）</li>
+<li><span class=dot style="background:#38BDF8"></span>吉村準平：9件（33.3%）</li>
+<li>佐久間合計：行動 18件・受注 1件・受注率 5.6%／吉村準平：受注 0件・受注率 0.0%</li>
 <li>仲村玲美・アヤ瑠笑夢：クローザーとしての行動なし</li>
 <li>全体：行動 27件・受注 1件・受注率 3.7%</li>
 </ul>
@@ -240,7 +243,7 @@ section.in h2 .no{animation:fadeUp .5s ease}
 <h2><span class=no>08</span>架電分析</h2>
 <h3>アポはどのリストから出たか</h3>
 <div class=pie-wrap>
-<div class=pie style="background:conic-gradient(#FF8A3D 0 53.3%,#38BDF8 53.3% 82.2%,#2FBF8F 82.2% 95.6%,#E5A83B 95.6% 97.8%,#8B7CF6 97.8% 100%)"></div>
+<div class=pie style="background:conic-gradient(#FF8A3D 0 53.3%,#38BDF8 53.3% 82.2%,#2FBF8F 82.2% 95.6%,#E5A83B 95.6% 97.8%,#8B7CF6 97.8% 100%)"><span>アポ<br>45件</span></div>
 <ul class=legend>
 <li><span class=dot style="background:#FF8A3D"></span>GM特特上即かけ：24件（53.3%）</li>
 <li><span class=dot style="background:#38BDF8"></span>GM特上即かけ：13件（28.9%）</li>
@@ -261,7 +264,7 @@ section.in h2 .no{animation:fadeUp .5s ease}
 <p class=n>受注1件（買取はるきち）はITNGからの案件です。その他のアポ6件はすべて佐久間の求人用リストからのアポです。リスト区分はAXTのリスト名で判定しています。</p>
 <h3>業種別</h3>
 <div class=pie-wrap>
-<div class=pie style="background:conic-gradient(#FF8A3D 0 35.6%,#F76FA5 35.6% 57.8%,#38BDF8 57.8% 75.6%,#2FBF8F 75.6% 91.1%,#E5A83B 91.1% 95.6%,#8B7CF6 95.6% 97.8%,#94A3B8 97.8% 100%)"></div>
+<div class=pie style="background:conic-gradient(#FF8A3D 0 35.6%,#F76FA5 35.6% 57.8%,#38BDF8 57.8% 75.6%,#2FBF8F 75.6% 91.1%,#E5A83B 91.1% 95.6%,#8B7CF6 95.6% 97.8%,#94A3B8 97.8% 100%)"><span>アポ<br>45件</span></div>
 <ul class=legend>
 <li><span class=dot style="background:#FF8A3D"></span>その他：16件（35.6%）</li>
 <li><span class=dot style="background:#F76FA5"></span>美容：10件（22.2%）</li>
