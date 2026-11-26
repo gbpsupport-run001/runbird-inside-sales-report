@@ -60,6 +60,12 @@ details summary::-webkit-details-marker{display:none}
 details summary::before{content:'▸ ';color:var(--orange)}
 details[open ] summary::before{content:'▾ '}
 details .w{margin:0 10px 10px;border:0}
+
+.pie-wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin:14px 0}
+.pie{width:180px;height:180px;border-radius:50%;box-shadow:var(--shadow);flex:none}
+.legend{list-style:none;padding:0;margin:0}
+.legend li{margin:6px 0;font-size:14px}
+.legend .dot{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:8px;vertical-align:-1px}
 .prow{display:grid;grid-template-columns:130px 1fr 110px;gap:10px;align-items:center;margin:10px 0;font-size:13.5px}
 .prow.v{text-align:right;font-weight:700}
 .good{color:#0E9F6E;font-weight:700}
@@ -101,13 +107,12 @@ section.in h2 .no{animation:fadeUp .5s ease}
 </div>
 
 <div class=k>
-<div><span class=lab>総コール数</span><b class=count data-to="3380" data-comma="1">0</b><span>仲村1,414 / アヤ1,121 / 佐久間845</span></div>
 <div><span class=lab>アポ数</span><b class=count data-to="45">0</b><span>アポ率 1.33%</span></div>
-<div><span class=lab>受注</span><b class=count data-to="1" data-suffix="件">0</b><span>目標15件</span></div>
-<div><span class=lab>受注率</span><b class=count data-to="3.7" data-dec="1" data-suffix="%">0</b><span>受注1件 ÷ 行動数27件</span></div>
+<div><span class=lab>入室数</span><b class=count data-to="27">0</b><span>目標56件（案件ベース）</span></div>
+<div><span class=lab>受注数</span><b class=count data-to="1" data-suffix="件">0</b><span>目標15件</span></div>
 <div><span class=lab>初期費用</span><b class=count data-to="26" data-suffix="万円">0</b><span>¥260,000（一括）</span></div>
-<div><span class=lab>新規月額</span><b>0万円</b><span>新規月額 ¥0／月</span></div>
-</div>
+<div><span class=lab>月額費用</span><b>0万円</b><span>新規月額 ¥0／月</span></div>
+</div></div>
 
 <section>
 <h2><span class=no>01</span>目標と進捗</h2>
@@ -172,15 +177,15 @@ section.in h2 .no{animation:fadeUp .5s ease}
 
 <section>
 <h2><span class=no>06</span>営業マン別 受注数・受注率</h2>
-<div class=w><table>
-<tr><th>営業マン（クローザー）</th><th>行動数</th><th>受注</th><th>受注率（対行動数）</th></tr>
-<tr><td>吉村準平</td><td>9</td><td>0</td><td>0.0%</td></tr>
-<tr><td>佐久間一彰</td><td>18</td><td>1</td><td>5.6%</td></tr>
-<tr><td>吉村準平（営業監督として同席）</td><td>4</td><td>―</td><td>―</td></tr>
-<tr><td>仲村玲美</td><td>0</td><td>0</td><td>―</td></tr>
-<tr><td>アヤ瑠笑夢</td><td>0</td><td>0</td><td>―</td></tr>
-<tr><td>全体</td><td>27</td><td>1</td><td>3.7%</td></tr>
-</table></div>
+<div class=pie-wrap>
+<div class=pie style="background:conic-gradient(#FF8A3D 0 66.7%,#38BDF8 66.7% 100%)"></div>
+<ul class=legend>
+<li><span class=dot style="background:#FF8A3D"></span>佐久間一彰：行動 18件（66.7%）・受注 1件・受注率 5.6%</li>
+<li><span class=dot style="background:#38BDF8"></span>吉村準平：行動 9件（33.3%）・受注 0件・受注率 0.0%</li>
+<li>仲村玲美・アヤ瑠笑夢：クローザーとしての行動なし</li>
+<li>全体：行動 27件・受注 1件・受注率 3.7%</li>
+</ul>
+</div>
 <details><summary>吉村準平の案件一覧（9件）</summary>
 <div class=w><table>
 <tr><th>日付</th><th>店舗名</th><th>結果</th><th>その後</th></tr>
@@ -234,6 +239,16 @@ section.in h2 .no{animation:fadeUp .5s ease}
 <section>
 <h2><span class=no>08</span>架電分析</h2>
 <h3>アポはどのリストから出たか</h3>
+<div class=pie-wrap>
+<div class=pie style="background:conic-gradient(#FF8A3D 0 53.3%,#38BDF8 53.3% 82.2%,#2FBF8F 82.2% 95.6%,#E5A83B 95.6% 97.8%,#8B7CF6 97.8% 100%)"></div>
+<ul class=legend>
+<li><span class=dot style="background:#FF8A3D"></span>GM特特上即かけ：24件（53.3%）</li>
+<li><span class=dot style="background:#38BDF8"></span>GM特上即かけ：13件（28.9%）</li>
+<li><span class=dot style="background:#2FBF8F"></span>その他（求人用リストなど）：6件（13.3%）</li>
+<li><span class=dot style="background:#E5A83B"></span>通常GM：1件（2.2%）</li>
+<li><span class=dot style="background:#8B7CF6"></span>AIリスト：1件（2.2%）</li>
+</ul>
+</div>
 <div class=w><table>
 <tr><th>リスト区分</th><th>コール</th><th>アポ</th><th>アポ率</th><th>アポに占める割合</th></tr>
 <tr><td>GM特特上即かけ</td><td>1,908</td><td>24</td><td>1.26%</td><td>53%</td></tr>
@@ -245,6 +260,18 @@ section.in h2 .no{animation:fadeUp .5s ease}
 </table></div>
 <p class=n>受注1件（買取はるきち）はITNGからの案件です。その他のアポ6件はすべて佐久間の求人用リストからのアポです。リスト区分はAXTのリスト名で判定しています。</p>
 <h3>業種別</h3>
+<div class=pie-wrap>
+<div class=pie style="background:conic-gradient(#FF8A3D 0 35.6%,#F76FA5 35.6% 57.8%,#38BDF8 57.8% 75.6%,#2FBF8F 75.6% 91.1%,#E5A83B 91.1% 95.6%,#8B7CF6 95.6% 97.8%,#94A3B8 97.8% 100%)"></div>
+<ul class=legend>
+<li><span class=dot style="background:#FF8A3D"></span>その他：16件（35.6%）</li>
+<li><span class=dot style="background:#F76FA5"></span>美容：10件（22.2%）</li>
+<li><span class=dot style="background:#38BDF8"></span>飲食：8件（17.8%）</li>
+<li><span class=dot style="background:#2FBF8F"></span>健康：7件（15.6%）</li>
+<li><span class=dot style="background:#E5A83B"></span>ペット：2件（4.4%）</li>
+<li><span class=dot style="background:#8B7CF6"></span>建築：1件（2.2%）</li>
+<li><span class=dot style="background:#94A3B8"></span>サービス：1件（2.2%）</li>
+</ul>
+</div>
 <div class=w><table>
 <tr><th>業種</th><th>コール</th><th>アポ</th><th>アポ率</th></tr>
 <tr><td>その他</td><td>793</td><td>16</td><td>2.02%</td></tr>
