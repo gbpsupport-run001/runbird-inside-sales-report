@@ -44,6 +44,20 @@ input{width:76px;font:inherit;padding:3px 8px;border:2px solid var(--line);borde
 button{font:inherit;font-weight:800;padding:8px 16px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
 #b-copy{background:var(--cat);border-color:var(--cat);color:#fff}
 textarea{width:100%;font:13px/1.6 "Noto Sans JP","Hiragino Sans",monospace;border:2px solid var(--line);border-radius:14px;background:var(--card);color:var(--fg);padding:10px;resize:vertical}
+.bars{margin:10px 0 4px}
+.brow{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px}
+.brow .nm{width:8em;text-align:right;color:var(--mut);white-space:nowrap}
+.brow .tr{flex:1;background:var(--line);border-radius:999px;height:14px}
+.brow .fl{height:100%;border-radius:999px}
+.brow .vl{width:4.2em;font-weight:800;white-space:nowrap}
+.stack{display:flex;height:18px;border-radius:999px;overflow:hidden;margin:4px 0 8px;background:var(--line)}
+.lgd{font-size:12.5px;color:var(--mut);margin:2px 0 6px}
+.lgd i{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 3px 0 10px}
+.lgd i:first-child{margin-left:0}
+.dwrap{display:flex;align-items:center;gap:16px;margin:10px 0}
+.donut{width:120px;height:120px;border-radius:50%;position:relative;flex:none}
+.donut .hole{position:absolute;inset:22px;background:var(--card);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.25}
+.donut .hole b{font-size:17px}.donut .hole span{font-size:11px;color:var(--mut)}
 .pr{margin:.5em 0;font-size:14px}.pr input{width:62px}.pr b{font-size:17px}.sm{margin:.6em 0 .2em}
 </style>
 <style>.rbnav{position:relative;z-index:9999;font:13px/1.6 "Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;background:#fff;color:#1d2433;border-bottom:1px solid #d8d8d8;padding:8px 14px;box-sizing:border-box;text-align:left}.rbnav div{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:2px 0}.rbnav b{font-weight:600;color:#667085;min-width:5.5em}.rbnav a,.rbnav span{padding:2px 12px;border-radius:999px;border:1px solid #d0d0d0;text-decoration:none;color:#1d2433;background:#fff}.rbnav span{background:#1d2433;border-color:#1d2433;color:#fff}@media(prefers-color-scheme:dark){.rbnav{background:#1d222d;color:#e8eaf0;border-color:#2b3140}.rbnav a{background:#1d222d;color:#e8eaf0;border-color:#3a4254}.rbnav span{background:#e8eaf0;color:#1d222d;border-color:#e8eaf0}}</style>
@@ -75,25 +89,32 @@ textarea{width:100%;font:13px/1.6 "Noto Sans JP","Hiragino Sans",monospace;borde
 <p class=n>仲村さんのコール記録は11/24分まで</p>
 
 <h2>✖ テレアポの断られ理由</h2>
-<p>営業電話そのものを断られた件数です。「営業×」の表記に加えて、「営業だったらいらない」「営業の電話はお断りしてます」「営業電話多くて断ってる」「営業うざい」といった言い回しまで入れています。</p>
 <div class=w><table>
 <tr><th>メンバー</th><th>コール</th><th>断り</th><th>営業拒否</th><th>断りのうち営業拒否</th></tr>
 <tr><td>🐆 仲村さん</td><td>1,414</td><td>192</td><td>22</td><td>11.5%</td></tr>
 <tr><td>🐻 佐久間さん</td><td>893</td><td>204</td><td>2</td><td>1.0%</td></tr>
 <tr><td>🐱 アヤさん</td><td>1,249</td><td>207</td><td>17</td><td>8.2%</td></tr>
 </table></div>
-<p class=n>営業時間・営業中は除く</p>
-<p>メモに「○○×」と記号で書かれた理由は、理由別ではこうなっています。</p>
+<h3>断りのうち営業拒否の割合</h3>
+<div class=bars>
+<div class=brow><span class=nm>🐆 仲村さん</span><div class=tr><div class=fl style="width:100%;background:#f4a259"></div></div><span class=vl>11.5%</span></div>
+<div class=brow><span class=nm>🐱 アヤさん</span><div class=tr><div class=fl style="width:71%;background:#f4a259"></div></div><span class=vl>8.2%</span></div>
+<div class=brow><span class=nm>🐻 佐久間さん</span><div class=tr><div class=fl style="width:9%;background:#f4a259"></div></div><span class=vl>1.0%</span></div>
+</div>
 <div class=w><table>
 <tr><th>メンバー</th><th>新規×</th><th>集客×</th><th>費用×</th><th>人柄×</th><th>スタッフ×</th></tr>
 <tr><td>🐆 仲村さん</td><td>45</td><td>0</td><td>15</td><td>6</td><td>0</td></tr>
 <tr><td>🐻 佐久間さん</td><td>73</td><td>0</td><td>0</td><td>1</td><td>41</td></tr>
 <tr><td>🐱 アヤさん</td><td>14</td><td>4</td><td>0</td><td>0</td><td>0</td></tr>
 </table></div>
-<p class=n>佐久間は新規✖と書く記法</p>
+<h3>✖理由の構成</h3>
+<p class=lgd><i style="background:#f4a259"></i>新規×<i style="background:#6cc08b"></i>集客×<i style="background:#5b8def"></i>費用×<i style="background:#b0794a"></i>人柄×<i style="background:#9b7ede"></i>スタッフ×</p>
+<div class=brow><span class=nm>🐆 仲村さん</span><div class=stack style="flex:1"><div style="width:68%;background:#f4a259"></div><div style="width:23%;background:#5b8def"></div><div style="width:9%;background:#b0794a"></div></div><span class=vl>66件</span></div>
+<div class=brow><span class=nm>🐻 佐久間さん</span><div class=stack style="flex:1"><div style="width:63%;background:#f4a259"></div><div style="width:1%;background:#b0794a"></div><div style="width:36%;background:#9b7ede"></div></div><span class=vl>115件</span></div>
+<div class=brow><span class=nm>🐱 アヤさん</span><div class=stack style="flex:1"><div style="width:78%;background:#f4a259"></div><div style="width:22%;background:#6cc08b"></div></div><span class=vl>18件</span></div>
+<p class=n>営業拒否は言い回しまで含む。営業時間・営業中は除く</p>
 
 <h2>ITチームとの比較</h2>
-<p>ITチーム4名のAXTコール履歴と並べたものです。営業拒否は、上の表と同じ数え方（言い回しまで拡大）です。</p>
 <div class=w><table>
 <tr><th>メンバー</th><th>コール</th><th>アポ</th><th>アポ率</th><th>断り</th><th>営業拒否</th><th>断りのうち営業拒否</th></tr>
 <tr><td>🐆 仲村さん（IS）</td><td>1,414</td><td>20</td><td>1.41%</td><td>192</td><td>22</td><td>11.5%</td></tr>
@@ -106,6 +127,21 @@ textarea{width:100%;font:13px/1.6 "Noto Sans JP","Hiragino Sans",monospace;borde
 <tr><td>田場杏奈さん（IT沖縄）</td><td>1,725</td><td>9</td><td>0.52%</td><td>338</td><td>14</td><td>4.1%</td></tr>
 <tr class=t><td>IT合計</td><td>7,118</td><td>65</td><td>0.91%</td><td>1,054</td><td>35</td><td>3.3%</td></tr>
 </table></div>
+<h3>アポ率（メンバー別）</h3>
+<div class=bars>
+<div class=brow><span class=nm>🐻 佐久間（IS）</span><div class=tr><div class=fl style="width:100%;background:#f4a259"></div></div><span class=vl>2.02%</span></div>
+<div class=brow><span class=nm>🐆 仲村（IS）</span><div class=tr><div class=fl style="width:70%;background:#f4a259"></div></div><span class=vl>1.41%</span></div>
+<div class=brow><span class=nm>下堂薗（IT）</span><div class=tr><div class=fl style="width:69%;background:#5b8def"></div></div><span class=vl>1.39%</span></div>
+<div class=brow><span class=nm>濱島（IT）</span><div class=tr><div class=fl style="width:57%;background:#5b8def"></div></div><span class=vl>1.15%</span></div>
+<div class=brow><span class=nm>🐱 アヤ（IS）</span><div class=tr><div class=fl style="width:36%;background:#f4a259"></div></div><span class=vl>0.72%</span></div>
+<div class=brow><span class=nm>永野（IT）</span><div class=tr><div class=fl style="width:26%;background:#5b8def"></div></div><span class=vl>0.52%</span></div>
+<div class=brow><span class=nm>田場（IT沖縄）</span><div class=tr><div class=fl style="width:26%;background:#5b8def"></div></div><span class=vl>0.52%</span></div>
+</div>
+<h3>コール数の構成</h3>
+<div class=dwrap>
+<div class=donut style="background:conic-gradient(#5b8def 0 66.7%,#f4a259 66.7% 100%)"><div class=hole><b>10,674</b><span>コール合計</span></div></div>
+<p class=lgd style="margin:0"><i style="background:#5b8def"></i>IT 7,118件（66.7%）<br><i style="background:#f4a259"></i>IS 3,556件（33.3%）</p>
+</div>
 <p class=n>ISは26日時点・ITは27日時点</p>
 
 <h2>クローザー（営業）別</h2>
